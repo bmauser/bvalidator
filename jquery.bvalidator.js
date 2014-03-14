@@ -8,7 +8,7 @@
  * Released under the MIT license
  * http://www.opensource.org/licenses/mit-license.php
  *
- * $Id: jquery.bvalidator.js 115 2014-03-03 01:48:19Z bmauser $
+ * $Id: jquery.bvalidator.js 123 2014-03-14 00:02:39Z bmauser $
  */
 
 (function($){
@@ -82,6 +82,7 @@
 			ajaxDelay: 300,
 			ajaxOptions: {cache: false},
 			ajaxParamName: 'bValue',
+			ajaxExtraParams: null,
 
 			// default messages
 			errorMessages: {
@@ -134,6 +135,9 @@
 				ajaxOptions.data = {}
 			ajaxOptions.url = ajaxUrl;
 			
+			if(options.ajaxExtraParams)
+				$.extend(true, ajaxOptions.data, typeof options.ajaxExtraParams == 'function' ? options.ajaxExtraParams.call(element) : options.ajaxExtraParams);
+			
 			if(sync){
 				var ret = false;
 				ajaxOptions.async = false;
@@ -150,7 +154,7 @@
 			else{
 				ajax_data.timeOut = setTimeout(function() {
 	
-					var val =  element.val();
+					var val = element.val();
 					
 					// only check if the value has not changed
 					if(ajax_data.val == val){
