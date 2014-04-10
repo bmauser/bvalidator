@@ -90,9 +90,9 @@
 					'default':    'Please correct this value.',
 					'equalto':    'Please enter the same value again.',
 					'differs':    'Please enter a different value.',
-					'minlength':  'The length must be at least {0} characters',
-					'maxlength':  'The length must be at max {0} characters',
-					'rangelength':'The length must be between {0} and {1}',
+					'minlength':  'The length must be at least {0} characters.',
+					'maxlength':  'The length must be at max {0} characters.',
+					'rangelength':'The length must be between {0} and {1}.',
 					'min':        'Please enter a number greater than or equal to {0}.',
 					'max':        'Please enter a number less than or equal to {0}.',
 					'between':    'Please enter a number between {0} and {1}.',
@@ -102,11 +102,11 @@
 					'digit':      'Please enter only digits.',
 					'number':     'Please enter a valid number.',
 					'email':      'Please enter a valid email address.',
-					'image':      'This field should only contain image types',
+					'image':      'This field should only contain image types.',
 					'url':        'Please enter a valid URL.',
 					'ip4':        'Please enter a valid IPv4 address.',
 					'ip6':        'Please enter a valid IPv6 address.',
-					'date':       'Please enter a valid date in format {0}.'
+					'date':       'Please enter a valid date in format {0}'
 				}
 			}
 		},

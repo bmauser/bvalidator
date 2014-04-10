@@ -27,7 +27,7 @@ var bValidatorOptions = {
 			'url':        'Por favor, insira uma URL válida.',
 			'ip4':        'Por favor, insira um endereço IPv4 válido.',
 			'ip6':        'Por favor, insira um endereço IPv6 válida.',
-			'date':       'Por favor, insira uma data válida no formato {0}.'
+			'date':       'Por favor, insira uma data válida no formato {0}'
 		}
 	}
 };

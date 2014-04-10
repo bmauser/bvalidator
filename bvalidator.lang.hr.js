@@ -27,7 +27,7 @@ var bValidatorOptions = {
 			'url':        'Unesite ispravan URL.',
 			'ip4':        'Unesite ispravnu IPv4 adresu.',
 			'ip6':        'Unesite ispravnu IPv6 adresu.',
-			'date':       'Unesite ispravan datum u formatu {0}.'
+			'date':       'Unesite ispravan datum u formatu {0}'
 		}
 	}
 };

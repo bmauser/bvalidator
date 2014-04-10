@@ -26,7 +26,7 @@ var bValidatorOptions = {
 			'image':      'Bu alan resim türleri içermelidir',
 			'url':        'Lütfen geçerli bir URL girin.',
 			'ip4':        'Lütfen geçerli bir IPv4 adresi girin.',
-			'ip6':        'Lütfen geçerli bir IPv6 adresi girin',
+			'ip6':        'Lütfen geçerli bir IPv6 adresi girin.',
 			'date':       '{0} Bu formatta bir tarih girin.'
 		}
 	}
