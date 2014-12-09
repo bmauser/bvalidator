@@ -34,6 +34,7 @@
 			showCloseIcon:       true,	// put close icon on error message
 			showErrMsgSpeed:    'normal',	// message's fade-in speed 'fast', 'normal', 'slow' or number of milliseconds
 			scrollToError:       true,	// scroll to first error
+			hiddenElementSelector: null, // Whitelist hidden elements for validation (Hack by ckihneman)
 			// css class names
 			classNamePrefix:     'bvalidator_',	// prefix for css class names
 			closeIconClass:      'close_icon',	// close error message icon class
@@ -176,8 +177,13 @@
 
 		// returns all inputs
 		_getElementsForValidation = function(element){
-			// skip hidden and input fields witch we do not want to validate
-			return element.is(':input') ? element : element.find(':input[' + options.validateActionsAttr + '], :input[' + options.modifyActionsAttr + ']').not(":button, :image, :reset, :submit, :hidden, :disabled");
+
+			// HACK by ckihneman
+			// Skip hidden and input fields which we do not want to validate,
+			// UNLESS `hiddenElementSelector` is set, these are whitelisted elements
+			// that are validated even if they are hidden.
+			var hiddenElementSelector = ':hidden' + (options.hiddenElementSelector ? ':not(' + options.hiddenElementSelector + ')' : '');
+			return element.is(':input') ? element : element.find(':input[' + options.validateActionsAttr + '], :input[' + options.modifyActionsAttr + ']').not(":button, :image, :reset, :submit, " + hiddenElementSelector + ", :disabled");
 		},
 
 		// binds validateOn event
@@ -249,11 +255,20 @@
 		// calculates message position
 		_getErrMsgPosition = function(input, tooltip){
 
-		        var tooltipContainer = input.data("errMsg.bV" + instanceName),
-		         top  = - ((tooltipContainer.offset().top - input.offset().top) + tooltip.outerHeight() - options.offset.y),
-		         left = (input.offset().left + input.outerWidth()) - tooltipContainer.offset().left + options.offset.x,
-			 x = options.position.x,
-			 y = options.position.y;
+			var tooltipContainer = input.data("errMsg.bV" + instanceName);
+
+			// HACK by ckihneman
+			// If hidden inputs are allowed, check if this input is whitelisted for validation.
+			// If so, use the parent element to find out where to put the tooltip.
+			// Note: Wrap hidden inputs with a span tag.
+			if (options.hiddenElementSelector && input.is(options.hiddenElementSelector + ':hidden')) {
+				input = input.parent();
+			}
+
+			var top  = - ((tooltipContainer.offset().top - input.offset().top) + tooltip.outerHeight() - options.offset.y),
+				left = (input.offset().left + input.outerWidth()) - tooltipContainer.offset().left + options.offset.x,
+			x = options.position.x,
+			y = options.position.y;
 
 			// adjust Y
 			if(y == 'center' || y == 'bottom'){
