@@ -55,3 +55,11 @@
 	bottom: -9px;
 	left: 5px
 }
+
+/**
+ * Hack by ckihneman
+ * `z-index` required to show error messages over chosen selects.
+ */
+.bVErrMsgContainer {
+	z-index: 1;
+}
