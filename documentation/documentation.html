@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>bValidator documentation &amp; examples</title>
+<title>bValidator documentation &amp; examples (ver 0)</title>
 <script type="text/javascript" src="../jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="../jquery.bvalidator.js"></script>
 <script type="text/javascript">
@@ -263,6 +263,28 @@ h3 {
 	cursor: pointer;
 }
 
+#old-ver-warn {
+    background-color: #000000;
+    color: #FF484B;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    top: 0;
+    font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#old-ver-warn a{
+    color: #FFFFFF;
+}
+
+body {
+    margin-top: 50px;
+    z-index: 10;
+}
+
 /* prettify */
 .pln{color:#000}@media screen{.str{color:#080}.kwd{color:#008}.com{color:#800}.typ{color:#606}.lit{color:#066}.pun,.opn,.clo{color:#660}.tag{color:#008}.atn{color:#606}.atv{color:#080}.dec,.var{color:#606}.fun{color:red}}@media print,projection{.str{color:#060}.kwd{color:#006;font-weight:bold}.com{color:#600;font-style:italic}.typ{color:#404;font-weight:bold}.lit{color:#044}.pun,.opn,.clo{color:#440}.tag{color:#006;font-weight:bold}.atn{color:#404}.atv{color:#060}}pre.prettyprint{padding:2px;border:1px solid #888}ol.linenums{margin-top:0;margin-bottom:0}li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8{list-style-type:none}li.L1,li.L3,li.L5,li.L7,li.L9{background:#eee}
 
@@ -278,17 +300,23 @@ h3 {
 </head>
 
 <body>
+
+<p id="old-ver-warn">
+<strong>NOTICE:</strong> This page contains documentation for  version 0.x. For the latest 1.x version visit <a href="http://bmauser.github.io/bvalidator/">http://bmauser.github.io/bvalidator/</a></p>
+
 <div class="header">
 	<h1>bValidator</h1> 
 <span style="font-size: 12pt;">documentation | <a href="#examples"><strong>examples</strong></a></span> | <a href="#themes">themes</a></div>
-<div class="main_content"><!-- section -->
-	
+<div class="main_content">
+
+    <!-- section -->
 	
 	<h1>What is bValidator?</h1>
 	<div class="content">
 		<p>bValidator is a <a href="http://jquery.com/" target="_blank">jQuery</a> plug-in for client side form validation. 
 		It supports fully customized error messages defined with template and CSS, many validation functions (<a href="#actions">actions</a>) like date, email, URL, IP address, validation of dynamic forms, customized validation functions and more. </p>
-		<p><a href="http://bojanmauser.from.hr/bvalidator/download/"><strong>Downloads</strong></a> | <a href="http://code.google.com/p/bvalidator/"><strong>Project page</strong></a></p>
+		<p><a href="http://bojanmauser.from.hr/bvalidator/download/"><strong>Download version 0.73</strong></a></p>
+		<p><a href="https://code.google.com/archive/p/bvalidator/downloads"><strong>Older versions can be found on Google Code Archive</strong></a></p>
 		<p>&nbsp;</p>
 <h3>Contents of this document:</h3>
 		<ul>
