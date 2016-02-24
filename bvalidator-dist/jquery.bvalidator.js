@@ -1,7 +1,7 @@
 /*!
  * jQuery bValidator plugin
  *
- * http://bojanmauser.from.hr/bvalidator/
+ * http://bmauser.github.io/bvalidator/
  */
 
 var bValidator = (function ($) {
