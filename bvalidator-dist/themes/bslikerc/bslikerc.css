@@ -1,0 +1,79 @@
+/* invalid input */
+.bvalidator-bslikerc-invalid {
+    background-color: #fcf8e3 !important;
+}
+/* tooltip */
+.bvalidator-bslikerc-tooltip {
+    font-size: 14px;
+    white-space: nowrap;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    position:absolute;
+    line-height: 20px;
+}
+.bvalidator-bslikerc-tooltip-noclose {
+    padding-right: 10px;
+}
+/* message */
+.bvalidator-bslikerc-tooltip .bvalidator-bslikerc-msg {
+    position: relative;
+}
+/* close icon */
+.bvalidator-bslikerc-tooltip .bvalidator-bslikerc-close {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    color: #000000;
+    text-shadow: 0 1px 0 #ffffff;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    position:absolute;
+    right: 6px;
+    top: 6px;
+}
+.bvalidator-bslikerc-tooltip .bvalidator-bslikerc-close:hover, .bvalidator-bslikerc-tooltip .bvalidator-bslikerc-close:focus{
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.4;
+    filter: alpha(opacity=40);
+}
+/* arrow */
+.bvalidator-bslikerc-tooltip .bvalidator-bslikerc-arrow {
+    display: block;
+    height: 0;
+    width: 0;
+    position: absolute;
+    left: -11px;
+    border-color: transparent;
+    border-right-color: #000000;
+    border-right-color: rgba(0, 0, 0, 0.25);
+    border-width: 11px 11px 11px 0;
+    border-style: solid;
+    top:50%;
+    margin-top:-10px;
+}
+.bvalidator-bslikerc-tooltip .bvalidator-bslikerc-arrow:after {
+    position: absolute;
+    top: -10px;
+    left: 1px;;
+    border-width: 10px 10px 10px 0;
+    content: "";
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-right-color: #ffffff;
+}

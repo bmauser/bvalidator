@@ -1,0 +1,2510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="bValidator is a form validation jQuery plug-in. It supports themes for validation messages, various validation functions, validation of dynamic forms, server side validation and more.">
+<meta property="og:url"           content="http://bojanmauser.from.hr/bvalidator/" />
+<meta property="og:type"          content="website" />
+<meta property="og:title"         content="bValidator" />
+<meta property="og:description"   content="bValidator is a form validation jQuery plug-in" />
+<title>bValidator documentation &amp; examples</title>
+<link href="lib/css/bvalidator-docs.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="lib/codemirror/lib/codemirror.css">
+<link rel="stylesheet" href="lib/codemirror/theme/bdocs.css">
+<link rel="stylesheet" href="lib/prettify/prettify.css">
+<script src="lib/codemirror/lib/codemirror.js"></script>
+<script src="lib/codemirror/addon/selection/active-line.js"></script>
+<script src="lib/codemirror/mode/htmlmixed/htmlmixed.js"></script>
+<script src="lib/codemirror/mode/xml/xml.js"></script>
+<script src="lib/codemirror/mode/javascript/javascript.js"></script>
+<script src="lib/codemirror/mode/css/css.js"></script>
+<script type="text/javascript" src="lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="lib/prettify/prettify.js"></script>
+
+<script type="text/javascript" src="bvalidator-dist/jquery.bvalidator.min.js"></script>
+<script type="text/javascript" src="lib/js/bvalidator-docs.min.js"></script>
+
+<!-- themes js -->
+<script type="text/javascript" src="bvalidator-dist/themes/bslikerc/bslikerc.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/bslikert/bslikert.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/presenters/bs3popover-tooltip.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/bs3/bs3popover/bs3popover.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/bs3/bs3tooltip/bs3tooltip.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/gray/gray.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/presenters/default.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/gray2/gray2.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/gray3/gray3.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/orange/orange.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/postit/postit.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/red/red.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/presenters/insert.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/insert/insert.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/presenters/group.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/group/group.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/presenters/bs3form.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/bs3/bs3form/bs3form.js"></script>
+<!-- themes css -->
+<link href="bvalidator-dist/themes/gray/gray.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/orange/orange.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/red/red.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/gray2/gray2.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/postit/postit.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/bs3/bs3popover/bs3popover.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/bs3/bs3tooltip/bs3tooltip.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/bslikert/bslikert.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/bslikerc/bslikerc.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/gray3/gray3.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/insert/insert.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/group/group.css" rel="stylesheet"/>
+<script type="text/javascript">
+    // set default theme
+    var isSmallScreen = window.matchMedia('only screen and (max-width: 760px)');
+
+    if (isSmallScreen.matches)
+        bValidator.defaultOptions.useTheme = 'insert';
+    else
+        bValidator.defaultOptions.useTheme = 'gray';
+
+</script>
+</head>
+
+<body>
+
+<!-- content -->
+<div class="container">
+    <div class="row row-offcanvas row-offcanvas-right">
+        
+        <!-- Page content -->
+        
+        <div class="col-xs-12 col-sm-9">
+            
+            <!-- What is bValidator? -->
+            
+            <h1 class="bdocs-page-header"> bValidator </h1>
+            <p> <strong>bValidator is a form validation<a href="http://jquery.com/" target="_blank"> jQuery</a> plug-in. </strong></p>
+            <p><strong>It supports <a href="#themes">themes</a> for validation messages, various <a href="#actions">validation functions</a>, validation of dynamic forms, server side validation and more (see <a href="#examples">examples</a>).</strong> 
+                <!-- Setup --> </p>
+            <p class="help-block">This page contains documentation for version 1.x, if you are looking for an older version <a href="http://bojanmauser.from.hr/bvalidator/">click here</a>.</p>
+            <h1 class="bdocs-section-header" id="setup"> <span class="glyphicon bdocs-h1-icon glyphicon-wrench"></span> Setup</h1>
+            <div class="bdocs-section">
+                <h3>Download</h3>
+                <p> Download bValidator from <a href="http://bojanmauser.from.hr/bvalidator/download/" target="_blank">here</a> (currently v1.0.0-rc0) </p>
+                <p>Or install with Bower:</p>
+                <pre class="bdocs-highlight-source">$ bower install bvalidator</pre>
+                <p>Or install with npm:</p>
+                <pre class="bdocs-highlight-source">$ npm install bvalidator</pre>
+                <h3>Include JavaScript</h3>
+                <p>To use bValidator you need to include jQuery, <code>jquery.bvalidator.min.js</code> and .js and .css files for  the <a href="#themes">theme</a> you want to use.</p>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;jquery.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;jquery.bvalidator.min.js&#34;&gt;&lt;/script&gt;
+
+// for choosen theme
+&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/gray/gray.js&#34;&gt;&lt;/script&gt;</pre>
+                <h3>Include CSS for the theme </h3>
+                <pre class="bdocs-highlight-source">&lt;link href=&#34;themes/gray/gray.css&#34; rel=&#34;stylesheet&#34; /&gt;</pre>
+                <h3>HTML</h3>
+                <p> The page should contain inputs you want to validate:</p>
+                <pre class="bdocs-highlight-source">&lt;form data-bvalidator-validate&gt;
+    Email: &lt;input type=&#34;text&#34; data-bvalidator=&#34;required,email&#34;/&gt;
+    Url: &lt;input type=&#34;text&#34; data-bvalidator=&#34;url&#34;/&gt;
+&lt;/form&gt;</pre>
+                <p> Add <code class="attr">data-bvalidator-validate</code> attribute to the <code class="html">&lt;form&gt;</code> you want to validate to bind bValidator to the form.<br>
+                    To each you want to validate, add <code class="attr">data-bvalidator</code> attribute with <a href="#actions">validation functions</a> to invoke for the field.</p>
+                <h3>With JavaScript</h3>
+                <p> You can   also bind bValidator  to the form with JavaScript (in that case <code class="attr">data-bvalidator-validate</code> attribute  is not needed on the <code class="html">&lt;form&gt;</code>). You can  use jQuery's <code>$(document).ready</code> to execute the script as soon as the web page has been loaded:</p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+    $(document).ready(function () {
+        $(&#39;form&#39;).bValidator();
+    });
+&lt;/script&gt;</pre>
+                <h3>Upgrade form version 0.x</h3>
+                <p> bValidator 1.x is not backward compatible with version 0.x. Basic features are similar to those  in 0.x, but I have introduced a lot of changes into 1.x  without backward compatibility in mind. Please read this docs before upgrade.</p>
+            </div>
+            
+            <!-- Configuration options -->
+            
+            <h1 class="bdocs-section-header" id="options"> <span class="glyphicon bdocs-h1-icon glyphicon-cog"></span> Options</h1>
+            <div class="bdocs-section">
+                <p> bValidator first checks default options. You can change default options like this: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+    bValidator.defaultOptions.singleError = true;
+    bValidator.defaultOptions.useTheme = &#39;red&#39;;
+&lt;/script&gt;</pre>
+                <p> You can also set options by passing an object with options to the  constructor function: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    var options = {
+        singleError: true,
+        useTheme:    &#39;orange&#39;
+    };
+
+    $(&#39;#myform&#39;).bValidator(options);
+
+&lt;/script&gt;</pre>
+                <p> bValidator also checks for options set by <code class="attr">data-bvalidator-option-</code> attribute on the <code class="html">&lt;form&gt;</code> element. For example, for <code><a href="#singleError">singleError</a></code> use the <code class="attr">data-bvalidator-option-single-error</code> attribute name: </p>
+                <pre class="bdocs-highlight-source">&lt;form data-bvalidator-option-single-error=&#34;true&#34; data-bvalidator-validate&gt;
+    &lt;input type=&#34;text&#34; data-bvalidator=&#34;number,required&#34;/&gt;
+&lt;/form&gt;</pre>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th>Option name</th>
+                        <th width="20%">Default value</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr id="singleError">
+                        <td class="bdocs-option-name">singleError</td>
+                        <td><code>false</code></td>
+                        <td>If <code>true</code>, only the first validation   message will be shown.</td>
+                    </tr>
+                    <tr id="scrollToError">
+                        <td class="bdocs-option-name">scrollToError</td>
+                        <td><code>true</code></td>
+                        <td>The page will be scrolled up or down to make the first  message visible.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">scrollToErrorOffset</td>
+                        <td><code>-10</code></td>
+                        <td>Offset from the top of the browser window.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">lang</td>
+                        <td><code>&quot;en&quot;</code></td>
+                        <td>Language for validation messages.</td>
+                    </tr>
+                    <tr id="validateOn">
+                        <td class="bdocs-option-name">validateOn</td>
+                        <td><code>&quot;&quot;</code></td>
+                        <td>Input field event which starts validation; examples: <code>change</code>, <code>blur</code>. To bind more events, separate them by comma; example:<code>keyup,change</code>. This option will  not be applied on checkboxes and radio buttons.</td>
+                    </tr>
+                    <tr id="errorValidateOn">
+                        <td class="bdocs-option-name">errorValidateOn</td>
+                        <td><code>&quot;keyup&quot;</code></td>
+                        <td>Input field event to start validation if the validation message is already shown;  examples: <code>change</code>, <code>blur</code>. To bind more events, separate them by comma; example: <code>keyup,paste</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">useTheme</td>
+                        <td><code>&quot;&quot;</code></td>
+                        <td>Theme for  validation messages.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name" id="delayValidation">delayValidation</td>
+                        <td><code>300</code></td>
+                        <td>Delay in milliseconds to invoke validation after <a href="#validateOn"><code>validateOn</code></a> and <a href="#errorValidateOn"><code>errorValidateOn</code></a> events.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name" id="validateOnSubmit">validateOnSubmit</td>
+                        <td><code>true</code></td>
+                        <td>If <code>true</code>, validation will occur on  form submit (if validator is bind to a form).</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">stopSubmitPropagation</td>
+                        <td><code>true</code></td>
+                        <td>If <code>true</code>, <code>submit</code> event propagation will be stopped on validation error (if validator is bind to a form). This option is considered only if the value of <a href="#validateOnSubmit"><code>validateOnSubmit</code></a> option is <code>true</code>.</td>
+                    </tr>
+                    <tr id="validateTillInvalid">
+                        <td class="bdocs-option-name">validateTillInvalid</td>
+                        <td><code>false</code></td>
+                        <td><p> If there are more validation functions in <code class="attr">data-bvalidator</code> attribute, they are all invoked after the validation has been triggered.					        If you set this option to <code>true</code>, functions will be invoked until one of the  function returns <code>false</code>. For example: <br />
+                                <code>data-bvalidator=&quot;number,max[10]&quot;</code>. If check with <code>number</code> function fails, <code>max</code> function will not be invoked. See <a href="#exampleValidateTillInvalid">example</a>. </p></td>
+                    </tr>
+                    <tr id="autoModifiers">
+                        <td class="bdocs-option-name">autoModifiers</td>
+                        <td><code>{'digit':  ['trim'],<br />
+                            'number': ['trim'],<br />
+                            'email':  ['trim'],<br />
+                            'url':    ['trim'],<br />
+                            'date':   ['trim'],<br />
+                            'ip4':    ['trim'],<br />
+                            'ip6':    ['trim']}</code></td>
+                        <td><p> This option tells which <a href="#modifyingActions">modifiers</a> are automatically called for a validation function. <a href="#trim" class="bdocs-mono">trim</a> modifier is called for stated functions by default, so you don't have to explicitly put the modifier into <code class="attr">data-bvalidator-modifier</code> attribute. You can set more auto modifiers for one validation function and use parameters  as in <code class="attr">data-bvalidator</code> attribute. For example:<br />
+                                <code>'mycheck': ['trim', 'myMod', 'myMod2[1:3]']</code> </p></td>
+                    </tr>
+                    <tr id="ajaxValid">
+                        <td class="bdocs-option-name">ajaxValid</td>
+                        <td><code>&quot;ok&quot;</code></td>
+                        <td>Valid response for server side validation with <a class="bdocs-mono" href="#ajax">ajax</a> validation function. If the value is valid, Ajax request should return this string.</td>
+                    </tr>
+                    <tr id="ajaxResponseMsg">
+                        <td class="bdocs-option-name">ajaxResponseMsg</td>
+                        <td><code>false</code></td>
+                        <td>If <code>true</code>, a response from the server is used as the validation  message.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">ajaxOptions</td>
+                        <td><code>{cache: false, method: 'POST'}</code></td>
+                        <td>Options for Ajax request. See <a href="http://api.jquery.com/jQuery.ajax/" target="_blank">jQuery documentation</a>.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">ajaxParams</td>
+                        <td><code>null</code></td>
+                        <td>Object (or function that returns an object) with values that are sent to the server with the request. For example: <code>{'id':123}</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">ajaxUrl</td>
+                        <td><code>&quot;&quot;</code></td>
+                        <td>URL for Ajax request. If empty, current browser URL is used.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">ajaxCache</td>
+                        <td><code>true</code></td>
+                        <td>If <code>true</code>, Ajax response from the server will be cached and the  response from cache will be used if the input value is not changed since the last Ajax call.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">skipValidation</td>
+                        <td><code>&quot;:hidden, :disabled&quot;</code></td>
+                        <td>jQuery selector to filter out  inputs that will  be skipped by bValidator (only inputs with <code class="attr">data-bvalidator</code> attribute are considered).</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">noMsgIfExistsForInstance</td>
+                        <td><code>[]</code></td>
+                        <td>This option can be useful if you are using more bValidator instances on the same form and you don't want to show a message if a message is already shown for the instance specified by this option. If a message is already shown it will not be removed. Example: <code>[&quot;myinstance&quot;]</code></td>
+                    </tr>
+                    <tr id="paramsDelimiter">
+                        <td class="bdocs-option-name">paramsDelimiter</td>
+                        <td><code>&quot;:&quot;</code></td>
+                        <td>Delimiter for validation function arguments inside square brackets <code>[]</code> in <code class="attr">data-bvalidator</code> attribute.</td>
+                    </tr>
+                    <tr id="actionsDelimiter">
+                        <td class="bdocs-option-name">actionsDelimiter</td>
+                        <td><code>&quot;,&quot;</code></td>
+                        <td>Validator functions delimiter in <code class="attr">data-bvalidator</code> attribute.</td>
+                    </tr>
+                    <tr id="html5ValidationOff">
+                        <td class="bdocs-option-name">html5ValidationOff</td>
+                        <td><code>true</code></td>
+                        <td>If <code>true</code>, HTML5 validation will be disabled for the forms  bValidator is bound to.</td>
+                    </tr>
+                    <tr id="enableHtml5Attr">
+                        <td class="bdocs-option-name">enableHtml5Attr</td>
+                        <td><code>true</code></td>
+                        <td>If <code>true</code>, bValidator will validate HTML5 
+                            input types: <code>email</code>, <code>url</code>, <code>number</code> <br>
+                            and inputs with attributes: <code>min</code>, <code>max</code>, <code>minlength</code>, <code>maxlength</code>, <code>pattern</code>, <code>required</code>.</td>
+                    </tr>
+                </table>
+                <p> Also see <a href="#themeOptions">theme options</a>.</p>
+            </div>
+            
+            <!-- Error messages and translations -->
+            
+            <h1 class="bdocs-section-header" id="messagesAndTranslations"> <span class="glyphicon bdocs-h1-icon glyphicon-comment"></span> Messages and translations</h1>
+            <div class="bdocs-section">
+                <p> bValidator can retrieve validation  messages from: </p>
+                <ul>
+                    <li>validation function</li>
+                    <li><code class="attr">data-bvalidator-msg</code> attribute</li>
+                    <li><code class="attr">data-bvalidator-msg-<em>functionName</em></code> attribute</li>
+                    <li>configuration object (options)<br>
+                    </li>
+                    <li> server response (<a href="#messagesFromServer">example</a>)</li>
+                </ul>
+                <p>See <a href="#exampleCustomMsg">examples</a>.</p>
+                <p> You can use <code>{0}</code>, <code>{1}</code>, <code>{2}</code>, <code>{3}</code>, ... tags in the validation message and they will be replaced with validation function parameters in <code>[]</code>. </p>
+                <p> You can change default  messages or add new ones by changing  default options: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+    bValidator.defaultOptions.messages.en.email = &#39;Invalid email&#39;;
+    bValidator.defaultOptions.messages.en.mycheck = &#39;Correct this&#39;;        
+&lt;/script&gt;</pre>
+                <p> or pass  messages as <a href="#options">options</a> to validator constructor: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    var options = {
+        lang: &#39;hr&#39;,
+        messages: {
+            hr: {
+                &#39;default&#39;:    &#39;Ispravite ovu vrijednost.&#39;,
+                &#39;equalto&#39;:    &#39;Unesite ponovno istu vrijednost.&#39;,
+                &#39;differs&#39;:    &#39;Unesite različitu vrijednost.&#39;,
+                // ....
+            }
+        }
+    };
+    
+    $(&#39;#myform&#39;).bValidator(options);
+
+&lt;/script&gt;</pre>
+                <p> All default    messages in English are listed in <code>jquery.bvalidator.js</code> file. For some other languages, there are .js files  in <code>lang</code> folder.</p>
+                <p>If you  create a translation file, please make a pull request on <a href="https://github.com/bmauser/bValidator">GitHub</a> and I will merge it into the project. </p>
+            </div>
+            
+            <!-- Validator actions -->
+            
+            <h1 class="bdocs-section-header" id="actions"> <span class="glyphicon bdocs-h1-icon glyphicon-ok"></span> Validation and modifying functions</h1>
+            <div class="bdocs-section">
+                <p> <strong>Validation functions</strong> (validators) are  functions that check the value and  return <code>true</code> if the value is valid. </p>
+                <p> <strong>Modifying functions</strong> (modifiers) are functions that change the value of the field before validation, for example, to trim whitespaces.  Modifiers return a modified value.</p>
+                <p> Validations which will be invoked   for an  input  are listed by default in <code class="attr">data-bvalidator</code> attribute. Modifiers are listed in <code class="attr">data-bvalidator-modifier</code> attribute.</p>
+                <p> Some functions can have parameters which are stated in square brackets <code>[]</code> and delimited with <code>:</code>, for example: <code>mycheck[param1:param2:param3]</code>. </p>
+                <pre class="bdocs-highlight-source">&lt;input type=&#34;text&#34; data-bvalidator=&#34;maxlength[10]&#34; data-bvalidator-modifier=&#34;trim&#34; /&gt;
+&lt;input type=&#34;text&#34; data-bvalidator=&#34;max[10],email,required&#34; /&gt;</pre>
+                <p> Here  are listed all built-in validation functions, but you can easily <a href="#exampleCustomValidationFunction">add your own</a>.</p>
+                <table class="table table-striped table-hover table-condensed table-bordered" id="validationActions">
+                    <tr>
+                        <th>Validator</th>
+                        <th>Parameters</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">alpha</td>
+                        <td>&nbsp;</td>
+                        <td>Checks if all characters are alphabetic.  Empty space (<code>' '</code>), underscore(<code>_</code>), minus (<code>-</code>) and period (<code>.</code>) are also valid.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">alphanum</td>
+                        <td>&nbsp;</td>
+                        <td>Checks if all characters are alphanumeric.  Empty space (<code>' '</code>), underscore(<code>_</code>), minus (<code>-</code>) and period (<code>.</code>) are also valid.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">digit</td>
+                        <td>&nbsp;</td>
+                        <td>Checks if all characters are digits.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">number</td>
+                        <td>&nbsp;</td>
+                        <td>Checks if the input value is a number.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">email</td>
+                        <td>&nbsp;</td>
+                        <td>Checks if the input value is an  E-mail.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">url</td>
+                        <td>&nbsp;</td>
+                        <td>Checks if the input value is a valid URL.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">date</td>
+                        <td><ol>
+                                <li>date format</li>
+                            </ol></td>
+                        <td>Checks if the value is a valid date in the format specified by the function parameter. A format can be any combination of <code>mm</code>,<code> dd</code>, <code>yyyy</code> with one character separator between. Example: <code>date[mm.dd.yyyy]</code> or <code>date[yyyy-mm-dd]</code></td>
+                    </tr>
+                    <tr id="required">
+                        <td class="bdocs-option-name">required</td>
+                        <td>&nbsp;</td>
+                        <td><p> Sets a field as required. </p>
+                            <p> If you put <code>required</code> in front of other functions like <code>data-bvalidator=&quot;required,max[10],email&quot;</code>, a  message that  the field is required will be shown with other validation messages. </p>
+                            <p> If you put <code>required</code> after  other functions like <code>data-bvalidator=&quot;max[10],email,required&quot;</code>, a  message that the field is required will not be shown if there are    other validation messages. </p>
+                            <p> <strong>Note</strong> that if a field is not marked as required and it is empty, it will be considered as valid and  not  validated at all. For example, if you have a field with <code>data-bvalidator=&quot;email&quot;</code> and you leave it empty, <code>email</code> validation function will not be called on the form submit. If a field is  not required, but you still want the validator  to be called, use <code><a href="#valempty">valempty</a></code> function.</p></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">between</td>
+                        <td><ol>
+                                <li>minimum value</li>
+                                <li>maximum value</li>
+                            </ol></td>
+                        <td><p> Checks if  the value is between values set by function parameters.  Example: <code>between[5:10]</code> </p>
+                            <p> If this function is used with multi-select or checkbox in a group (checkboxes with the same name, for example <code>name=&quot;chk[]&quot;</code>), it means that a number of selected options or checkboxes  must be between values set by function parameters.  See <a href="#exampleCheckboxRadio">example</a>. </p></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">max</td>
+                        <td><ol>
+                                <li>maximum value</li>
+                            </ol></td>
+                        <td><p> Checks if  the value is less or equal to the function parameter. </p>
+                            <p> If this function is used with multi-select or checkbox in a group (checkboxes with the same name for example <code>name=&quot;chk[]&quot;</code>), it means that a number of selected options or checkboxes  must be less or equal  to the function parameter. See <a href="#exampleCheckboxRadio">example</a>. </p></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">min</td>
+                        <td><ol>
+                                <li>minimum value</li>
+                            </ol></td>
+                        <td><p> Checks if the value is greater or equal to the function parameter value. </p>
+                            <p> If this function is used with select or checkbox in a group (checkboxes with the same name for example <code>name=&quot;chk[]&quot;</code>), it means that a number of selected options or checkboxes  must be greater or equal  to the function parameter. See <a href="#exampleCheckboxRadio">example</a>. </p></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">rangelen</td>
+                        <td><ol>
+                                <li>minimum length</li>
+                                <li>maximum length</li>
+                            </ol></td>
+                        <td>Checks if length of the value is between values of  function parameters. Example: <code>rangelen[5:20]</code></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">maxlen</td>
+                        <td><ol>
+                                <li>maximum length</li>
+                            </ol></td>
+                        <td>Checks if length of the value is smaller than the function parameter value. Example: <code>maxlen[20]</code></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">minlen</td>
+                        <td><ol>
+                                <li>minimum length</li>
+                            </ol></td>
+                        <td>Checks if length of the value is greater than the function parameter value. Example: <code>minlen[5]</code></td>
+                    </tr>
+                    <tr id="extension">
+                        <td class="bdocs-option-name">extension</td>
+                        <td><ol>
+                                <li>file extensions</li>
+                            </ol></td>
+                        <td>Checks if  the value ends with '<code>.</code>' followed by any of passed parameters. Example: <code>extension[jpg:png:txt]</code><br /></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">ip4</td>
+                        <td>&nbsp;</td>
+                        <td>Checks if  the value is a valid IPv4 address.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">ip6</td>
+                        <td>&nbsp;</td>
+                        <td>Checks if  the value is a valid IPv6 address.<br />
+                            <strong>Note</strong> that this function uses a complex regular expression which can be pretty slow.</td>
+                    </tr>
+                    <tr id="valempty">
+                        <td class="bdocs-option-name">valempty</td>
+                        <td>&nbsp;</td>
+                        <td>Validates field even if it's not marked as <code><a href="#required">required</a></code> and is empty. This function makes sense only if some other custom validation function is  used on that field and the field is not <code><a href="#required">required</a></code>. See <a href="#dependinginputs">example</a>.</td>
+                    </tr>
+                    <tr id="ajax">
+                        <td class="bdocs-option-name">ajax</td>
+                        <td>&nbsp;</td>
+                        <td><p> Function for server side validation. See <a href="#exampleServerSideValidation">examples</a>. </p></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">differ</td>
+                        <td><ol>
+                                <li>element ID</li>
+                            </ol></td>
+                        <td>Input value has to be different from the value of the field whose  ID is passed as parameter. Example: <code>equal[myElementId]</code></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">equal</td>
+                        <td><ol>
+                                <li>element ID</li>
+                            </ol></td>
+                        <td>Input value has to be equal to the value of the field whose  ID is passed as parameter. Example: <code>differ[myElementId]</code></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">pattern</td>
+                        <td><ol>
+                                <li>pattern</li>
+                                <li> modifier (optional)</li>
+                            </ol></td>
+                        <td><p> Checks if the value matches a regular expression pattern given by the function parameter.<br />
+                                If the pattern contains characters like <code>[]</code>,<code>:</code> (same characters  used by bValidator to parse function arguments), you'll have to use a custom validation function or use HTML5 <code class="attr">pattern</code> attribute.</p></td>
+                    </tr>
+                </table>
+                <h3 id="modifyingActions">Modifying functions </h3>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th>Modifier</th>
+                        <th>Parameters</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr id="trim">
+                        <td class="bdocs-option-name">trim</td>
+                        <td>&nbsp;</td>
+                        <td>Removes  whitespaces from the beginning and the end of the input value.</td>
+                    </tr>
+                </table>
+                <p> Custom modifiers can be added  in the same way as custom validation functions (see <a href="#exampleModifiers">example</a>). </p>
+            </div>
+            
+            <!-- API functions -->
+            
+            <h1 class="bdocs-section-header" id="api"> <span class="glyphicon bdocs-h1-icon glyphicon-play-circle"></span> API functions</h1>
+            <div class="bdocs-section">
+                <p> When you make an instance of bValidator you can call some functions on that instance. You can get reference to  a validator instance using jQuery <code>data</code> function: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    $(&#39;#myform&#39;).bValidator();
+    
+    // check if form is valid
+    if($(&#39;#myform&#39;).data(&#39;bValidator&#39;).isValid()){
+        // do somenthing
+    }
+
+&lt;/script&gt;</pre>
+                <p> <code>.data('bValidator')</code> returns  reference to the first instance of bValidator. You can have more instances of bValidator  on the same form (see <a href="#exampleMoreInstances">example</a>) and all references are returned by <code>.data('bValidator<strong>s</strong>')</code> (<strong>note</strong> the  '<strong>s</strong>' here). </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    // first instance
+    $(&#39;#myform&#39;).bValidator();
+	
+    // second instance with default options and named &#39;myinstance&#39;
+    $(&#39;#myform&#39;).bValidator(null, &#39;myinstance&#39;);
+    
+    // validates the form with the first instance named &#39;bvalidator&#39;
+    $(&#39;#myform&#39;).data(&#34;bValidators&#34;).bvalidator.validate();
+    
+    // validates the form with the second instance named &#39;myinstance&#39;
+    $(&#39;#myform&#39;).data(&#34;bValidators&#34;).myinstance.validate();
+
+&lt;/script&gt;</pre>
+                <p> Instance names can be also set by <code class="attr">data-bvalidator-validate</code> attribute. Default instance name is <code>bvalidator</code>. Instance names are in lower case. </p>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th>Function</th>
+                        <th>Arguments</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr id="validate">
+                        <td class="bdocs-option-name">validate</td>
+                        <td><ol>
+                                <li>jQuery object containing inputs to validate  (optional)</li>
+                            </ol></td>
+                        <td>Invokes validation.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">isValid</td>
+                        <td><ol>
+                                <li>jQuery object containing inputs to check <br />
+                                    (optional)</li>
+                            </ol></td>
+                        <td>Only checks if inputs  are valid. Doesn't show validation messages. Returns <code>true</code> if all fields are valid, or <code>false</code> if there are some validation errors.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">getOptions</td>
+                        <td>&nbsp;</td>
+                        <td>Returns the object with options  of the current validator instance.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">showMsg</td>
+                        <td><ol>
+                                <li>jQuery object containing inputs</li>
+                                <li>string message (optional)</li>
+                            </ol></td>
+                        <td>Shows a  message on the elements specified with the first argument. Message can be shown on any element on the page. The element doesn't have to be a part of the form  (or container element) on which bValidator is bound. If the second argument is not set, bValidator will try to get a message from <code class="attr">data-bvalidator-msg</code> attribute.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">removeMsg</td>
+                        <td><ol>
+                                <li>jQuery object 
+                                    containing inputs</li>
+                            </ol></td>
+                        <td>Removes the  message.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">getInputs</td>
+                        <td>&nbsp;</td>
+                        <td>Returns jQuery object containing all input fields associated with the validator.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">getForm</td>
+                        <td>&nbsp;</td>
+                        <td>Returns jQuery object containing <code class="html">&lt;form&gt;</code> (or other elemet on which bValidator is bound).</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">reset</td>
+                        <td><ol>
+                                <li>jQuery object 
+                                    containing inputs<br />
+                                    (optional) </li>
+                            </ol></td>
+                        <td>Hides all validation messages and unbinds events. This    function is  bind to the form reset event.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">destroy</td>
+                        <td>&nbsp;</td>
+                        <td>Removes  bValidator instance.</td>
+                    </tr>
+                    <tr id="getValidators">
+                        <td class="bdocs-option-name">getValidators</td>
+                        <td>&nbsp;</td>
+                        <td><p> Returns the object with all built-in validation  functions of the current validator instance. This is useful for adding custom validator functions which are not accessible from the global scope or overriding existing built-in functions. See <a href="#exampleGetValidators">example</a>. </p>
+                            <p> <strong>Note</strong> that the first parameter passed to the validation function is  the input value or <code>0/1</code> for checkboxes and radios. </p></td>
+                    </tr>
+                    <tr id="getModifiers">
+                        <td class="bdocs-option-name">getModifiers</td>
+                        <td>&nbsp;</td>
+                        <td><p> Returns the object with all built-in modifiers of the current validator instance. This is useful for adding custom modifying functions which are not accessible from the global scope or overriding existing built-in modifiers. You can add your modifier function like this:<br />
+                            </p>
+                            <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    $(&#39;#myform&#39;).data(&#39;bValidator&#39;).getModifiers().myMod = function(value){
+        // return changed value
+        return &#39;newValue&#39;;
+    }
+&lt;/script&gt;</pre></td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">setScrollTo</td>
+                        <td><ol>
+                                <li> position in pixels</li>
+                            </ol></td>
+                        <td>Sets  position in pixels for scrolling after validation.</td>
+                    </tr>
+                    <tr id="bindValidateOn">
+                        <td class="bdocs-option-name">bindValidateOn</td>
+                        <td><ol>
+                                <li>jQuery object 
+                                    containing inputs </li>
+                            </ol></td>
+                        <td>This function is helpful when using <code><a href="#validateOn">validateOn</a></code> option and dynamic   forms. If you add some new input elements to the form after the validator has already been initialized and you want to validate them on the event specified by <code><a href="#validateOn">validateOn</a></code> option, you need to call this function.</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <!-- Events -->
+            
+            <h1 class="bdocs-section-header" id="events"> <span class="glyphicon bdocs-h1-icon glyphicon-repeat"></span> Events</h1>
+            <div class="bdocs-section">
+                <p> Example	of using an event triggered by bValidator: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    $(&#39;#myForm&#39;).on(&#39;beforeFormValidation.bvalidator&#39;, function () {
+        // do something...
+    })
+
+&lt;/script&gt;</pre>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th>Event</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">beforeFormValidation.bvalidator</td>
+                        <td>Triggered before a form validation starts.</td>
+                    </tr>
+                    <tr id="afterFormValidation">
+                        <td class="bdocs-option-name">afterFormValidation.bvalidator</td>
+                        <td>Triggered after a form validation is finished.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">beforeFieldValidation.bvalidator</td>
+                        <td>Triggered before a field validation starts.</td>
+                    </tr>
+                    <tr id="afterFieldValidation">
+                        <td class="bdocs-option-name">afterFieldValidation.bvalidator</td>
+                        <td>Triggered after a field validation is finished.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">afterAjax.bvalidator</td>
+                        <td>Triggered after Ajax request.</td>
+                    </tr>
+                </table>
+                <p> bValidator sets some values to the event object which you can access from within the event function: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    $(&#39;#myForm&#39;).on(&#39;beforeFormValidation.bvalidator&#39;, function (event) {
+        
+        // bValidator instance
+        event.bValidator.instance
+
+        // validation result, true or false (&#39;after&#39; events only)
+        event.bValidator.validationResult
+
+        // array with error messages (afterFieldValidation only)
+        event.bValidator.errorMessages
+
+        //  &lt;form&gt; which is validated
+        event.target
+    })
+
+&lt;/script&gt;</pre>
+            </div>
+            
+            <!-- Examples -->
+            
+            <h1 class="bdocs-section-header" id="examples"> <span class="glyphicon bdocs-h1-icon glyphicon-flash"></span> Examples</h1>
+            <p> You can edit each example and  change the source code by clicking on the 'Show editor'. This page includes default <a href="http://getbootstrap.com/">Bootstrap 3</a> CSS and JavaScript. Note that some Bootstrap styles in the examples are modified for a simple HTML markup, so if you paste a form with Bootstrap HTML it will not look like you would expect. Click on the 'No styling' bellow the editor to disable customized styling and leave only default Bootstrap styles.</p>
+            <p>You can change the look of the validation messages in the examples by choosing the theme name from the dropdown in the main menu.</p>
+            <div class="bdocs-section">
+                
+                <!-- example -->
+                
+                <h2 id="exampleBasic">Basic example</h2>
+                <p> This is a basic example of using bValidator. </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-validate&gt;
+	
+	&lt;input data-bvalidator=&#34;email,required&#34; placeholder=&#34;Enter an Email&#34; type=&#34;text&#34;&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+    
+&lt;/form&gt;
+    </div>
+</div>
+
+                
+                <!-- example -->
+                
+                <h2 id="exampleCustomMsg">Custom messages</h2>
+                <p> You can set a  validation message for the field with <code class="attr">data-bvalidator-msg</code> attribute: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-validate&gt;
+	
+	&lt;label&gt;Enter a number:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;number,required&#34; data-bvalidator-msg=&#34;Number please&#34; type=&#34;text&#34;&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+&lt;/form&gt; 
+
+    </div>
+</div>
+
+                <p id="exampleValidateTillInvalid"> A message  for a specific validation function  can be set with <code class="attr">data-bvalidator-msg-<em>functionName</em></code> attribute: </p>
+                <p>
+                    <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-validate data-bvalidator-option-validate-till-invalid=&#34;true&#34;&gt;
+	
+	&lt;label&gt;Enter something:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;alpha,minlen[20],required&#34; data-bvalidator-msg-minlen=&#34;Please enter more characters.&#34; type=&#34;text&#34;&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+&lt;/form&gt; 
+
+    </div>
+</div>
+
+                </p>
+                <p>In the previous example <code><a href="#validateTillInvalid">validateTillInvalid</a></code> option is used to show a message  from one validation function at the time.</p>
+                <p> Messages can also be set through <a href="#options">options</a>. This example shows how to set a validation message with options passed to bValidator constructor: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+
+    var options = {
+        messages: {
+            en: {
+                &#34;ip4&#34;: &#34;IP address must be in format x.x.x.x&#34;
+            }
+        }
+    };
+    
+	// call bValidator constructor for the form
+    $(&#39;#my-form-3&#39;).bValidator(options);
+
+&lt;/script&gt;
+
+&lt;form id=&#34;my-form-3&#34;&gt;
+	
+	&lt;label&gt;Enter IP4 adress:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;ip4,required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+&lt;/form&gt; 
+
+    </div>
+</div>
+
+                <p> Validation function can return a message. If the validation function returns a <code>string</code>, it will be used as validation message. See also <a href="#exampleCustomValidationFunction">custom validation functions examples</a>.</p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+    
+    function myValidationAction2(fieldValue){		
+		
+        // return true if field is valid 
+                
+        // validation message
+        return &#34;Please enter something else&#34;;
+    }
+    
+&lt;/script&gt;
+
+&lt;form data-bvalidator-validate&gt;
+	
+	&lt;label&gt;Enter something:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;myValidationAction2,required&#34;  type=&#34;text&#34;&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+    
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> See more about  messages <a href="#messagesAndTranslations">here</a>. </p>
+                
+                <!-- example -->
+                
+                <h2 id="exampleCustomValidationFunction">Custom validation function</h2>
+                <p> If you want to make  your own validation function, create a function that returns <code>true</code> for successful validation and put the function name in <code class="attr">data-bvalidator</code> attribute: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+    
+    function myValidationAction(fieldValue){
+        if(fieldValue == &#39;abc&#39;)
+			return true;
+		
+		return false;
+    }
+    
+&lt;/script&gt;
+
+&lt;form data-bvalidator-validate&gt;
+	
+	&lt;label&gt;Enter &#39;abc&#39;:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;myValidationAction,required&#34; data-bvalidator-msg=&#34;Please enter just &#39;abc&#39;.&#34; type=&#34;text&#34;&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+    
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> You can pass parameters to your validation function. First argument to a validation function is the value of the input field and other arguments (if any) are values stated in square brackets <code>[]</code> after the function name in <code class="attr">data-bvalidator</code> attribute. </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+    
+    function myvalidator(number, devideBy){
+        number = parseFloat(number);
+        if(number % parseInt(devideBy) == 0)
+            return true;
+        return false;
+    }
+    
+&lt;/script&gt;
+
+&lt;form data-bvalidator-validate&gt;
+	
+	&lt;label&gt;Enter a number divisible by 3:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;myvalidator[3],number,required&#34; data-bvalidator-msg=&#34;Enter a number which is divisible by 3.&#34; type=&#34;text&#34;&gt;
+	
+	
+	&lt;label&gt;Enter a number divisible by 4:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;myvalidator[4],number,required&#34; data-bvalidator-msg=&#34;Enter a number which is divisible by 4.&#34; type=&#34;text&#34;&gt;
+	
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> To submit the next form  fill in both fields or leave them empty: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+    
+    function checkMyInputs(value, field){
+        
+        if(field == &#39;1&#39;){
+            if(!value &amp;&amp; $(&#39;#val_2&#39;).val())
+                return false;
+        }
+        else if(field == &#39;2&#39;){
+            if(!value &amp;&amp; $(&#39;#val_1&#39;).val())
+                return false;
+        }
+        return true;
+    }
+    
+&lt;/script&gt;
+
+&lt;form data-bvalidator-validate&gt;
+	
+	&lt;label&gt;Value 1:&lt;/label&gt;
+	&lt;input id=&#34;val_1&#34; data-bvalidator=&#34;checkMyInputs[1],valempty&#34; data-bvalidator-msg=&#34;Please enter value in both fields or leave them empty&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Value 2:&lt;/label&gt;
+	&lt;input id=&#34;val_2&#34; data-bvalidator=&#34;checkMyInputs[2],valempty&#34; data-bvalidator-msg=&#34;Please enter value in both fields or leave them empty&#34; type=&#34;text&#34;&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> Password form: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+    
+    function passwordFormat(password){
+		regex = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/); // number, a-z, A-Z, min 8 chars
+		if(regex.test(password))
+			return true;
+		return false;
+    }
+    
+&lt;/script&gt;
+
+&lt;form data-bvalidator-validate&gt;
+		
+	&lt;label&gt;Password&lt;/label&gt;
+	&lt;input id=&#34;new_pass1&#34; data-bvalidator=&#34;passwordFormat,required&#34; data-bvalidator-msg=&#34;Min 8 characters including a number, letters a-z, A-Z&#34; type=&#34;password&#34;&gt;
+
+	&lt;label&gt;Confirm password&lt;/label&gt;
+	&lt;input id=&#34;new_pass2&#34; data-bvalidator=&#34;equal[new_pass1],required&#34; data-bvalidator-msg-equal=&#34;Please enter the same password again&#34; type=&#34;password&#34;&gt;
+
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p id="exampleGetValidators"> If your validation function is not accessible from global scope, you can add the validation function to a validator instance by
+                    using <a href="#getValidators" class="bdocs-mono">getValidators</a> API function:<br />
+                </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    $(&#39;#myform&#39;).data(&#39;bValidator&#39;).getValidators().myAction = function(value){
+        // check the value and return true if valid
+    }
+&lt;/script&gt;</pre>
+                <p> Or you can add your validation function to all instances of bValidator by adding the function to <code>bValidator.validators</code> object: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    bValidator.validators.myAction = function(value){
+        // check the value and return true if valid
+    }
+    
+&lt;/script&gt;</pre>
+                
+                <!-- example -->
+                
+                <h2 id="exampleBigForm">Big form</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="true" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-validate&gt;
+
+	&lt;label&gt;Only digits:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;digit,required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Number:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;number,required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;URL:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;url,required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Pv4 address:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;ip4,required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Choose one:&lt;/label&gt;
+	&lt;input name=&#34;e&#34; value=&#34;1&#34; type=&#34;radio&#34;&gt;
+	&lt;input name=&#34;e&#34; value=&#34;1&#34; type=&#34;radio&#34;&gt;
+	&lt;input name=&#34;e&#34; value=&#34;1&#34; data-bvalidator=&#34;required&#34; data-bvalidator-msg=&#34;Select one radio button&#34; type=&#34;radio&#34;&gt;
+	
+	&lt;br /&gt;
+	
+	&lt;label&gt;Alphabetic characters only:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;alpha,minlen[10],required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Alphanumeric characters only:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;alphanum,minlen[10],required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Date in format dd.mm.yyyy:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;date[dd.mm.yyyy],required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Value between 100 and 200:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;between[100:200],required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Minimum length is 10 characters:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;minlen[10],required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Maximum length is 10 characters:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;maxlen[10],required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Enter between 10 and 20 characters:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;rangelen[10:20],required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;br /&gt;
+	
+	&lt;label&gt;Select at least two checkboxes:&lt;/label&gt;
+	&lt;input name=&#34;b[]&#34; value=&#34;1&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;b[]&#34; value=&#34;1&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;b[]&#34; value=&#34;1&#34; data-bvalidator=&#34;min[2],required&#34; data-bvalidator-msg=&#34;Select at least two checkboxes&#34; type=&#34;checkbox&#34;&gt;
+	
+	&lt;br /&gt;
+	
+	&lt;label&gt;Select .jpg, .png or .txt file:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;extension[jpg:png:txt],required&#34; data-bvalidator-msg=&#34;Please select file of type .jpg, .png or .txt&#34; type=&#34;file&#34;&gt;
+	
+	&lt;label&gt;This checkbox is required:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;required&#34; type=&#34;checkbox&#34;&gt;
+	
+	&lt;br /&gt;
+	
+	&lt;label&gt;Minimum value is 10:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;min[10],required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Select no more than 2 options:&lt;/label&gt;
+	&lt;select size=&#34;5&#34; multiple=&#34;multiple&#34; class=&#34;form-control&#34; data-bvalidator=&#34;max[2],required&#34; data-bvalidator-msg=&#34;Select no more than 2 options&#34;&gt;
+		&lt;option value=&#34;1&#34;&gt;One&lt;/option&gt;
+		&lt;option value=&#34;2&#34;&gt;Two&lt;/option&gt;
+		&lt;option value=&#34;3&#34;&gt;Three&lt;/option&gt;
+		&lt;option value=&#34;4&#34;&gt;Four&lt;/option&gt;
+	&lt;/select&gt;
+	
+	&lt;br /&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                
+                <!-- example -->
+                
+                <h2 id="exampleCheckboxRadio">Checkboxes and radio buttons</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-validate&gt;
+	
+	&lt;label&gt;Select two or none:&lt;/label&gt;
+	&lt;input name=&#34;chk8[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk8[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk8[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk8[]&#34; data-bvalidator=&#34;min[2],max[2]&#34; data-bvalidator-msg=&#34;Select two or none checkboxes&#34; type=&#34;checkbox&#34;&gt;
+	
+	&lt;br /&gt;
+	
+	&lt;label&gt;Select one:&lt;/label&gt;
+	&lt;input name=&#34;radio8&#34; value=&#34;1&#34; type=&#34;radio&#34;&gt;
+	&lt;input name=&#34;radio8&#34; value=&#34;2&#34; type=&#34;radio&#34;&gt;
+	&lt;input name=&#34;radio8&#34; value=&#34;3&#34; type=&#34;radio&#34;&gt;
+	&lt;input name=&#34;radio8&#34; value=&#34;4&#34; data-bvalidator=&#34;required&#34; data-bvalidator-msg=&#34;Select radio&#34; type=&#34;radio&#34;&gt;
+	
+	&lt;br /&gt;
+	
+	&lt;label&gt;Select between three and five:&lt;/label&gt;&lt;br /&gt;
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk81[]&#34; data-bvalidator=&#34;between[3:5],required&#34; data-bvalidator-msg=&#34;Number of selected checkboxes must be between 3 and 5&#34; type=&#34;checkbox&#34;&gt;&lt;br&gt;
+	
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;&lt;br&gt;
+	
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;
+	&lt;input name=&#34;chk81[]&#34; type=&#34;checkbox&#34;&gt;&lt;br /&gt;
+	
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> Checkboxes or radio buttons are grouped by giving the same <code class="attr">name</code> attribute to all elements in the group. <code class="attr">data-bvalidator</code> and <code class="attr">data-bvalidator-msg</code> attributes should be added to only one element in the group on which a validation message will be shown. </p>
+                
+                <!-- example -->
+                
+                <h2 id="exampleDynamicForm">Dynamic form</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-validate&gt;
+	&lt;div id=&#34;container-for-new-elements&#34;&gt;
+	&lt;/div&gt;
+	
+	&lt;div class=&#34;show-hide&#34;&gt;
+		&lt;label&gt;Enter name:&lt;/label&gt;
+		&lt;input data-bvalidator=&#34;alphanum,required&#34; type=&#34;text&#34;&gt;
+	&lt;/div&gt;
+	
+	&lt;label&gt;Enter a number:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;number,required&#34; type=&#34;text&#34;&gt;
+	
+	&lt;div class=&#34;show-hide&#34;&gt;
+		&lt;label&gt;Enter Email:&lt;/label&gt;
+		&lt;input data-bvalidator=&#34;required,email&#34; type=&#34;text&#34;&gt;
+	&lt;/div&gt;
+	
+	&lt;!-- this is here just as template for new elements --&gt;
+	&lt;div id=&#34;new-element-template&#34; style=&#34;display: none;&#34;&gt;
+		&lt;label&gt;Enter a number:&lt;/label&gt;
+		&lt;input data-bvalidator=&#34;number,required&#34; type=&#34;text&#34;&gt;
+	&lt;/div&gt;
+	
+	
+	&lt;button type=&#34;button&#34; onclick=&#34;$(&#39;#container-for-new-elements&#39;).append($(&#39;#new-element-template&#39;).html())&#34;&gt;Add form element&lt;/button&gt;
+	&lt;button type=&#34;button&#34; onclick=&#34;$(&#39;.show-hide&#39;).toggle(400);&#34;&gt;Show / Hide&lt;/button&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> Inputs can be added to the form after bValidator is initialized. Note that hidden form elements are not validated by default. If you need to hide or show some elements, put them into a container element and then show or hide that container. Validation messages will not follow show/hide actions if you apply them only on the input element which is validated. That also depends on the theme that is used.<br />
+                    If you use <a href="#validateOn"><code>validateOn</code></a> option,   after adding a new input to the form, call <a href="#bindValidateOn" class="bdocs-mono">bindValidateOn</a> API function  to bind <code>validateOn</code> event. </p>
+                
+                <!-- example -->
+                
+                <h2 id="exampleHtml5Form">HTML5 form</h2>
+                <p> bValidator works nicely with HTML5 input types. See <a href="#enableHtml5Attr" class="bdocs-mono">enableHtml5Attr</a> option for supported input types and attributes. You can also use <code class="attr">data-bvalidator</code> attributes with HTML5 markup, see <a href="#themeBs3form" class="bdocs-mono">bs3form</a> theme example.</p>
+                .
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-validate&gt;
+
+    &lt;label&gt;E-mail:&lt;/label&gt;
+    &lt;input type=&#34;email&#34; required&gt;
+    &lt;br&gt;
+
+    &lt;label&gt;URL:&lt;/label&gt;
+    &lt;input type=&#34;url&#34; required&gt;
+    
+    &lt;br&gt;
+    &lt;label&gt;Number between 10 and 20:&lt;/label&gt;
+    &lt;input type=&#34;number&#34; min=10 max=&#34;20&#34; required&gt;
+    
+    &lt;br&gt;
+    &lt;label&gt;5 - 10 characters:&lt;/label&gt;
+    &lt;input type=&#34;text&#34; maxlength=&#34;10&#34; minlength=&#34;5&#34; required&gt;
+    
+    &lt;br&gt;
+    &lt;label&gt;Numbers in format 123-456:&lt;/label&gt;
+    &lt;input type=&#34;text&#34; pattern=&#34;[0-9]{3}\-[0-9]{3}&#34; required&gt;
+
+	&lt;br&gt;
+    &lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                
+                <!-- example -->
+                
+                <h2 id="exampleValidateDiv">Validate <span class="bdocs-mono">&lt;div&gt;</span> element</h2>
+                <p> Container element doesn't have to be a <code class="html">&lt;form&gt;</code>. You can trigger validation with JavaScript: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+    
+    function checkIfValid(){
+        if($(&#39;#input-container&#39;).data(&#39;bValidator&#39;).validate())
+            alert (&#39;Is valid!&#39;);
+    }
+    
+&lt;/script&gt;
+
+&lt;div data-bvalidator-validate id=&#34;input-container&#34;&gt;
+	
+	&lt;label&gt;Only digits:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;digit,required&#34; type=&#34;text&#34; &gt;
+
+	&lt;button onclick=&#34;checkIfValid();&#34; type=&#34;submit&#34;&gt;Validate&lt;/button&gt;
+&lt;/div&gt;
+
+    </div>
+</div>
+
+                
+                <!-- example -->
+                
+                <h2 id="exampleMoreInstances">More instances</h2>
+                <p> Enter letters and numbers in the field below: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-validate=&#34;bvalidator,hint&#34;
+    data-hint-option-validate-on=&#34;keyup&#34;
+    data-hint-option-validate-on-submit=&#34;false&#34;
+    data-hint-theme=&#34;gray2&#34;&gt;
+
+	&lt;label&gt;Minimum 15 characters:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;minlen[15],required&#34; data-hint=&#34;alpha&#34; data-hint-msg=&#34;It would be nice if you enter only letters.&#34; type=&#34;text&#34;&gt;
+
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+
+&lt;/form&gt;
+    </div>
+</div>
+
+                <p> You can have more instances of bValidator on the same form. In  the example above, there are two bValidator instances on the  form. One named <span class="bdocs-mono">bvalidator</span> (name for the default instance) and another named <span class="bdocs-mono">hint</span> . Names are stated in <code class="attr">data-bvalidator-validate</code> attribute. Each instance has its own options.  In this example <span class="bdocs-mono">hint</span> instance is configured not to submit the form, to use <a href="#themeGray2"> <span class="bdocs-mono">gray2</span> </a> theme and to validate on <span class="bdocs-mono">keyup</span> event. For <span class="bdocs-mono">hint</span> instance options are set  with <code class="attr">data-hint-</code> attributes in the same way as with <code class="attr">data-bvalidator-</code> attributes for the default instance. </p>
+                <p> Similar example but defined with JavaScript: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form id=&#34;formInstancesExample&#34;&gt;
+
+	&lt;label&gt;Enter username:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;minlen[10],required&#34; data-hint=&#34;email&#34; data-hint-msg=&#34;You can use your email as username.&#34; type=&#34;text&#34;&gt;
+
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+
+&lt;/form&gt;
+
+&lt;script type=&#34;text/javascript&#34;&gt;
+    
+    // options for hint instance
+    var optionsHints = {
+       validateOn:       &#39;keyup&#39;,
+       validateOnSubmit: false,
+	   useTheme:         &#39;gray2&#39;
+    };
+    
+	$(&#39;#formInstancesExample&#39;).bValidator(); // default instance
+    $(&#39;#formInstancesExample&#39;).bValidator(optionsHints, &#39;hint&#39;); // hint instance
+    
+&lt;/script&gt;
+
+    </div>
+</div>
+
+                
+                <!-- example -->
+                
+                <h2 id="exampleJustDisplayingMessages">Just displaying messages</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+    
+    $(document).ready(function () {
+        $(&#39;#justMessages&#39;).bValidator();
+    });
+	
+	// elements to show messages on
+	var $elements = $(&#39;#justMessages input, #justMessages span&#39;);
+    
+    // shows messages
+    function showMessges(){
+		$(&#39;#justMessages&#39;).data(&#39;bValidator&#39;).showMsg($elements, &#39;Hi there&#39;);
+    }
+    
+    // hides messages
+    function hideMessges(){
+        $(&#39;#justMessages&#39;).data(&#39;bValidator&#39;).removeMsg($elements);
+    }
+    
+&lt;/script&gt;
+
+
+&lt;div id=&#34;justMessages&#34; class=&#34;form-horizontal&#34;&gt;
+
+	&lt;div class=&#34;form-group&#34;&gt;
+		&lt;div class=&#34;col-md-4&#34;&gt;
+			&lt;input data-bvalidator-theme=&#34;gray2&#34; type=&#34;text&#34;&gt;
+		&lt;/div&gt;
+		&lt;div class=&#34;col-md-4&#34;&gt;
+			&lt;input data-bvalidator-theme=&#34;postit&#34; type=&#34;text&#34;&gt;
+		&lt;/div&gt;
+		&lt;div class=&#34;col-md-4&#34;&gt;
+			&lt;span class=&#34;bg-success&#34;&gt;&amp;lt;span&amp;gt;&lt;/span&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+    
+	&lt;button type=&#34;button&#34; onclick=&#34;showMessges()&#34;&gt;Show messages&lt;/button&gt;
+	&lt;button type=&#34;button&#34; onclick=&#34;hideMessges()&#34;&gt;Hide messages&lt;/button&gt;
+    
+&lt;/div&gt;
+
+    </div>
+</div>
+
+                <p> In this example no validation is done, only  messages are displayed.
+                    Messages can be displayed on any element on the page, it doesn't have to be an input and it doesn't have to be inside the container element on which bValidator is bound. </p>
+                
+                <!-- example -->
+                
+                <h2 id="exampleModifiers">Modifiers</h2>
+                <p> Modifiers are functions which purpose is to change the input value before validation. For example, to strip trailing/leading whitespaces. Modifiers are called before  validation functions. Modifying function are listed in <code class="attr">data-bvalidator-modifier</code> attribute by default, the same as  validation functions are listed <code class="attr">data-bvalidator</code> attribute.	For some validation functions <code><a href="#trim">trim</a></code> modifier is  called by default (see <code><a href="#autoModifiers">autoModifiers</a></code> option). </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+    
+    function myDigitsModifier(oldValue){
+        return oldValue.replace(/[^0-9\.]/g, &#34;&#34;) // leave only digits
+    }
+    
+    function myURLModifier(oldValue){
+        if(oldValue.substring(0, 4) != &#39;http&#39;)
+			return &#39;http://&#39; + oldValue
+    }
+    
+&lt;/script&gt;
+
+
+&lt;form data-bvalidator-validate&gt;
+
+	&lt;label&gt;E-mail:&lt;/label&gt;
+	&lt;input type=&#34;text&#34; data-bvalidator=&#34;email,required&#34;&gt;
+	
+	&lt;p class=&#34;help-block&#34;&gt;(put whitespaces at the beginning or the end)&lt;/p&gt;
+	
+	&lt;label&gt;Only digits:&lt;/label&gt;
+	&lt;input type=&#34;text&#34;  data-bvalidator=&#34;digit,required&#34; data-bvalidator-modifier=&#34;myDigitsModifier&#34;&gt;
+	
+	&lt;p class=&#34;help-block&#34;&gt;(try to enter some letters)&lt;/p&gt;
+	
+	&lt;label&gt;URL:&lt;/label&gt;
+	&lt;input type=&#34;text&#34;  data-bvalidator=&#34;url,required&#34; data-bvalidator-modifier=&#34;myURLModifier&#34;&gt;
+		
+	&lt;p class=&#34;help-block&#34;&gt;(try to enter without http://)&lt;/p&gt;
+    
+    &lt;label&gt;Enter some word:&lt;/label&gt;
+	&lt;input type=&#34;text&#34; data-bvalidator-modifier=&#34;trim&#34;&gt;
+
+	&lt;p class=&#34;help-block&#34;&gt;(put whitespaces at the beginning or the end)&lt;/p&gt;
+	
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> In this example, <code><a href="#trim">trim</a></code> modifier is automatically called on the first field because <code>email</code> function is mentioned by default in <code><a href="#autoModifiers">autoModifiers</a></code> option.<br />
+                    On the second field, custom modifier  will delete all but digits.<br />
+                    The third field modifier will add 'http://' if you enter URL without it.<br />
+                    The fourth field has  modifying function only, no validation at all. 
+                    You can use only modifier  on the field without <code class="attr">data-bvalidator</code> attribute and validation. </p>
+                <p> <strong>Note</strong> that the first argument of a  modifying function is the value of the input. Other arguments (if any) are values stated in square brackets <code>[]</code> after the function name in <code class="attr">data-bvalidator-modifier</code> attribute (same as for <a href="#customvalidationaction">custom validation</a> functions).  Modifying function should return a new value for the input field. If nothing (<code>undefined</code>) is returned, the input value will not be changed.</p>
+                
+                <!-- example -->
+                
+                <h2 id="exampleServerSideValidation">Server side validation</h2>
+                <p> This field is validated on the server side with <code><a href="#ajax">ajax</a></code> function: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="true" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-option-ajax-url=&#34;lib/ajax-response/response-notok.txt&#34; data-bvalidator-validate&gt;
+	
+	&lt;input data-bvalidator=&#34;ajax,required&#34; data-bvalidator-msg=&#34;Invalid username.&#34; name=&#34;username&#34; placeholder=&#34;Username&#34; type=&#34;text&#34;&gt;
+		
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> The <code class="attr">data-bvalidator-option-ajax-url</code> attribute on the <code class="html">&lt;form&gt;</code> contains URL to which the request is sent.  By default, bValidator will make asynchronous HTTP (Ajax) request sending values of the inputs that are validated.  If the field is valid, the response from the server should be a string defined by <code><a href="#ajaxValid">ajaxValid</a></code> option <span class="bdocs-mono">(&quot;ok&quot;</span> by default). The server can also return a JSON string with results for each validated field. </p>
+                <p> In the next example both fields are  validated on the client and also on the server: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="true" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-option-ajax-url=&#34;lib/ajax-response/response-json-notok.txt&#34; data-bvalidator-validate&gt;
+	
+	&lt;label&gt;Enter username:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;email,ajax,required&#34; data-bvalidator-msg-ajax=&#34;Username is already taken.&#34; name=&#34;username&#34; type=&#34;text&#34;&gt;
+
+	&lt;label&gt;Enter number:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;digit,ajax,required&#34; data-bvalidator-msg-ajax=&#34;The number is not in the database.&#34; name=&#34;number&#34; type=&#34;text&#34;&gt;
+		
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> Server validation won't be invoked if  the value is invalid by some other validation function (<code>email</code> in this example) or   if the value is not changed since the last check. JSON string returned from the server should be in format: </p>
+                <p> <span class="bdocs-mono">{&quot;inputName1&quot;:&quot;ok&quot;, &quot;inputName2&quot;:&quot;ok&quot;}</span> </p>
+                <p> For the fields that are valid, JSON property  should have <span class="bdocs-mono">&quot;ok&quot;</span> value by default. JSON properties for the fields that are not valid can have any other value or don't have to be included in the  response. If all fields are valid only <span class="bdocs-mono">&quot;ok&quot;</span> string can be returned from the server. Validation  message  for <code><a href="#ajax">ajax</a></code> function can be set by <code class="attr">data-bvalidator-msg-<em>ajax</em></code> attribute (see more about <a href="#messagesAndTranslations">messages</a>). </p>
+                <p> Validator will  make Ajax request only for the fields which need validation  and  expect  response only for those fields. In this examples,  all fields are  always in JSON response, but  that's because a static text file and not a real validation script is on the server side.</p>
+                <p id="messagesFromServer"> You can also return validation messages from the server. In the next example, all fields are validated on the server and all messages come from the server: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="true" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-option-ajax-response-msg=&#34;true&#34; data-bvalidator-option-ajax-url=&#34;lib/ajax-response/response-json3.txt&#34; data-bvalidator-validate&gt;
+	
+	&lt;input data-bvalidator=&#34;ajax,valempty&#34; name=&#34;value1&#34; placeholder=&#34;value 1&#34; type=&#34;text&#34;&gt;
+
+	&lt;input data-bvalidator=&#34;ajax,valempty&#34; name=&#34;value2&#34; placeholder=&#34;value 2&#34; type=&#34;text&#34;&gt;
+    
+    &lt;input data-bvalidator=&#34;ajax,valempty&#34; name=&#34;value3&#34; placeholder=&#34;value 3&#34; type=&#34;text&#34;&gt;
+		
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+	&lt;button type=&#34;reset&#34;&gt;Reset&lt;/button&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> Set <code><a href="#ajaxResponseMsg">ajaxResponseMsg</a></code> option  to <code>true</code> to show  messages from the server response. <code><a href="#valempty">valempty</a></code> function is used here instead of <code><a href="#required">required</a></code>, because <code><a href="#required">required</a></code> will show the validation message that the field is required and skip server validation. This way the field is always validated on the server side, even if  empty. </p>
+            </div>
+            
+            <!-- Themes -->
+            
+            <h1 class="bdocs-section-header" id="themes"> <span class="glyphicon bdocs-h1-icon glyphicon-tasks"></span> Themes</h1>
+            <div class="bdocs-section" id="bvd_section_themes">
+                <p> Themes define the look of validation messages. To use a theme you need to include .css and .js files for the theme.</p>
+                <p> To set the  theme for all fields in the form, set the theme name with <code class="attr">data-bvalidator-theme</code> attribute on the <code class="html">&lt;form&gt;</code>: </p>
+                <pre class="bdocs-highlight-source">&lt;form data-bvalidator-theme=&#34;gray3&#34; data-bvalidator-validate&gt;
+    &lt;input type=&#34;text&#34; data-bvalidator=&#34;alphanum,required&#34;/&gt;
+&lt;/form&gt;</pre>
+                <p> That is the same as setting <code><a href="#useTheme">useTheme</a></code> option with <code class="attr">data-bvalidator-option-use-theme</code> attribute. </p>
+                <p> To change the theme only for the specific input field, put <code class="attr">data-bvalidator-theme</code> attribute on the <code class="html">&lt;input&gt;</code>: </p>
+                <pre class="bdocs-highlight-source">&lt;form data-bvalidator-validate&gt;
+    &lt;input type=&#34;text&#34; data-bvalidator=&#34;alphanum,required&#34; data-bvalidator-theme=&#34;gray3&#34;/&gt;
+&lt;/form&gt;</pre>
+                <p> With JavaScript, you can set the default theme  by changing <code><a href="#useTheme">useTheme</a></code> option. </p>
+                <h2 id="themeOptions">Theme examples and options:</h2>
+                <p> Options  for themes can be   set by <code class="attr">data-bvalidator-theme-<em>optionName</em></code> attribute or by JavaScript. </p>
+                <p> You can set <code class="attr">data-bvalidator-theme-<em>optionName</em></code> attribute on the <code class="html">&lt;form&gt;</code> element to change the option for all the fields in the form: </p>
+                <pre class="bdocs-highlight-source">&lt;form data-bvalidator-theme-offset=&#34;-20,0&#34; data-bvalidator-validate&gt;
+    &lt;input type=&#34;text&#34; data-bvalidator=&#34;alphanum,required&#34;/&gt;
+&lt;/form&gt;</pre>
+                <p> If you put <code class="attr">data-bvalidator-theme-<em>optionName</em></code> attribute on the <code class="html">&lt;input&gt;</code>, the option will be set only for that field: </p>
+                <pre class="bdocs-highlight-source">&lt;form data-bvalidator-validate&gt;
+    &lt;input type=&#34;text&#34; data-bvalidator-theme-offset=&#34;-20,0&#34; data-bvalidator=&#34;alphanum,required&#34;/&gt;
+&lt;/form&gt;</pre>
+                <p> Theme options can also be set by changing default options: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+    bValidator.defaultOptions.themes.gray3.offset = &#39;-20,0&#39;;
+    bValidator.defaultOptions.themes.gray3.showClose = false;        
+&lt;/script&gt;</pre>
+                <p> Or by   passing object with options to   bValidator constructor function: </p>
+                <pre class="bdocs-highlight-source">&lt;script type=&#34;text/javascript&#34;&gt;
+
+    var options = {
+        themes: {
+            &#39;gray3&#39;: {
+                 showClose: false
+            }
+        }
+    };
+
+    $(&#39;#myform&#39;).bValidator(options);
+
+&lt;/script&gt;</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeGray">gray</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;gray&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+	
+&lt;/form&gt;
+
+
+    </div>
+</div>
+
+                <h3 id="themeGrayOptions">Options for <span class="bdocs-mono">gray</span> theme:</h3>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th>Option</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">offset</td>
+                        <td><code>&quot;-23,-4&quot;</code></td>
+                        <td>Fine tunes the message  position.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">showClose</td>
+                        <td><code>true</code></td>
+                        <td>If <code>true</code>, messages will have a close icon.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">msgShowSpeed</td>
+                        <td><code>&quot;normal&quot;</code></td>
+                        <td> Message's fade-in speed. Values can be <code>fast</code>, <code>normal</code>, <code>slow</code> or number of milliseconds.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">position</td>
+                        <td><code>&quot;right,top&quot;</code></td>
+                        <td>Zero position for the  message. First  value is for the  horizontal position (<code>left</code>, <code>center</code>, <code>right</code>), second value is for the vertical position (<code>top</code>, <code>center</code>, <code>bottom</code>).</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">invalidClass</td>
+                        <td><code>&quot;bvalidator-gray-invalid&quot;</code></td>
+                        <td>CSS class that will be added to the field if  invalid. </td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">validClass</td>
+                        <td><code>&quot;&quot;</code></td>
+                        <td>CSS class that will be added to the field if  valid. </td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">template</td>
+                        <td><code><small>&quot;&lt;div class=&quot;bvalidator-gray-tooltip bvalidator-gray-tooltip-noclose&quot;&gt;&lt;div class=&quot;bvalidator-gray-arrow&quot;&gt;&lt;/div&gt;&lt;div class=&quot;bvalidator-gray-msg&quot;&gt;{message}&lt;/div&gt;&lt;/div&gt;&quot;</small></code></td>
+                        <td>Template for the message  without the close icon.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">templateClose</td>
+                        <td><code><small>&quot;&lt;div class=&quot;bvalidator-gray-tooltip&quot;&gt;&lt;div class=&quot;bvalidator-gray-arrow&quot;&gt;&lt;/div&gt;&lt;div class=&quot;bvalidator-gray-msg&quot;&gt;{message}&lt;/div&gt;&lt;div class=&quot;bvalidator-gray-close&quot;&gt;&amp;#215;&lt;/div&gt;&lt;/div&gt;&quot;</small></code></td>
+                        <td>Template for the message  with the close icon.</td>
+                    </tr>
+                </table>
+                <h4>Files to include for <span class="bdocs-mono">gray</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/gray/gray.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/gray/gray.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeBs3form">bs3form</h2>
+                <p> This theme uses <a href="http://getbootstrap.com/css/#forms-control-validation">Bootstrap's form validation </a> styles and is designed  for pages built with Bootstrap 3. For this theme to work correctly you have to make forms with Bootstrap markup. It is important to place <code>form-group</code> and <code>control-label</code> classes correctly. See Bootstrap documentation for details. </p>
+                <div data-bdocs-br-input="false" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <div class="bdocs-example-html-container ">
+        &lt;form data-bvalidator-validate data-bvalidator-theme=&#34;bs3form&#34;&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;label class=&#34;control-label&#34;&gt;Email address&lt;/label&gt;
+        &lt;input type=&#34;email&#34; class=&#34;form-control&#34; placeholder=&#34;Email&#34; required&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;label class=&#34;sr-only&#34;&gt;Amount&lt;/label&gt;
+        &lt;div class=&#34;input-group&#34;&gt;
+            &lt;div class=&#34;input-group-addon&#34;&gt;
+                $
+            &lt;/div&gt;
+            &lt;input type=&#34;number&#34; required class=&#34;form-control&#34; placeholder=&#34;Amount&#34;&gt;
+            &lt;div class=&#34;input-group-addon&#34;&gt;
+                .00
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;div class=&#34;checkbox&#34;&gt;
+            &lt;label&gt;
+                &lt;input type=&#34;checkbox&#34; required&gt;
+                Check me out &lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;select class=&#34;form-control&#34; required&gt;
+            &lt;option value=&#34;&#34;&gt;Choose something&lt;/option&gt;
+            &lt;option value=&#34;1&#34;&gt;One&lt;/option&gt;
+            &lt;option value=&#34;2&#34;&gt;Two&lt;/option&gt;
+            &lt;option value=&#34;3&#34;&gt;Three&lt;/option&gt;
+        &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;label class=&#34;control-label&#34;&gt;Group of checkboxes&lt;/label&gt;
+        &lt;div&gt;
+            &lt;label class=&#34;checkbox-inline&#34;&gt;
+                &lt;input data-bvalidator-msg=&#34;Number of selected checkboxes must be between 3 and 5&#34; data-bvalidator=&#34;between[3:5],required&#34; type=&#34;checkbox&#34; name=chk883[]&gt;
+                1 &lt;/label&gt;
+            &lt;label class=&#34;checkbox-inline&#34;&gt;
+                &lt;input type=&#34;checkbox&#34; name=chk883[]&gt;
+                2&lt;/label&gt;
+            &lt;label class=&#34;checkbox-inline&#34;&gt;
+                &lt;input type=&#34;checkbox&#34; name=chk883[]&gt;
+                3&lt;/label&gt;
+            &lt;label class=&#34;checkbox-inline&#34;&gt;
+                &lt;input type=&#34;checkbox&#34; name=chk883[]&gt;
+                4&lt;/label&gt;
+            &lt;br&gt;
+            &lt;label class=&#34;checkbox-inline&#34;&gt;
+                &lt;input type=&#34;checkbox&#34; name=chk883[]&gt;
+                5&lt;/label&gt;
+            &lt;label class=&#34;checkbox-inline&#34;&gt;
+                &lt;input type=&#34;checkbox&#34; name=chk883[]&gt;
+                6&lt;/label&gt;
+            &lt;label class=&#34;checkbox-inline&#34;&gt;
+                &lt;input type=&#34;checkbox&#34; name=chk883[]&gt;
+                7&lt;/label&gt;
+            &lt;label class=&#34;checkbox-inline&#34;&gt;
+                &lt;input type=&#34;checkbox&#34; name=chk883[]&gt;
+                8&lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;label class=&#34;control-label&#34;&gt;Radios&lt;/label&gt;
+        &lt;div&gt;
+            &lt;label class=&#34;radio-inline&#34;&gt;
+                &lt;input type=&#34;radio&#34; name=&#34;radio9986&#34; value=&#34;1&#34; required data-bvalidator-msg=&#34;Please select something&#34;&gt;
+                one &lt;/label&gt;
+            &lt;label class=&#34;radio-inline&#34;&gt;
+                &lt;input type=&#34;radio&#34; name=&#34;radio9986&#34; value=&#34;2&#34;&gt;
+                two &lt;/label&gt;
+            &lt;label class=&#34;radio-inline&#34;&gt;
+                &lt;input type=&#34;radio&#34; name=&#34;radio9986&#34; value=&#34;3&#34;&gt;
+                three &lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;button type=&#34;submit&#34; class=&#34;btn btn-primary&#34;&gt;Submit&lt;/button&gt;
+    &lt;button type=&#34;reset&#34; class=&#34;btn btn-primary &#34;&gt;Reset&lt;/button&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> With horizontal forms use the helper class <code>bvalidator-bs3form-msg</code> to mark the element
+                    into which to append the validation message. By default, the message is appended to <code>form-group</code> element. </p>
+                <div data-bdocs-br-input="false" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <div class="bdocs-example-html-container ">
+        &lt;form data-bvalidator-validate data-bvalidator-theme=&#34;bs3form&#34; class=&#34;form-horizontal&#34;&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;label class=&#34;col-sm-2 control-label&#34;&gt;Email&lt;/label&gt;
+        &lt;div class=&#34;col-sm-10 bvalidator-bs3form-msg&#34;&gt;
+            &lt;div class=&#34;input-group&#34;&gt;
+                &lt;span class=&#34;input-group-addon&#34;&gt;@&lt;/span&gt;
+               &lt;input required type=&#34;email&#34; class=&#34;form-control&#34; placeholder=&#34;Email&#34;&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;label class=&#34;col-sm-2 control-label&#34;&gt;Select&lt;/label&gt;
+        &lt;div class=&#34;col-sm-10 bvalidator-bs3form-msg&#34;&gt;
+            &lt;select class=&#34;form-control&#34; required&gt;
+                &lt;option value=&#34;&#34;&gt;Choose something&lt;/option&gt;
+                &lt;option value=&#34;1&#34;&gt;One&lt;/option&gt;
+                &lt;option value=&#34;2&#34;&gt;Two&lt;/option&gt;
+                &lt;option value=&#34;3&#34;&gt;Three&lt;/option&gt;
+            &lt;/select&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;label class=&#34;col-sm-2 control-label&#34;&gt;Choose&lt;/label&gt;
+        &lt;div class=&#34;col-sm-10 bvalidator-bs3form-msg&#34;&gt;
+            &lt;label class=&#34;radio-inline&#34;&gt;
+                &lt;input type=&#34;radio&#34; name=&#34;radio99862&#34; value=&#34;1&#34; required data-bvalidator-msg=&#34;Please select something&#34;&gt;
+                one &lt;/label&gt;
+            &lt;label class=&#34;radio-inline&#34;&gt;
+                &lt;input type=&#34;radio&#34; name=&#34;radio99862&#34; value=&#34;2&#34;&gt;
+                two &lt;/label&gt;
+            &lt;label class=&#34;radio-inline&#34;&gt;
+                &lt;input type=&#34;radio&#34; name=&#34;radio99862&#34; value=&#34;3&#34;&gt;
+                three &lt;/label&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;    
+    
+    
+    
+    
+    
+    
+           
+    
+    
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;div class=&#34;col-sm-offset-2 col-sm-10&#34;&gt;
+            &lt;button type=&#34;submit&#34; class=&#34;btn btn-primary&#34;&gt;Submit&lt;/button&gt;
+            &lt;button type=&#34;reset&#34; class=&#34;btn btn-primary &#34;&gt;Reset&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> Next example is Inline form. <code>showMessages</code> option
+                    is set to <code>false</code> to not show the messages: </p>
+                <p>
+                    <div data-bdocs-br-input="false" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <div class="bdocs-example-html-container ">
+        &lt;form data-bvalidator-validate data-bvalidator-theme=&#34;bs3form&#34; data-bvalidator-theme-show-messages=&#34;false&#34; class=&#34;form-inline&#34;&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;label class=&#34;control-label&#34;&gt;Name&lt;/label&gt;
+        &lt;input required type=&#34;text&#34; class=&#34;form-control&#34;&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;label class=&#34;control-label&#34;&gt;Address&lt;/label&gt;
+        &lt;input required type=&#34;text&#34; class=&#34;form-control&#34;&gt;
+    &lt;/div&gt;
+    &lt;div class=&#34;form-group&#34;&gt;
+        &lt;button type=&#34;submit&#34; class=&#34;btn btn-primary&#34;&gt;Submit&lt;/button&gt;
+        &lt;button type=&#34;reset&#34; class=&#34;btn btn-primary &#34;&gt;Reset&lt;/button&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                </p>
+                <p>&nbsp; </p>
+                <h3>Options for <span class="bdocs-mono">bs3form</span> theme:</h3>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th width="10%">Option</th>
+                        <th width="40%">Default</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">template</td>
+                        <td><code>&quot;&lt;div class=&quot;help-block&quot;&gt;{message}&lt;/div&gt;&quot;</code></td>
+                        <td>Template for a validation message. If <code>showMessages</code> option
+                            is set to <code>false</code> you can change the template to use <code>sr-only</code> class for assistive technologies.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">formGroupInvalidClass</td>
+                        <td><code>&quot;has-error&quot;</code></td>
+                        <td>CSS class that will be added to the <code>formGroup</code> element if invalid.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">formGroupValidClass</td>
+                        <td><code>&quot;&quot;</code></td>
+                        <td>CSS class that will be added to the <code>formGroup</code> element if valid. <code>has-success</code> is a default Bootstrap class for this.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">showMessages</td>
+                        <td><code>true</code></td>
+                        <td>If <code>true</code> messages will be shown.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">formGroup</td>
+                        <td><code>&quot;.form-group&quot;</code></td>
+                        <td>jQuery selector for the element with <code>form-group</code> class.  If it doesn't start with <code>#</code>, search with jQuery's <code>.closest()</code> is used.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">msgParent</td>
+                        <td><code>&quot;.bvalidator-bs3form-msg&quot;</code></td>
+                        <td>jQuery selector for the element to append a validation message into. If it doesn't  start with <code>#</code>, search with jQuery's <code>.closest()</code> is used.</td>
+                    </tr>
+                </table>
+                <h4>Files to include for <span class="bdocs-mono">bs3form</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/bs3form.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/bs3/bs3form/bs3form.js&#34;&gt;&lt;/script&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeBs3popover">bs3popover</h2>
+                <p> This theme uses Bootstrap <a href="http://getbootstrap.com/javascript/#popovers">Popover</a> plugin to show messages. You have to include bootstrap js and css for this theme to work. </p>
+                <div data-bdocs-br-input="false" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form id=&#34;wert&#34; data-bvalidator-theme=&#34;bs3popover&#34; data-bvalidator-return=&#34;false&#34; class=&#34;text-center&#34;&gt;
+    &lt;br /&gt;
+    &lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34; data-bvalidator-theme-placement=&#34;top&#34;&gt;
+    &lt;br /&gt;
+    &lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+    &lt;br /&gt;
+    &lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34; data-bvalidator-theme-placement=&#34;left&#34;&gt;
+    &lt;br /&gt;
+    &lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34; data-bvalidator-theme-placement=&#34;bottom&#34;&gt;	
+	&lt;br /&gt;
+    &lt;br /&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <h3>Options for <span class="bdocs-mono">bs3popover</span> theme:</h3>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th width="10%">Option</th>
+                        <th width="40%">Default</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">placement</td>
+                        <td><code>&quot;right&quot;</code></td>
+                        <td>How to position the popover. <code>top</code> | <code>bottom</code> | <code>left</code> | <code>right</code> | <code>auto</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">showClose</td>
+                        <td><code>true</code></td>
+                        <td>If <code>true</code>, popover will have the close icon.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">content</td>
+                        <td><code><small>&quot;&lt;div class=&quot;bvalidator-bs3popover-msg bvalidator-bs3popover-msg-noclose&quot;&gt;{message}&lt;/div&gt;&quot;</small></code></td>
+                        <td> Template for the popover content without the close icon.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">contentClose</td>
+                        <td><code><small>&quot;&lt;div class=&quot;bvalidator-bs3popover-msg&quot;&gt;{message}&lt;/div&gt;&lt;div class=&quot;bvalidator-bs3popover-close&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;close&quot; aria-label=&quot;Close&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&quot;</small></code></td>
+                        <td>Template for the popover content with the close icon.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">tooltipOptions</td>
+                        <td><code><small>{<br>
+                            html: 'true',<br>
+                            template: '&lt;div class=&quot;popover&quot; role=&quot;tooltip&quot;&gt;&lt;div class=&quot;arrow&quot;&gt;&lt;/div&gt;&lt;div class=&quot;popover-content&quot;&gt;&lt;/div&gt;&lt;/div&gt;',<br>
+                            viewport: null,<br>
+                            trigger:  'manual'<br>
+                            }</small></code></td>
+                        <td>Popover options. See <a href="http://getbootstrap.com/javascript/#popovers-options">Bootstrap documentation</a> for all options.</td>
+                    </tr>
+                </table>
+                <h4>Files to include for <span class="bdocs-mono">bs3popover</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/bs3popover-tooltip.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/bs3/bs3popover/bs3popover.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/bs3/bs3popover/bs3popover.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeBs3tooltip">bs3tooltip</h2>
+                <p> This theme is similar to <span class="bdocs-mono">bs3popover</span> theme but it uses <a href="http://getbootstrap.com/javascript/#tooltips">Tooltip</a> plugin to display messages. You have to include bootstrap js and css for this theme to work. </p>
+                <div data-bdocs-br-input="false" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;bs3tooltip&#34; data-bvalidator-return=&#34;false&#34; class=&#34;text-center&#34;&gt;
+    &lt;br /&gt;
+    &lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34; data-bvalidator-theme-placement=&#34;top&#34;&gt;
+    &lt;br /&gt;
+    &lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+    &lt;br /&gt;
+    &lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34; data-bvalidator-theme-placement=&#34;left&#34;&gt;
+    &lt;br /&gt;
+    &lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34; data-bvalidator-theme-placement=&#34;bottom&#34;&gt;	
+	&lt;br /&gt;
+    &lt;br /&gt;
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <h3>Options for <span class="bdocs-mono">bs3tooltip</span> theme:</h3>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th width="10%">Option</th>
+                        <th width="40%">Default</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">placement</td>
+                        <td><code>&quot;right&quot;</code></td>
+                        <td>How to position the tooltip. <code>top</code> | <code>bottom</code> | <code>left</code> | <code>right</code> | <code>auto</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">showClose</td>
+                        <td><code>true</code></td>
+                        <td>If <code>true</code>, tooltip will have the close icon.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">content</td>
+                        <td><code><small>&quot;&lt;div class=&quot;bvalidator-bs3tooltip-msg bvalidator-bs3tooltip-msg-noclose&quot;&gt;{message}&lt;/div&gt;&quot;</small></code></td>
+                        <td> Template for the tooltip content without the close icon.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">contentClose</td>
+                        <td><code><small>&quot;&lt;div class=&quot;bvalidator-bs3tooltip-msg&quot;&gt;{message}&lt;/div&gt;&lt;div class=&quot;bvalidator-bs3tooltip-close&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;close&quot; aria-label=&quot;Close&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&amp;times;&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;&quot;</small></code></td>
+                        <td>Template for the tooltip content with the close icon.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">tooltipOptions</td>
+                        <td><code><small>{<br>
+                            html: 'true',<br>
+                            viewport: null,<br>
+                            trigger:  'manual',<br>
+                            } </small></code></td>
+                        <td>Tooltip options. See <a href="http://getbootstrap.com/javascript/#tooltips-options">Bootstrap documentation</a> for all options.</td>
+                    </tr>
+                </table>
+                <h4>Files to include for <span class="bdocs-mono">bs3tooltip</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/bs3popover-tooltip.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/bs3/bs3tooltip/bs3tooltip.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/bs3/bs3tooltip/bs3tooltip.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeInsert">insert</h2>
+                <p> This is a simple theme which just inserts a message before or after the input which is checked. </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;insert&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;  &gt;
+	
+&lt;/form&gt;
+    </div>
+</div>
+
+                <p> You can easily change message styles or template by setting options: </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;insert&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34; data-bvalidator-theme-msg-class=&#34;text-danger&#34; data-bvalidator-theme-invalid-class=&#34;bdocs-example-back-orange&#34;&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <h3>Options for <span class="bdocs-mono">insert</span> theme:</h3>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th width="10%">Option</th>
+                        <th width="40%">Default</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">placement</td>
+                        <td><code>&quot;after&quot;</code></td>
+                        <td>Where to put a message, <code>after</code> or <code>before</code>.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">invalidClass</td>
+                        <td><code>&quot;bvalidator-insert-invalid&quot;</code></td>
+                        <td>CSS class that will be added to the field if  invalid. </td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">validClass</td>
+                        <td><code>&quot;&quot;</code></td>
+                        <td>CSS class that will be added to the field if  valid. </td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">msgClass</td>
+                        <td><code>&quot;bvalidator-insert-msg&quot;</code></td>
+                        <td>This value will replace <code>{msgClass}</code> in <code>template</code> option.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">template</td>
+                        <td><code>&quot;&lt;div class=&quot;{msgClass}&quot;&gt;{message}&lt;/div&gt;&quot;</code></td>
+                        <td>Template for a validation message.</td>
+                    </tr>
+                </table>
+                <h4>Files to include for <span class="bdocs-mono">insert</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/insert.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/insert/insert.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/insert/insert.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeGroup">group</h2>
+                <p> This theme puts all validation messages into one container. </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;group&#34; data-bvalidator-return=&#34;false&#34;&gt;
+
+	&lt;label&gt;Enter something:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;&#34; data-bvalidator-msg=&#34;Please enter something.&#34; type=&#34;text&#34;&gt;
+	
+	&lt;label&gt;Enter something else:&lt;/label&gt;
+	&lt;input data-bvalidator=&#34;&#34; data-bvalidator-msg=&#34;Please enter something else.&#34; type=&#34;text&#34;&gt;
+
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <h3>Options for <span class="bdocs-mono">group</span> theme:</h3>
+                <table class="table table-striped table-hover table-condensed table-bordered">
+                    <tr>
+                        <th width="10%">Option</th>
+                        <th width="40%">Default</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">msgClass</td>
+                        <td><code>&quot;bvalidator-group-msg&quot;</code></td>
+                        <td>CSS class for validation messages container.</td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">invalidClass</td>
+                        <td><code>&quot;bvalidator-group-invalid&quot;</code></td>
+                        <td>CSS class that will be added to the field if  invalid. </td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">validClass</td>
+                        <td><code>&quot;&quot;</code></td>
+                        <td>CSS class that will be added to the field if  valid. </td>
+                    </tr>
+                    <tr>
+                        <td class="bdocs-option-name">makeMsgContainer</td>
+                        <td><code>null</code></td>
+                        <td>Function that returns the element into which all messages will be prepend. It is called with two arguments: <code>$form</code> and <code>$input</code>. If <code>null</code>, messages are prepend into the <code class="html">&lt;form&gt;</code>.</td>
+                    </tr>
+                </table>
+                <h4>Files to include for <span class="bdocs-mono">group</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/group.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/group/group.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/group/group.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeGray2">gray2</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;gray2&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> This theme has the same options as the <a href="#themeGrayOptions"><span class="bdocs-mono">gray</span></a> theme, see the theme .js file for default values. </p>
+                <h4>Files to include for <span class="bdocs-mono">gray2</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/gray2/gray2.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/gray2/gray2.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeGray3">gray3</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;gray3&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+	
+&lt;/form&gt;
+
+
+    </div>
+</div>
+
+                <p> This theme has the same options as the <a href="#themeGrayOptions"><span class="bdocs-mono">gray</span></a> theme, see the theme .js file for default values. </p>
+                <h4>Files to include for <span class="bdocs-mono">gray3</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/gray2/gray3.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/gray2/gray3.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeOrange">orange</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;orange&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> This theme has the same options as the <a href="#themeGrayOptions"><span class="bdocs-mono">gray</span></a> theme, see the theme .js file for default values. </p>
+                <h4>Files to include for <span class="bdocs-mono">orange</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/orange/orange.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/orange/orange.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themePostit">postit</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;postit&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+	
+&lt;/form&gt;
+
+
+    </div>
+</div>
+
+                <p> This theme has the same options as the <a href="#themeGrayOptions"><span class="bdocs-mono">gray</span></a> theme, see the theme .js file for default values. </p>
+                <h4>Files to include for <span class="bdocs-mono">postit</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/postit/postit.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/postit/postit.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeRed">red</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;red&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+	
+&lt;/form&gt;
+    </div>
+</div>
+
+                <p> This theme has the same options as the <a href="#themeGrayOptions"><span class="bdocs-mono">gray</span></a> theme, see the theme .js file for default values. </p>
+                <h4>Files to include for <span class="bdocs-mono">red</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/red/red.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/red/red.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeBslikerc">bslikerc</h2>
+                <p> This theme looks like Bootstrap popover with <code>right</code> placement, but it doesn't depend on Bootstrap as <code><a href="#themeBs3popover">bs3popover</a></code> theme does. </p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;bslikerc&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> This theme has the same options as the <a href="#themeGrayOptions"><span class="bdocs-mono">gray</span></a> theme, see the theme .js file for default values. </p>
+                <h4>Files to include for <span class="bdocs-mono">bslikerc</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/bslikerc/bslikerc.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/bslikerc/bslikerc.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+                
+                <!-- theme example -->
+                
+                <h2 id="themeBslikert">bslikert</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;bslikert&#34; data-bvalidator-return=&#34;false&#34;&gt;
+
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+	
+&lt;/form&gt;
+
+    </div>
+</div>
+
+                <p> This theme looks similar to Bootstrap popover, but it doesn't depend on Bootstrap as <code><a href="#themeBs3popover">bs3popover</a></code> theme does  and has the same options as the <a href="#themeGrayOptions"><span class="bdocs-mono">gray</span></a> theme. See the theme .js file for default options values. </p>
+                <h4>Files to include for <span class="bdocs-mono">bslikert</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/bslikert/bslikert.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/bslikert/bslikert.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+            </div>
+            
+            <!-- Licence -->
+            
+            <h1 class="bdocs-section-header" id="licence"> <span class="glyphicon bdocs-h1-icon glyphicon-heart"></span> Licence</h1>
+            <p><strong>bValidator is licensed under <a href="ttps://opensource.org/licenses/MIT">MIT license</a> so it is free and you can use it without restrictions.</strong></p>
+            <div class="text-center well">
+                <p>If you use bValidator, please consider making a donation</p>
+                <div>
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" id="donate_form" style="text-align:center">
+                        <input type="hidden" name="cmd" value="_s-xclick" />
+                        <input type="hidden" name="hosted_button_id" value="WHSA95VNSYHSG" />
+                        <select name="os0" style="margin-top:5px;margin-bottom:5px;">
+                            <option value="5">$5.00 USD</option>
+                            <option value="10" selected>$10.00 USD</option>
+                            <option value="15">$15.00 USD</option>
+                            <option value="20">$20.00 USD</option>
+                            <option value="25">$25.00 USD</option>
+                            <option value="30">$30.00 USD</option>
+                        </select>
+                        <input type="hidden" name="currency_code" value="USD" />
+                        <br />
+                        <input name="submit" type="image" src="https://www.paypalobjects.com/WEBSCR-640-20110429-1/en_US/i/btn/btn_donate_LG.gif" alt="Donate via PayPal" title="Donate via PayPal" />
+                    </form>
+                </div>
+                <p>&nbsp;</p>
+                <p>If you like it, please share</p>
+                
+                <div class="g-plusone" data-size="medium" data-annotation="none" data-href="http://bojanmauser.from.hr/bvalidator/">
+                </div>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://bojanmauser.from.hr/bvalidator/" data-hashtags="bvalidator" data-dnt="true">Tweet</a> <a aria-label="Star bmauser/bvalidator on GitHub" href="https://github.com/bmauser/bvalidator" class="github-button">Star</a><br>
+                <div class="fb-like" data-href="http://bojanmauser.from.hr/bvalidator/" data-layout="button" data-action="like" data-show-faces="true" data-share="true">
+                </div>
+                <br>
+                
+            </div>
+            
+        </div>
+        
+        <!-- Menu column -->
+        
+        <div class="col-xs-6 col-sm-3" id="bdocs-menu-col">
+            <div class="bdocs-sidebar hidden-print" role="complementary">
+                <ul class="nav">
+                    <li><a href="#setup"> <span class="glyphicon glyphicon-wrench"></span> Setup</a></li>
+                    <li><a href="#options"> <span class="glyphicon glyphicon-cog"></span> Options</a> </li>
+                    <li><a href="#messagesAndTranslations"> <span class="glyphicon glyphicon-comment"></span> Messages and translations</a></li>
+                    <li><a href="#actions"> <span class="glyphicon glyphicon-ok"></span> Validation and modifying functions</a></li>
+                    <li><a href="#api"> <span class="glyphicon glyphicon-play-circle"></span> API functions</a></li>
+                    <li><a href="#events"> <span class="glyphicon glyphicon-repeat"></span> Events</a></li>
+                    <li><a href="#examples"> <span class="glyphicon glyphicon-flash"></span> Examples</a>
+                        <ul class="nav">
+                            <li class="dropdown"><a aria-expanded="false" aria-haspopup="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#" id="bvd_choose_theme_menu"> <span class="bdocs-mono">useTheme:</span>
+                                <button type="button" class="btn btn-default btn-xs"> <span id="bvd_menu_theme_name"> <span class="bdocs-mono">gray</span> </span> <span class="caret"></span> </button>
+                                </a>
+                                <ul aria-labelledby="bvd_choose_theme_menu" class="dropdown-menu" id="bvd_change_theme">
+                                    <li><a href="#" data-bvd-theme="gray"> <span class="bdocs-mono">gray</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="bs3popover"> <span class="bdocs-mono">bs3popover</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="bs3tooltip"> <span class="bdocs-mono">bs3tooltip</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="gray2"> <span class="bdocs-mono">gray2</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="gray3"> <span class="bdocs-mono">gray3</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="orange"> <span class="bdocs-mono">orange</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="postit"> <span class="bdocs-mono">postit</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="red"> <span class="bdocs-mono">red</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="bslikerc"> <span class="bdocs-mono">bslikerc</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="bslikert"> <span class="bdocs-mono">bslikert</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="insert"> <span class="bdocs-mono">insert</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="group"> <span class="bdocs-mono">group</span> </a></li>
+                                    <li class="divider" role="separator"></li>
+                                    <li><a href="#" data-bvd-theme-option-close="1">No close icon</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#exampleBasic">Basic example</a></li>
+                            <li><a href="#exampleCustomMsg">Custom messages</a></li>
+                            <li><a href="#exampleCustomValidationFunction">Custom validation function</a></li>
+                            <li><a href="#exampleBigForm">Big form</a></li>
+                            <li><a href="#exampleCheckboxRadio">Checkboxes and radio buttons</a></li>
+                            <li><a href="#exampleDynamicForm">Dynamic form</a></li>
+                            <li><a href="#exampleHtml5Form">HTML5 form</a></li>
+                            <li><a href="#exampleValidateDiv">Validate <span class="bdocs-mono">&lt;div&gt;</span> element</a></li>
+                            <li><a href="#exampleMoreInstances">More instances</a></li>
+                            <li><a href="#exampleJustDisplayingMessages">Just displaying messages</a></li>
+                            <li><a href="#exampleModifiers">Modifiers</a></li>
+                            <li><a href="#exampleServerSideValidation">Server side validation</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#themes"> <span class="glyphicon glyphicon-tasks"></span> Themes</a>
+                        <ul class="nav">
+                            <li><a href="#themeGray">gray</a></li>
+                            <li><a href="#themeBs3form">bs3form</a></li>
+                            <li><a href="#themeBs3popover">bs3popover</a></li>
+                            <li><a href="#themeBs3tooltip">bs3tooltip</a></li>
+                            <li><a href="#themeInsert">insert</a></li>
+                            <li><a href="#themeGroup">group</a></li>
+                            <li><a href="#themeGray2">gray2</a></li>
+                            <li><a href="#themeGray3">gray3</a></li>
+                            <li><a href="#themePostit">postit</a></li>
+                            <li><a href="#themeOrange">orange</a></li>
+                            <li><a href="#themeRed">red</a></li>
+                            <li><a href="#themeBslikerc">bslikerc</a></li>
+                            <li><a href="#themeBslikert">bslikert</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#licence"> <span class="glyphicon glyphicon-heart"></span> Licence</a>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="fb-root">
+</div>
+<script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script> 
+<script type="text/javascript">
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-34189043-3', 'auto');
+ga('send', 'pageview');
+
+
+
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=480155108852065";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+
+
+
+</script>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script> 
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+
+</body>
+</html>

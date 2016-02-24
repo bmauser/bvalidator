@@ -1,0 +1,32 @@
+.bvalidator-bs3popover-container {
+    position:absolute;
+}
+
+.bvalidator-bs3popover-container .popover {
+    max-width: none;
+}
+
+.bvalidator-bs3popover-container .popover-content {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    max-width: none;
+    text-align: left;
+    position: relative;
+    line-height: 1;
+}
+
+.bvalidator-bs3popover-close {
+    position: absolute;
+    right: .4em;
+    top: .46em;
+}
+
+.bvalidator-bs3popover-msg {
+    margin-right: .6em;
+    white-space: nowrap;
+    line-height: 1.5em;
+}
+
+.bvalidator-bs3popover-msg-noclose{
+    margin-right: 0;
+}

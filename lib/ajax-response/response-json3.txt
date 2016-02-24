@@ -1,0 +1,5 @@
+{
+  "value1":"Please fix this value",
+  "value2":"This value is invalid",
+  "value3":"Please enter something else."
+}

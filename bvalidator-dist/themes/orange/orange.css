@@ -1,0 +1,68 @@
+/* invalid input */
+.bvalidator-orange-invalid {
+    background-color: #FFC !important;
+}
+/* tooltip */
+.bvalidator-orange-tooltip {
+    background-color: #F90;
+    font-size: 10px;
+    border: 1px solid #333;
+    color: #333;
+    border-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    -webkit-box-shadow: 0 0 6px #ddd;
+            box-shadow: 0 0 6px #ddd;
+    white-space: nowrap;
+    padding-top: 2px;
+    padding-right: 15px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    line-height: normal;
+    position:absolute;
+}
+.bvalidator-orange-tooltip-noclose {
+    padding-right: 5px;
+}
+/* message */
+.bvalidator-orange-tooltip .bvalidator-orange-msg {
+    position: relative;
+}
+/* close icon */
+.bvalidator-orange-tooltip .bvalidator-orange-close {
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bolder;
+    color: #F3F3F3;
+    cursor: pointer;
+    font-size: 12px;
+    position:absolute;
+    right: 2px;
+    top: 0px;
+}
+.bvalidator-orange-tooltip .bvalidator-orange-close:hover, .bvalidator-orange-tooltip .bvalidator-orange-close:focus{
+    color: #FFF;
+}
+/* arrow */
+.bvalidator-orange-tooltip .bvalidator-orange-arrow {
+    border-color: #333 transparent transparent;
+    border-style: solid;
+    border-width: 10px 10px 0;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -10px;
+    left: 7px;
+}
+.bvalidator-orange-tooltip .bvalidator-orange-arrow:after {
+    border-color: #F90 transparent transparent;
+    border-style: solid;
+    border-width: 10px 10px 0;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: 1px;
+    left: -10px;
+    content: "";
+}

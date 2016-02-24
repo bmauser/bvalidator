@@ -1,0 +1,36 @@
+.bvalidator-bs3tooltip-container {
+    position:absolute;
+}
+
+.bvalidator-bs3tooltip-container .tooltip-inner {
+    max-width: none;
+    text-align: left;
+    position: relative;
+}
+
+.bvalidator-bs3tooltip-close {
+    position: absolute;
+    right: .4em;
+    top: .4em;
+}
+
+.bvalidator-bs3tooltip-close .close{
+    color: #FFF;
+    text-shadow: 0 1px 0 #ffffff;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    font-size: 1.2em;
+}
+
+.bvalidator-bs3tooltip-close .close:hover, bvalidator-bs3tooltip-close .close:focus{
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.bvalidator-bs3tooltip-msg {
+    margin-right: 1em;
+    white-space: nowrap;
+}
+.bvalidator-bs3tooltip-msg-noclose{
+    margin-right: 0;
+}
