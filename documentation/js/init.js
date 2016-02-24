@@ -2,6 +2,12 @@ $(document).ready(function () {
 
     'use strict'
 
+    // set get method for ajax, because github forbids post requests
+    bValidator.defaultOptions.ajaxOptions = {
+        cache  : false,
+        method : 'GET'
+    };
+
     $('.bdocs-highlight-source').bDocs('formatSource');
 
     $('.bdocs-live-example').bDocs('makeSourceEditable');
