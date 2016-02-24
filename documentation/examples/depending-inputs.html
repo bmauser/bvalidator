@@ -1,0 +1,28 @@
+<script type="text/javascript">
+    
+    function checkMyInputs(value, field){
+        
+        if(field == '1'){
+            if(!value && $('#val_2').val())
+                return false;
+        }
+        else if(field == '2'){
+            if(!value && $('#val_1').val())
+                return false;
+        }
+        return true;
+    }
+    
+</script>
+
+<form data-bvalidator-validate>
+	
+	<label>Value 1:</label>
+	<input id="val_1" data-bvalidator="checkMyInputs[1],valempty" data-bvalidator-msg="Please enter value in both fields or leave them empty" type="text">
+	
+	<label>Value 2:</label>
+	<input id="val_2" data-bvalidator="checkMyInputs[2],valempty" data-bvalidator-msg="Please enter value in both fields or leave them empty" type="text">
+	
+	<button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+</form>

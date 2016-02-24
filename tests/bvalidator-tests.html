@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <title>bValidator tests</title>
+  <link rel="stylesheet" href="qunit-1.18.0.css">
+  <script src="qunit-1.18.0.js"></script>
+  <script type="text/javascript" src="../node_modules/jquery/dist/jquery.js"></script>
+  <script type="text/javascript" src="../dist/jquery.bvalidator.js"></script>
+  <script type="text/javascript" src="../dist/themes/gray/gray.js"></script>
+  <script type="text/javascript" src="../dist/themes/presenters/default.js"></script>
+  <script>
+  
+  	// QUnit.config.scrolltop = false;
+  
+	function makeForm(formID){
+		
+		if(!formID)
+			formID = 'testForm';
+		
+		var $form = $('<form id="'+formID+'"></form>');
+		$('#qunit-fixture').append($form);
+		return $form;
+	}
+  
+	function addEmailFieldToForm(formID, emailFieldID){
+		
+		if(!formID)
+			formID = 'testForm';
+			
+		if(!emailFieldID)
+			emailFieldID = 'emailField';
+		
+		$('#' + formID).append('<input id="'+emailFieldID+'" data-bvalidator="email,required" type="text" />');
+	}
+	
+	function _($val){
+		console.log($val);
+	}
+	
+	var msgContainerClass = 'bvalidator-message-container';
+  
+  </script>
+  </head>
+  <body>
+<div id="qunit">
+  </div>
+<script>
+  
+  	QUnit.test( "bind to a form", function( assert ) {
+		makeForm().bValidator();
+		assert.ok( $('#testForm').data('bValidator') instanceof bValidator);
+		assert.ok( $('#testForm').data('bValidators').bvalidator instanceof bValidator);
+	});
+  
+	QUnit.test( "bind to a form with instance name", function( assert ) {
+		makeForm().bValidator({}, 'testinstance');
+		
+		assert.ok( $('#testForm').data('bValidator') instanceof bValidator);
+		assert.ok( $('#testForm').data('bValidators').testinstance instanceof bValidator);
+	});
+
+	QUnit.test( "bind to an input", function( assert ) {
+		makeForm(); // form is not needed
+		addEmailFieldToForm();
+		
+		$('#emailField').bValidator();
+		$('#emailField').bValidator({}, 'testinstance');
+		
+		assert.ok( $('#emailField').data('bValidator') instanceof bValidator);
+		assert.ok( $('#emailField').data('bValidators').bvalidator instanceof bValidator);
+		assert.ok( $('#emailField').data('bValidators').testinstance instanceof bValidator);
+		$('#emailField').data('bValidator').validate();
+		assert.equal($('#emailField').next().hasClass(msgContainerClass), true);
+	});
+    
+    QUnit.test( "beforeFormValidation and afterFormValidation events", function( assert ) {
+		makeForm().bValidator();
+		addEmailFieldToForm();
+		
+		var a = null;
+		var b = null;
+		var c = true;
+		
+		$('#testForm').on('beforeFormValidation.bvalidator', function(e){
+			a = e.bValidator.instance;
+		});
+		
+		$('#testForm').on('afterFormValidation.bvalidator', function(e){
+			b = e.bValidator.instance;
+			c = e.bValidator.validationResult;
+		});
+		
+		$('#testForm').submit();
+		
+		assert.ok( a instanceof bValidator);
+		assert.ok( b instanceof bValidator);
+		assert.equal( c, false);
+    });
+
+	QUnit.test( "beforeFormValidation and afterFormValidation events for named instance", function( assert ) {
+
+		makeForm().append('<input data-testinstance="email,required" type="text" />').bValidator({}, 'testinstance');
+		
+		var a = null;
+		var b = null;
+		var c = true;
+		
+		$('#testForm').on('beforeFormValidation.testinstance', function(e){
+			a = e.bValidator.instance;
+		});
+		
+		$('#testForm').on('afterFormValidation.testinstance', function(e){
+			b = e.bValidator.instance;
+			c = e.bValidator.validationResult;
+		});
+		
+		$('#testForm').submit();
+		
+		assert.ok( a instanceof bValidator);
+		assert.ok( b instanceof bValidator);
+		assert.equal( c, false);
+    });
+	
+	
+	QUnit.test( "beforeFieldValidation and afterFieldValidation", function( assert ) {
+
+		makeForm().bValidator();
+		addEmailFieldToForm();
+		
+		var a = null;
+		var b = null;
+		var c = true;
+		var d = true;
+		
+		$(window).on('beforeFieldValidation.bvalidator', function(e){
+			a = e.bValidator.instance;;
+		});
+		
+		$(window).on('afterFieldValidation.bvalidator', function(e){
+			b = e.bValidator.instance;
+			c = e.bValidator.validationResult;
+			d = e.bValidator.errorMessages;
+		});
+		
+		$('#testForm').submit();
+		
+		assert.ok( a instanceof bValidator);
+		assert.ok( b instanceof bValidator);
+		assert.ok( typeof d[0] == 'string');
+		assert.equal(c, false);
+    });
+	
+
+	QUnit.test( "show error message", function( assert ) {
+		makeForm().bValidator();
+		addEmailFieldToForm();
+		$('#testForm').submit();
+		assert.equal($('#emailField').next().hasClass(msgContainerClass), true, "bvalidator-message-container is added to the DOM" );
+    });
+	
+	QUnit.test( "bValidator instance structure", function( assert ) {
+		makeForm().bValidator();
+		addEmailFieldToForm();
+		var bValidator = $('#testForm').data('bValidator');
+		
+		assert.expect(14) // api functions + fn object
+		
+		for (var member in bValidator){
+			if(member == 'fn')
+				assert.ok( typeof bValidator[member] == 'object', member + " is object" );
+			else
+				assert.ok( typeof bValidator[member] == 'function', member + " is function" );
+		}
+    });
+	
+	QUnit.test( "minlen validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = '12345'
+		assert.ok( actions.minlen(v, '4'));
+		assert.ok( actions.minlen(v, '5'));
+		assert.notOk( actions.minlen(v, '6'));
+		assert.notOk( actions.minlen(v, '444aaa'));
+    });
+	
+	QUnit.test( "maxlen validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = '12345'
+		assert.ok( actions.maxlen(v, '5'));
+		assert.ok( actions.maxlen(v, '6'));
+		assert.notOk( actions.maxlen(v, '4'));
+    });
+	
+	QUnit.test( "rangelen validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = '12345'
+		assert.ok( actions.rangelen(v, '5', '5'));
+		assert.ok( actions.rangelen(v, '4', '6'));
+		assert.ok( actions.rangelen(v, '4', '5'));
+		assert.notOk( actions.rangelen(v, '3', '4'));
+		assert.notOk( actions.rangelen(v, '6', '5'));
+		assert.notOk( actions.rangelen(v, '10', '11'));
+    });
+	
+	QUnit.test( "min validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = '10'
+		assert.ok( actions.min(v, '5'));
+		assert.ok( actions.min(v, '10'));
+		assert.notOk( actions.min(v, '11'));
+    });
+	
+	QUnit.test( "max validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = '10'
+		assert.ok( actions.max(v, '10'));
+		assert.ok( actions.max(v, '11'));
+		assert.notOk( actions.max(v, '5'));
+		
+    });
+	
+	QUnit.test( "between validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = '10'
+		assert.ok( actions.between(v, '5', '15'));
+		assert.ok( actions.between(v, '10', '10'));
+		assert.ok( actions.between(v, '9', '10'));
+		assert.notOk( actions.between(v, '3', '4'));
+		assert.notOk( actions.between(v, '10', '8'));
+    });
+	
+	QUnit.test( "required validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = ''
+		assert.notOk( actions.required(v));
+		v = 'a'
+		assert.ok( actions.required(v));
+		v = 'false'
+		assert.ok( actions.required(v));
+		v = 'true'
+		assert.ok( actions.required(v));
+    });
+	
+	QUnit.test( "alpha validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = 'aaaa'
+		assert.ok( actions.alpha(v));
+		v = 'ee .-_'
+		assert.ok( actions.alpha(v));
+		v = 'ee%'
+		assert.notOk( actions.alpha(v));
+		v = 'aaa3'
+		assert.notOk( actions.alpha(v));
+    });
+	
+	QUnit.test( "alphanum validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = 'aaaa'
+		assert.ok( actions.alphanum(v));
+		v = 'ee .-_'
+		assert.ok( actions.alphanum(v));
+		v = 'ee%'
+		assert.notOk( actions.alphanum(v));
+		v = 'aaa3'
+		assert.ok( actions.alphanum(v));
+    });
+	
+	QUnit.test( "digit validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = '123'
+		assert.ok( actions.digit(v));
+		v = '1'
+		assert.ok( actions.digit(v));
+		v = '12e'
+		assert.notOk( actions.digit(v));		
+    });
+	
+	QUnit.test( "number validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = '123'
+		assert.ok( actions.number(v));
+		v = '+123'
+		assert.ok( actions.number(v));
+		v = '-123.44'
+		assert.ok( actions.number(v));
+		v = '12.123'
+		assert.ok( actions.number(v));
+		v = '12,55'
+		assert.notOk( actions.number(v));
+		v = '12e5'
+		assert.notOk( actions.number(v));	
+    });
+	
+	QUnit.test( "date validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = '12.12.2015'
+		assert.ok( actions.date(v, 'mm.dd.yyyy'));
+		v = '12.12.2015'
+		assert.ok( actions.date(v, 'dd.mm.yyyy'));
+		v = '20.12.2015'
+		assert.ok( actions.date(v, 'dd.mm.yyyy'));
+		v = '20.12.2015'
+		assert.notOk( actions.date(v, 'mm.dd.yyyy'));
+		v = '12.55.2015'
+		assert.notOk( actions.date(v, 'mm.dd.yyyy'));
+		v = '01.01.2015'
+		assert.ok( actions.date(v, 'mm.dd.yyyy'));
+		v = '01-01-2015'
+		assert.ok( actions.date(v, 'mm-dd-yyyy'));
+		v = '2015#02#03'
+		assert.ok( actions.date(v, 'yyyy#mm#dd'));
+		v = '2015#02#03-'
+		assert.notOk( actions.date(v, 'yyyy#mm#dd-'));		
+    });
+	
+	QUnit.test( "extension validation action", function( assert ) {
+		
+		var v,actions = bValidator.validators;
+	
+		v = 'file.jpg'
+		assert.ok( actions.extension(v, 'jpg', 'gif', 'doc'));
+		v = 'file.doc'
+		assert.notOk( actions.extension(v, 'jpg', 'gif', 'docx'));
+
+    });
+		
+	// email, url, ip4, ip6 are tested in another way
+	// @todo test ajax
+	
+	
+	QUnit.test( "trim modifier", function( assert ) {
+		
+		var modifiers = bValidator.modifiers;
+		var v;
+		
+		v = 'asdasdasdasd'
+		assert.equal( v, modifiers.trim(v));
+		v = '  123   '
+		assert.equal( '123', modifiers.trim(v));
+		v = ' \n 123 \t  '
+		assert.equal( '123', modifiers.trim(v));
+    });
+	
+	QUnit.test( "jQuery chainable API", function( assert ) {
+		
+		makeForm('testForm1');
+		makeForm('testForm2');
+		makeForm('testForm3');
+		
+		$('#qunit-fixture > form').bValidator();
+		
+		assert.ok( $('#testForm1').data('bValidator') instanceof bValidator, "binded on form 1" );
+		assert.ok( $('#testForm2').data('bValidator') instanceof bValidator, "binded on form 2" );
+		assert.ok( $('#testForm3').data('bValidator') instanceof bValidator, "binded on form 2" );
+    });
+	
+	// helper function for API test 
+	var setupApiTest = function(){
+		makeForm('testForm1');
+		makeForm('testForm2');
+		addEmailFieldToForm('testForm1', 'emailField1');
+		addEmailFieldToForm('testForm2', 'emailField2');
+		return $('#qunit-fixture > form'); // both forms
+	}
+	
+	QUnit.test( "API function validate()", function( assert ) {
+		var $allForms = setupApiTest();
+	
+		// validate
+		$('#testForm1').bValidator('validate');
+		$('#testForm2').bValidator('validate');
+		assert.equal($('#emailField1').next().hasClass(msgContainerClass), true);
+		assert.equal($('#emailField2').next().hasClass(msgContainerClass), true);
+	});
+		
+	QUnit.test( "API function getOptions()", function( assert ) {
+		var $allForms = setupApiTest();
+		// getOptions
+		assert.equal($allForms.bValidator('getOptions').useTheme, 'gray');	
+	});
+	
+	QUnit.test( "API function getValidators()", function( assert ) {
+		var $allForms = setupApiTest();
+		// getValidators
+		assert.ok( typeof $allForms.bValidator('getValidators').alpha == 'function');
+	});
+		
+	QUnit.test( "API function getModifiers()", function( assert ) {
+		var $allForms = setupApiTest();
+		// getModifiers
+		assert.ok( typeof $allForms.bValidator('getModifiers').trim == 'function');
+	});
+		
+	QUnit.test( "API function isValid()", function( assert ) {
+		var $allForms = setupApiTest();
+		// isValid
+		assert.notOk( $allForms.bValidator('isValid'), "forms.bValidator('isValid')" );
+	});
+	
+	QUnit.test( "API function getInputs()", function( assert ) {
+		var $allForms = setupApiTest();
+		// getInputs
+		assert.equal($allForms.bValidator('getInputs').attr('id'), 'emailField1');
+	});
+		
+	QUnit.test( "API function removeMsg()", function( assert ) {
+		var $allForms = setupApiTest();
+		// removeMsg
+		$allForms.bValidator('validate');
+		$allForms.bValidator('removeMsg', $('#emailField1, #emailField2'));
+		assert.equal($('#emailField1').next().hasClass(msgContainerClass), false);
+		assert.equal($('#emailField2').next().hasClass(msgContainerClass), false);
+	});
+		
+	QUnit.test( "API function reset()", function( assert ) {
+		var $allForms = setupApiTest()
+		// reset
+		$allForms.bValidator('validate');
+		$allForms.bValidator('reset');
+		assert.equal($('#emailField1').next().hasClass(msgContainerClass), false);
+		assert.equal($('#emailField2').next().hasClass(msgContainerClass), false);
+	});
+		
+	QUnit.test( "API function setScrollTo()", function( assert ) {
+		var $allForms = setupApiTest()
+		$allForms.bValidator();
+		$('#testForm1').data('bValidator').fn.scrollTo = 200;
+		$('#testForm2').data('bValidator').fn.scrollTo = 200;
+		$allForms.bValidator('setScrollTo', 100);
+		assert.equal($('#testForm1').data('bValidator').fn.scrollTo, 100);
+		assert.equal($('#testForm2').data('bValidator').fn.scrollTo, 100);
+	});
+		
+	QUnit.test( "API function showMsg()", function( assert ) {
+		var $allForms = setupApiTest()
+		// showMsg
+		$allForms.bValidator('reset');
+		$allForms.bValidator('showMsg', $('#emailField1, #emailField2'), 'test message');
+		assert.equal($('#emailField1').next().hasClass(msgContainerClass), true);
+		assert.equal($('#emailField2').next().hasClass(msgContainerClass), true);
+	});
+		
+	QUnit.test( "API function bindValidateOn()", function( assert ) {
+		var $allForms = setupApiTest()
+		$allForms.bValidator();
+		$('#testForm1').data('bValidator').fn.options.validateOn = 'click';
+		$('#testForm2').data('bValidator').fn.options.validateOn = 'change';
+		$('#testForm1').bValidator('bindValidateOn', $('#emailField1'));
+		$('#testForm2').bValidator('bindValidateOn', $('#emailField2'));
+		assert.equal(jQuery._data( $('#emailField1')[0], "events" ).click[0].type, 'click');
+		assert.equal(jQuery._data( $('#emailField2')[0], "events" ).change[0].type, 'change' );
+	});
+	
+	QUnit.test( "API function destroy()", function( assert ) {
+		var $allForms = setupApiTest()
+		// destroy
+		$allForms.bValidator('destroy');
+		assert.equal($('#testForm1').data('bValidator'), null);
+		assert.equal($('#testForm2').data('bValidator'), null);
+	});
+	
+	
+	function makeOptionTestForm(){
+		
+		makeForm().bValidator();
+		addEmailFieldToForm('testForm', 'emailField1');
+		addEmailFieldToForm('testForm', 'emailField2');
+		addEmailFieldToForm('testForm', 'emailField3');
+		
+		return $('#testForm').bValidator('getOptions'); // options
+	}
+	
+	
+	QUnit.test( "option useTheme", function( assert ) {
+		
+		try{
+			makeOptionTestForm().useTheme = 'unexising';
+			$('#testForm').data('bValidator').validate();
+		}
+		catch (err) {
+            assert.ok( err == '[bValidator] no options for theme: unexising' );
+		}
+	});
+	
+	QUnit.test( "option singleError", function( assert ) {
+
+		makeOptionTestForm().singleError = true;
+		$('#testForm').data('bValidator').validate();
+		assert.equal($('#emailField1').next().hasClass(msgContainerClass), true );
+		assert.equal($('#emailField2').next().hasClass(msgContainerClass), false );
+		assert.equal($('#emailField3').next().hasClass(msgContainerClass), false );
+    });
+	
+	QUnit.test( "option scrollToError", function( assert ) {
+
+		var options = makeOptionTestForm();
+		$('#testForm').data('bValidator').fn.scrollTo = 10000;
+		$('#testForm').data('bValidator').validate();
+		assert.ok($('#testForm').data('bValidator').fn.scrollTo < 10000, "scrollToError" );
+		
+		options.scrollToError = false;
+		$('#testForm').data('bValidator').fn.scrollTo = 10000;
+		$('#testForm').data('bValidator').validate();
+		assert.ok($('#testForm').data('bValidator').fn.scrollTo == 10000, "scrollToError" );
+    });
+
+	QUnit.test( "option scrollToErrorOffset", function( assert ) {
+
+		var options = makeOptionTestForm();
+		$('#testForm').data('bValidator').validate();
+		var val1 = parseInt($('#testForm').data('bValidator').fn.scrollTo);
+		
+		options.scrollToErrorOffset = 15;
+		var val2 = $('#testForm').data('bValidator').fn.scroll(val1);
+		
+		assert.equal(val2, val1 + 15);
+    });
+
+
+	QUnit.test( "option validateOn", function( assert ) {
+
+		var done = assert.async();
+
+		makeOptionTestForm().validateOn = 'click';
+		$('#testForm').bValidator('bindValidateOn', $('#emailField1'));
+		$('#emailField1').trigger('click');
+		
+		setTimeout(function(){
+			assert.equal($('#emailField1').next().hasClass(msgContainerClass), true, "validateOn with bindValidateOn()" );
+			done();
+		}, 350);
+    });
+	
+	QUnit.test( "option errorValidateOn", function( assert ) {
+		
+		var done = assert.async();
+		
+		makeOptionTestForm().errorValidateOn = 'click';
+		$('#testForm').bValidator('validate'); // show message
+		$('.' + msgContainerClass + ' .bvalidator-gray-close').trigger('click'); // remove message
+		$('#emailField1').trigger('click');
+
+		setTimeout(function(){
+			assert.equal($('#emailField1').next().hasClass(msgContainerClass), true);
+			done(); 
+		}, 400);	
+    });
+	
+	QUnit.test( "option validateOnSubmit", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		var options = {validateOnSubmit : false};
+		$('#testForm').bValidator(options);
+		
+		$('#testForm').submit(function() { // stop form submit
+			return false;
+		});
+		
+		$('#testForm').submit();
+		assert.equal($('#emailField1').next().hasClass(msgContainerClass), false);
+    });
+	
+	QUnit.test( "option stopSubmitPropagation", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		$('#testForm').bValidator();
+		$('#testForm').submit();
+		assert.equal($('#emailField').next().hasClass(msgContainerClass), true);
+    });
+
+	QUnit.test( "option stopSubmitPropagation", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		var options = {stopSubmitPropagation : false};
+		$('#testForm').bValidator(options);
+		
+		var submited = false;
+		
+		$('#testForm').submit(function() { // stop form submit
+			submited = true;
+			return false;
+		});
+		
+		$('#testForm').submit();
+		
+		assert.equal(submited, true);
+    });
+	
+	QUnit.test( "option validateTillInvalid, validateActionsAttr", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		var options = {validateTillInvalid : true};
+		$('#testForm').bValidator(options);
+		
+		var calledVal1 = false;
+		var calledVal2 = false;
+		
+		$('#testForm').data('bValidator').fn.validators.val1 = function(){
+			calledVal1 = true;
+			return false;
+		};
+		
+		$('#testForm').data('bValidator').fn.validators.val2 = function(){
+			calledVal2 = true;
+			return false;
+		};
+		
+		$('#emailField').attr('data-bvalidator', 'val1,val2,required');
+		$('#testForm').data('bValidator').validate();
+		
+		assert.equal(calledVal1, true);
+		assert.equal(calledVal2, false);
+    });
+	
+	QUnit.test( "option skipValidation", function( assert ) {
+		
+		makeOptionTestForm().skipValidation = "input";
+		assert.ok($('#testForm').bValidator('isValid'));
+		
+    });
+	
+	QUnit.test( "option noMsgIfExistsForInstance", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		
+		$('#testForm').bValidator();
+		$('#emailField').attr('data-secondinstance', 'email,required');
+		
+		var options = {noMsgIfExistsForInstance : ['bvalidator']};
+		$('#testForm').bValidator(options, 'secondinstance');
+		
+		$('#testForm').data('bValidators').bvalidator.validate();
+		$('#testForm').data('bValidators').secondinstance.validate();
+		assert.ok( $('.bvalidator-message-container').length == 1);
+	
+		$('#testForm').data('bValidators').bvalidator.reset();
+		$('#testForm').data('bValidators').secondinstance.reset();
+		$('#testForm').data('bValidators').secondinstance.fn.options.noMsgIfExistsForInstance = [];
+		$('#testForm').data('bValidators').bvalidator.validate();
+		$('#testForm').data('bValidators').secondinstance.validate();
+		assert.ok( $('.bvalidator-message-container').length == 2);
+	});
+
+	QUnit.test( "option lang", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		
+		var options = {
+			lang: 'xx',
+			errorMessages : {xx: {email : 'xxx-xxx', required : 'x'}}
+		};
+		$('#testForm').bValidator(options);
+		$('#testForm').bValidator('validate');
+		
+		assert.ok( $( "#testForm:contains('xxx-xxx')" ).length = 1, 'lang');
+	});
+	
+	QUnit.test( "option errorMessageAttr", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		$('#emailField').attr('data-bvalidator-msg', 'xxx-xxx');
+		$('#testForm').bValidator('validate');
+		assert.ok( $( "#testForm:contains('xxx-xxx')" ).length = 1);
+	});
+	
+	QUnit.test( "option validationResultAttr", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		$('#emailField').attr('data-bvalidator-return', 'true');
+		$('#testForm').bValidator('validate');
+		assert.ok( $('.bvalidator-message-container').length == 0);
+	});
+	
+	QUnit.test( "option modifyActionsAttr", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		$('#testForm').bValidator();
+		
+		$('#testForm').data('bValidator').fn.modifiers.test1 = function(){
+			return '123';
+		};
+		
+		$('#emailField').attr('data-bvalidator-modifier', 'test1');
+		$('#testForm').data('bValidator').validate();
+		
+		assert.equal($('#emailField').val() == '123', true);
+	});
+
+	QUnit.test( "option setThemeAttr", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		
+		var options = {
+			themes : {'t123': bValidator.defaultOptions.themes.gray}
+		};
+		
+		$('#testForm').bValidator(options);
+		$('#emailField').attr('data-bvalidator-theme', 't123');
+		$('#testForm').data('bValidator').validate();
+		assert.ok( $('.bvalidator-message-container').length == 1);
+	});
+	
+	QUnit.test( "option dataOptionNamespace", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+
+		var done = assert.async();
+
+		$('#testForm').attr('data-bvalidator-option-validate-on', 'click');
+		$('#testForm').bValidator();
+		$('#emailField').trigger('click');
+		
+		setTimeout(function(){
+			assert.ok( $('.bvalidator-message-container').length == 1);
+			done();
+		}, 350);	
+	});
+	
+	QUnit.test( "option paramsDelimiter", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		
+		$('#testForm').attr('data-bvalidator-option-params-delimiter', '#');
+		
+		var paramsCheck = '';
+		
+		$('#testForm').bValidator();
+		$('#testForm').data('bValidator').fn.validators.valTest = function(v, param1,param2,param3){
+			paramsCheck = param1+param2+param3;
+			return false;
+		};
+		
+		$('#emailField').attr('data-bvalidator', 'valTest[12#34#56],required');
+		$('#testForm').data('bValidator').validate();
+		
+		assert.ok( paramsCheck == '123456');
+	});
+	
+	QUnit.test( "option actionsDelimiter", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		
+		$('#testForm').attr('data-bvalidator-option-actions-delimiter', '#');
+		
+		var actionsCheck = '';
+		
+		$('#testForm').bValidator();
+		$('#testForm').data('bValidator').fn.validators.valTest1 = function(v, param){
+			actionsCheck += param;
+			return false;
+		};
+		
+		$('#testForm').data('bValidator').fn.validators.valTest2 = function(v, param){
+			actionsCheck += param;
+			return false;
+		};
+		
+		$('#emailField').val('aaa');
+		$('#emailField').attr('data-bvalidator', 'valTest1[eee]#valTest2[uuu]#required');
+		$('#testForm').data('bValidator').validate();
+		
+		assert.equal(actionsCheck, 'eeeuuu');
+	});
+	
+	QUnit.test( "option autoModifiers", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		
+		$('#emailField').val('eee');
+		
+		var options = {
+			autoModifiers : {'email': ['modTest']}
+		};
+		
+		$('#testForm').bValidator(options);
+
+		$('#testForm').data('bValidator').fn.modifiers.modTest = function(value){
+			return value + 'aaa';
+		};
+		
+		$('#testForm').data('bValidator').validate();
+		assert.equal($('#emailField').val(), 'eeeaaa');
+	});
+	
+	QUnit.test( "custom modifier", function( assert ) {
+		
+		makeForm();
+		addEmailFieldToForm();
+		
+		$('#emailField').val('aaa');
+		$('#testForm').bValidator();
+		
+		$('#testForm').data('bValidator').fn.modifiers.modTest = function(value){
+			return value + 'aaa';
+		};
+		
+		$('#emailField').attr('data-bvalidator-modifier', 'modTest');
+		
+		$('#testForm').data('bValidator').validate();
+		assert.equal($('#emailField').val(), 'aaaaaa');
+		
+	});
+
+	QUnit.test( "ajax action one field", function( assert ) {
+		
+		var done = assert.async();
+		
+		var options = {ajaxOptions:     {cache: false, method: 'POST', complete: function(){ 
+			assert.ok( $('.bvalidator-message-container').length == 1);
+			done();
+		}}}
+		
+		makeForm()
+		$('#testForm').attr('data-bvalidator-option-ajax-url', 'ajax-response-notok.txt');
+		$('#testForm').bValidator(options);
+		addEmailFieldToForm();
+		
+		$('#emailField').val('aaa');
+		$('#emailField').attr('data-bvalidator', 'ajax[],required');
+		$('#testForm').data('bValidator').validate();		
+	});
+	
+	QUnit.test( "ajax action two fields same URL", function( assert ) {
+		
+		var done = assert.async();
+		
+		var options = {ajaxOptions:     {cache: false, method: 'POST', complete: function(){ 
+			assert.ok( $('.bvalidator-message-container').length == 2);
+			done();
+		}}}
+		
+		makeForm();
+		$('#testForm').attr('data-bvalidator-option-ajax-url', 'ajax-response-notok.txt');
+		$('#testForm').bValidator(options);
+		addEmailFieldToForm();
+		addEmailFieldToForm(null, 'field2')
+		
+		$('#emailField').val('aaa');
+		$('#field2').val('aaa');
+		$('#emailField').attr('data-bvalidator', 'ajax,required');
+		$('#field2').attr('data-bvalidator', 'ajax,required');
+		$('#testForm').data('bValidator').validate();		
+	});
+	
+	QUnit.test( "ajax action two fields one response", function( assert ) {
+		
+		var done = assert.async();
+		
+		var options = {ajaxOptions:     {cache: false, method: 'POST', complete: function(){ 
+			assert.ok( $('.bvalidator-message-container').length == 2);
+			done();
+		}}}
+		
+		makeForm();
+		$('#testForm').attr('data-bvalidator-option-ajax-url', 'ajax-response-notok.txt');
+		$('#testForm').bValidator(options);
+		addEmailFieldToForm();
+		addEmailFieldToForm(null, 'field2')
+		
+		$('#emailField').val('aaa');
+		$('#field2').val('aaa');
+		$('#emailField').attr('data-bvalidator', 'ajax,required');
+		$('#field2').attr('data-bvalidator', 'ajax,required');
+		$('#testForm').data('bValidator').validate();		
+	});
+	
+	
+	QUnit.test( "ajax action two fields json response", function( assert ) {
+		
+		var done = assert.async();
+		
+		var options = {ajaxOptions:     {cache: false, method: 'POST', complete: function(){ 
+			//console.log($('.bvalidator-message-container').length);
+			
+			assert.ok( $('.bvalidator-message-container').length == 2);
+			done();
+		}}}
+		
+		makeForm();
+		$('#testForm').attr('data-bvalidator-option-ajax-url', 'ajax-response-json1.txt');
+		addEmailFieldToForm();
+		addEmailFieldToForm(null, 'field2')
+		addEmailFieldToForm(null, 'field3')
+		
+		$('#emailField').val('aaa');
+		$('#field2').val('aaa');
+		$('#field3').val('aaa');
+		$('#emailField').attr('data-bvalidator', 'ajax,required');
+		$('#field2').attr('data-bvalidator', 'ajax,required');
+		$('#field3').attr('data-bvalidator', 'ajax,required');
+		$('#testForm').bValidator(options);
+		$('#testForm').data('bValidator').validate();		
+	});
+
+        // ajaxAnswerValid: 'ok',
+        // ajaxDelay:       300,
+        // ajaxOptions:     {cache: false},
+        // ajaxParamName:   'bValue',
+        // ajaxParams:      null,
+	
+  
+  </script>
+<div id="qunit-fixture">
+  </div>
+</body>
+</html>

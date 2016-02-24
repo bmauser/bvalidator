@@ -1,0 +1,287 @@
+@theme_color: #999;
+@icon_color: #5bc0de;
+@icon_menu_color: #CCC;
+
+
+.not_used {
+	color: #69F;
+}
+
+
+body {
+	position: relative; /* for scrollspy */
+}
+table {
+	margin-top: 25px;
+}
+.attr {
+	background-color:#F0F5FF;
+}
+.html {
+	background-color:#F1F1F1;
+}
+h2 {
+	margin-top: 1.5em;
+}
+.bdocs-option-name {
+	font-weight: bold;
+	color: #C00;
+}
+.bdocs-section-header{
+	border-bottom: 1px solid @theme_color;
+    margin: 40px 0 20px;
+    padding-bottom: 9px;
+}
+.bdocs-h1-icon {
+	font-size: 27px;
+	color: @icon_color;
+}
+.bdocs-page-header{
+	color:#333;
+	font-size: 4em;
+	border-bottom: 3px solid @theme_color; 
+	margin: 0px 0 20px;
+	padding-top: 20px;
+	padding-bottom: 9px;
+	font-weight: normal;
+}
+.bdocs-mono {
+	font-family: "Courier New", Courier, monospace
+}
+.bdocs-highlight-source {
+	font-family: "Courier New", Courier, monospace;
+	white-space: pre;
+	margin-bottom: 10px;
+	padding: 5px;
+	overflow: auto;
+}
+table .bdocs-highlight-source { /* can't get overflow: auto; to work inside table cell */
+	white-space: pre-wrap;
+}
+
+
+/* page footer */
+.bdocs-footer {
+	margin-top: 70px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #CCC;
+	padding-top: 25px;
+	display: block;
+}
+
+
+/* examples */
+.bdocs-example-html form {
+	position: relative;
+	line-height: 2.5em;
+	width: 100%;
+	margin: auto;
+}
+.bdocs-example-html label {
+	display:inline-block;
+	width: auto;
+	white-space:nowrap;
+	margin-right: .5em;
+}
+.bdocs-example-html select, 
+.bdocs-example-html input[type="number"], 
+.bdocs-example-html input[type="date"],
+.bdocs-example-html input[type="text"],
+.bdocs-example-html input[type="url"],
+.bdocs-example-html input[type="datetime-local"],
+.bdocs-example-html input[type="month"],
+.bdocs-example-html input[type="email"],
+.bdocs-example-html input[type="password"] {
+ .form-control;
+ .input-sm;
+	width: 20%;
+	display:inline-block;
+	vertical-align:middle;
+}
+.bdocs-example-html select {
+	height: auto;
+}
+.bdocs-example-html input[type=file] {
+	display:inline-block;
+}
+.bdocs-example-html form > button, 
+#input-container > button, 
+#justMessages > button {
+ .btn;
+ .btn-primary;
+}
+.bdocs-example-html .bdocs-width1 {
+	width: 9em !important;
+}
+.bdocs-example-html .bdocs-width2 {
+	width: 18em !important;
+}
+.bdocs-example-show-editor-btt {
+	font-weight: bold;
+	left: 20px;
+	position: relative;
+	top: -20px;
+}
+.bdocs-example-editor-container {
+	margin-bottom: 2.2em;
+}
+.bdocs-example-html-container {
+	z-index: 10;
+	position: relative;
+}
+.bdocs-example {
+	position: relative;
+}
+.bdocs-example-update-indicator {
+	position:absolute;
+	height:100%;
+	width:100%;
+	left:0px;
+	top:0px;
+	border:2px solid #FF7B7B;
+	z-index: -1;
+	margin-top: -10px;
+	margin-left: -10px;
+}
+
+
+/* main menu */
+.bdocs-sidebar { /* nav container */
+	overflow-y: auto;
+	overflow-x: hidden;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	padding-top: 20px;
+	border-left-width: 4px;
+	border-left-style: solid;
+	border-left-color: @theme_color;
+}
+.bdocs-sidebar .nav > li > a { /* first level */
+	display: block;
+	font-size: 1em;
+	font-weight: 500;
+	color: #666;
+	margin: 0px;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+}
+.bdocs-sidebar .nav > li > a .glyphicon{ /* first level icons */
+	color: @icon_menu_color;
+}
+.bdocs-sidebar .nav > li > a:hover, 
+.bdocs-sidebar .nav > li > a:focus {
+	color: #000;
+	text-decoration: none;
+	background-color: transparent;
+} 
+.bdocs-sidebar .nav > .active > a .glyphicon{
+	color: @icon_color;
+}
+.bdocs-sidebar .nav > .active > a, 
+.bdocs-sidebar .nav > .active:hover > a, 
+.bdocs-sidebar .nav > .active:focus > a {
+	
+	padding-right: 0px;
+	padding-left: 20px;
+	
+	font-weight: bold;
+	color: #000;
+	background-color: transparent;
+}
+
+.bdocs-sidebar .nav > .active > a:after, 
+.bdocs-sidebar .nav > .active:hover > a:after, 
+.bdocs-sidebar .nav > .active:focus > a:after {
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	top:50%;
+	border-top-width: 15px;
+	border-right-width: 15px;
+	border-bottom-width: 15px;
+	border-left-width: 18px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: transparent;
+	border-bottom-color: transparent;
+	border-top-color: transparent;
+	border-left-color: @theme_color;
+	
+	margin-top: -15px;
+	left: 0;
+}
+
+.bdocs-sidebar .nav .nav {
+	display: none;
+	padding-bottom: 10px;
+}
+.bdocs-sidebar .nav .nav > li > a {
+	font-size: 0.8em;
+	font-weight: normal;
+	
+	padding-top: 2px;
+	padding-right: 0px;
+	padding-bottom: 2px;
+	padding-left: 40px;
+}
+.bdocs-sidebar .nav .nav > li > a:hover, 
+.bdocs-sidebar .nav .nav > li > a:focus {
+	
+}
+.bdocs-sidebar .nav .nav > .active > a, 
+.bdocs-sidebar .nav .nav > .active:hover > a, 
+.bdocs-sidebar .nav .nav > .active:focus > a {
+	font-weight: 500;
+	padding-left: 40px;
+
+}
+.bdocs-sidebar .nav .nav > .active > a:after, 
+.bdocs-sidebar .nav .nav > .active:hover > a:after, 
+.bdocs-sidebar .nav .nav > .active:focus > a:after {
+	border-top-width: 8px;
+	border-right-width: 8px;
+	border-bottom-width: 8px;
+	border-left-width: 14px;
+
+	border-left-color: @theme_color;
+	margin-top: -8px;
+
+}
+.bdocs-sidebar .nav > .active > ul {
+	display: block;
+}
+.bdocs-sidebar .dropdown-menu > li > a { /* drop down links */
+	line-height: 1.2;
+}
+.bdocs-sidebar .dropdown-menu .divider {
+	margin: 1px 0;
+}
+
+@media (max-width: 768px) {
+	.bdocs-sidebar {
+		display:none;
+	}
+}
+
+
+/* CodeMirror */
+.CodeMirror {
+	height: auto !important;
+}
+.CodeMirror-scroll {
+	overflow-y: hidden !important;
+	overflow-x: auto !important;
+}
+
+
+/* in examples */
+.bdocs-example-back-orange {
+	background-color: #F17A2A !important;
+}

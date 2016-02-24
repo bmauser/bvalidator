@@ -1,0 +1,23 @@
+<form id="formInstancesExample">
+
+	<label>Enter username:</label>
+	<input data-bvalidator="minlen[10],required" data-hint="email" data-hint-msg="You can use your email as username." type="text">
+
+	<button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+
+</form>
+
+<script type="text/javascript">
+    
+    // options for hint instance
+    var optionsHints = {
+       validateOn:       'keyup',
+       validateOnSubmit: false,
+	   useTheme:         'gray2'
+    };
+    
+	$('#formInstancesExample').bValidator(); // default instance
+    $('#formInstancesExample').bValidator(optionsHints, 'hint'); // hint instance
+    
+</script>

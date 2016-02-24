@@ -1,0 +1,75 @@
+/* invalid input */
+.bvalidator-gray3-invalid {
+    background-color: #fcf8e3 !important;
+}
+/* tooltip */
+.bvalidator-gray3-tooltip {
+    font-size: 13px;
+    white-space: nowrap;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 7px;
+    padding-right: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid #666666;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    background: #c6c6c6; /* Old browsers */
+    background: linear-gradient(to bottom,  #c6c6c6 0%,#3f3f3f 100%);
+    color: #FFF;
+    line-height: normal;
+    position:absolute;
+}
+.bvalidator-gray3-tooltip-noclose {
+    padding-right: 7px;
+}
+/* message */
+.bvalidator-gray3-tooltip .bvalidator-gray3-msg {
+    position: relative;
+}
+/* close icon */
+.bvalidator-gray3-tooltip .bvalidator-gray3-close {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    text-shadow: 0 1px 0 #000;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    color: #FF0;
+    position:absolute;
+    right: 6px;
+    top: 1px;
+}
+.bvalidator-gray3-tooltip .bvalidator-gray3-close:hover, .bvalidator-gray3-tooltip .bvalidator-gray3-close:focus{
+    color: #FF0;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+/* arrow */
+.bvalidator-gray3-tooltip .bvalidator-gray3-arrow {
+    position: absolute;
+    bottom: -10px;
+    left: 5px;
+    border-width: 11px 11px 0 11px;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-top-color: #000000;
+    border-top-color: rgba(0, 0, 0, 0.8);
+}
+.bvalidator-gray3-tooltip .bvalidator-gray3-arrow:after {
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    left: -9px;
+    border-color: transparent;
+    border-top-color: #3F3F3F;
+    border-width: 10px 10px 0 10px;
+    border-style: solid;
+    bottom: 1px;
+}

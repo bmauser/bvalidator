@@ -1,0 +1,38 @@
+<form data-bvalidator-validate>
+	
+	<label>Select two or none:</label>
+	<input name="chk8[]" type="checkbox">
+	<input name="chk8[]" type="checkbox">
+	<input name="chk8[]" type="checkbox">
+	<input name="chk8[]" data-bvalidator="min[2],max[2]" data-bvalidator-msg="Select two or none checkboxes" type="checkbox">
+	
+	<br />
+	
+	<label>Select one:</label>
+	<input name="radio8" value="1" type="radio">
+	<input name="radio8" value="2" type="radio">
+	<input name="radio8" value="3" type="radio">
+	<input name="radio8" value="4" data-bvalidator="required" data-bvalidator-msg="Select radio" type="radio">
+	
+	<br />
+	
+	<label>Select between three and five:</label><br />
+	<input name="chk81[]" type="checkbox">
+	<input name="chk81[]" type="checkbox">
+	<input name="chk81[]" type="checkbox">
+	<input name="chk81[]" data-bvalidator="between[3:5],required" data-bvalidator-msg="Number of selected checkboxes must be between 3 and 5" type="checkbox"><br>
+	
+	<input name="chk81[]" type="checkbox">
+	<input name="chk81[]" type="checkbox">
+	<input name="chk81[]" type="checkbox">
+	<input name="chk81[]" type="checkbox"><br>
+	
+	<input name="chk81[]" type="checkbox">
+	<input name="chk81[]" type="checkbox">
+	<input name="chk81[]" type="checkbox">
+	<input name="chk81[]" type="checkbox"><br />
+	
+	
+	<button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+</form>

@@ -1,0 +1,12 @@
+<form data-bvalidator-option-ajax-url="lib/ajax-response/response-json-notok.txt" data-bvalidator-validate>
+	
+	<label>Enter username:</label>
+	<input data-bvalidator="email,ajax,required" data-bvalidator-msg-ajax="Username is already taken." name="username" type="text">
+
+	<label>Enter number:</label>
+	<input data-bvalidator="digit,ajax,required" data-bvalidator-msg-ajax="The number is not in the database." name="number" type="text">
+		
+	<button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+	
+</form>

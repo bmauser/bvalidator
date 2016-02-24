@@ -1,0 +1,37 @@
+{
+  "name": "bvalidator",
+  "description": "Form validation jQuery plug-in.",
+  "keywords": [
+    "form",
+    "validation",
+    "validator",
+    "jquery",
+    "javascript"
+  ],
+  "homepage": "http://bmauser.github.io/bvalidator",
+  "license": "MIT",
+  "moduleType": "globals",
+  "main": [
+    "dist/jquery.bvalidator.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmauser/bvalidator.git"
+  },
+  "ignore": [
+    "/.*",
+    "/documentation",
+    "/dist-docs",
+    "/Gruntfile.js",
+    "/js",
+    "/node_modules",
+    "/package.json",
+    "/tests",
+    "/themes",
+    "/composer.json",
+    "/README.md"
+  ],
+  "dependencies": {
+    "jquery": "1.9.1 - 2"
+  }
+}

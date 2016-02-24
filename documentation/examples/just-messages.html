@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    
+    $(document).ready(function () {
+        $('#justMessages').bValidator();
+    });
+	
+	// elements to show messages on
+	var $elements = $('#justMessages input, #justMessages span');
+    
+    // shows messages
+    function showMessges(){
+		$('#justMessages').data('bValidator').showMsg($elements, 'Hi there');
+    }
+    
+    // hides messages
+    function hideMessges(){
+        $('#justMessages').data('bValidator').removeMsg($elements);
+    }
+    
+</script>
+
+
+<div id="justMessages" class="form-horizontal">
+
+	<div class="form-group">
+		<div class="col-md-4">
+			<input data-bvalidator-theme="gray2" type="text">
+		</div>
+		<div class="col-md-4">
+			<input data-bvalidator-theme="postit" type="text">
+		</div>
+		<div class="col-md-4">
+			<span class="bg-success">&lt;span&gt;</span>
+		</div>
+	</div>
+    
+	<button type="button" onclick="showMessges()">Show messages</button>
+	<button type="button" onclick="hideMessges()">Hide messages</button>
+    
+</div>

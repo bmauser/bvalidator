@@ -1,0 +1,31 @@
+<form data-bvalidator-validate>
+	<div id="container-for-new-elements">
+	</div>
+	
+	<div class="show-hide">
+		<label>Enter name:</label>
+		<input data-bvalidator="alphanum,required" type="text">
+	</div>
+	
+	<label>Enter a number:</label>
+	<input data-bvalidator="number,required" type="text">
+	
+	<div class="show-hide">
+		<label>Enter Email:</label>
+		<input data-bvalidator="required,email" type="text">
+	</div>
+	
+	<!-- this is here just as template for new elements -->
+	<div id="new-element-template" style="display: none;">
+		<label>Enter a number:</label>
+		<input data-bvalidator="number,required" type="text">
+	</div>
+	
+	
+	<button type="button" onclick="$('#container-for-new-elements').append($('#new-element-template').html())">Add form element</button>
+	<button type="button" onclick="$('.show-hide').toggle(400);">Show / Hide</button>
+	
+	<button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+	
+</form>

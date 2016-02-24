@@ -1,0 +1,15 @@
+<script type="text/javascript">
+
+    // first instance
+    $('#myform').bValidator();
+	
+    // second instance with default options and named 'myinstance'
+    $('#myform').bValidator(null, 'myinstance');
+    
+    // validates the form with the first instance named 'bvalidator'
+    $('#myform').data("bValidators").bvalidator.validate();
+    
+    // validates the form with the second instance named 'myinstance'
+    $('#myform').data("bValidators").myinstance.validate();
+
+</script>

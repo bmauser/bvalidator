@@ -1,0 +1,54 @@
+/* invalid input */
+.bvalidator-red-invalid {
+    background-color: #FCC !important;
+}
+/* tooltip */
+.bvalidator-red-tooltip {
+    background-color: #F33;
+    font-size: 10px;
+    border: 1px solid #F40000;
+    color: #FFF;
+    white-space: nowrap;
+    padding-top: 2px;
+    padding-right: 17px;
+    padding-bottom: 2px;
+    padding-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+    font-weight: bold;
+    line-height: normal;
+    position: absolute;
+}
+.bvalidator-red-tooltip-noclose {
+    padding-right: 5px;
+}
+/* message */
+.bvalidator-red-tooltip .bvalidator-red-msg {
+    position: relative;
+}
+/* close icon */
+.bvalidator-red-tooltip .bvalidator-red-close {
+    font-family: Verdana, Geneva, sans-serif;
+    font-weight: bolder;
+    color: #000;
+    cursor: pointer;
+    font-size: 10px;
+    position: absolute;
+    top: 2px;
+    right: 3px;
+}
+.bvalidator-red-tooltip .bvalidator-red-close:hover , .bvalidator-red-tooltip .bvalidator-red-close:focus{
+    color: #666;
+}
+/* arrow */
+.bvalidator-red-tooltip .bvalidator-red-arrow {
+    border-color: #F33 transparent transparent;
+    border-style: solid;
+    border-width: 10px 10px 0;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -9px;
+    left: 5px
+}

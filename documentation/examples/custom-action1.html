@@ -1,0 +1,19 @@
+<script type="text/javascript">
+    
+    function myValidationAction(fieldValue){
+        if(fieldValue == 'abc')
+			return true;
+		
+		return false;
+    }
+    
+</script>
+
+<form data-bvalidator-validate>
+	
+	<label>Enter 'abc':</label>
+	<input data-bvalidator="myValidationAction,required" data-bvalidator-msg="Please enter just 'abc'." type="text">
+	
+	<button type="submit">Submit</button>
+    
+</form>

@@ -1,0 +1,19 @@
+/* invalid input */
+.bvalidator-group-invalid {
+    background-color: #FFC4C4 !important;
+}
+/* message */
+.bvalidator-group-msg {
+    border-radius: 0.2em;
+    border: 1px solid #FF9A9C;
+    color: #9A0F11;
+    font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+    font-style: normal;
+    padding: 0.3em;
+    font-size: 1em;
+    background-color: #FFEFEF;
+    line-height: normal;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    margin-bottom: 0.2em;
+}

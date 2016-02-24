@@ -1,0 +1,23 @@
+<script type="text/javascript">
+
+    var options = {
+        messages: {
+            en: {
+                "ip4": "IP address must be in format x.x.x.x"
+            }
+        }
+    };
+    
+	// call bValidator constructor for the form
+    $('#my-form-3').bValidator(options);
+
+</script>
+
+<form id="my-form-3">
+	
+	<label>Enter IP4 adress:</label>
+	<input data-bvalidator="ip4,required" type="text">
+	
+	<button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+</form> 

@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    
+    function myDigitsModifier(oldValue){
+        return oldValue.replace(/[^0-9\.]/g, "") // leave only digits
+    }
+    
+    function myURLModifier(oldValue){
+        if(oldValue.substring(0, 4) != 'http')
+			return 'http://' + oldValue
+    }
+    
+</script>
+
+
+<form data-bvalidator-validate>
+
+	<label>E-mail:</label>
+	<input type="text" data-bvalidator="email,required">
+	
+	<p class="help-block">(put whitespaces at the beginning or the end)</p>
+	
+	<label>Only digits:</label>
+	<input type="text"  data-bvalidator="digit,required" data-bvalidator-modifier="myDigitsModifier">
+	
+	<p class="help-block">(try to enter some letters)</p>
+	
+	<label>URL:</label>
+	<input type="text"  data-bvalidator="url,required" data-bvalidator-modifier="myURLModifier">
+		
+	<p class="help-block">(try to enter without http://)</p>
+    
+    <label>Enter some word:</label>
+	<input type="text" data-bvalidator-modifier="trim">
+
+	<p class="help-block">(put whitespaces at the beginning or the end)</p>
+	
+	<button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+	
+</form>

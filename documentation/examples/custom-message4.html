@@ -1,0 +1,20 @@
+<script type="text/javascript">
+    
+    function myValidationAction2(fieldValue){		
+		
+        // return true if field is valid 
+                
+        // validation message
+        return "Please enter something else";
+    }
+    
+</script>
+
+<form data-bvalidator-validate>
+	
+	<label>Enter something:</label>
+	<input data-bvalidator="myValidationAction2,required"  type="text">
+	
+	<button type="submit">Submit</button>
+    
+</form>

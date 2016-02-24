@@ -1,0 +1,26 @@
+<form data-bvalidator-validate>
+
+    <label>E-mail:</label>
+    <input type="email" required>
+    <br>
+
+    <label>URL:</label>
+    <input type="url" required>
+    
+    <br>
+    <label>Number between 10 and 20:</label>
+    <input type="number" min=10 max="20" required>
+    
+    <br>
+    <label>5 - 10 characters:</label>
+    <input type="text" maxlength="10" minlength="5" required>
+    
+    <br>
+    <label>Numbers in format 123-456:</label>
+    <input type="text" pattern="[0-9]{3}\-[0-9]{3}" required>
+
+	<br>
+    <button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+
+</form>

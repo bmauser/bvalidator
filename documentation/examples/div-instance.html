@@ -1,0 +1,16 @@
+<script type="text/javascript">
+    
+    function checkIfValid(){
+        if($('#input-container').data('bValidator').validate())
+            alert ('Is valid!');
+    }
+    
+</script>
+
+<div data-bvalidator-validate id="input-container">
+	
+	<label>Only digits:</label>
+	<input data-bvalidator="digit,required" type="text" >
+
+	<button onclick="checkIfValid();" type="submit">Validate</button>
+</div>

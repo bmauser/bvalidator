@@ -1,0 +1,24 @@
+<script type="text/javascript">
+    
+    function myvalidator(number, devideBy){
+        number = parseFloat(number);
+        if(number % parseInt(devideBy) == 0)
+            return true;
+        return false;
+    }
+    
+</script>
+
+<form data-bvalidator-validate>
+	
+	<label>Enter a number divisible by 3:</label>
+	<input data-bvalidator="myvalidator[3],number,required" data-bvalidator-msg="Enter a number which is divisible by 3." type="text">
+	
+	
+	<label>Enter a number divisible by 4:</label>
+	<input data-bvalidator="myvalidator[4],number,required" data-bvalidator-msg="Enter a number which is divisible by 4." type="text">
+	
+	
+	<button type="submit">Submit</button>
+	<button type="reset">Reset</button>
+</form>

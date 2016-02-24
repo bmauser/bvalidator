@@ -1,0 +1,18 @@
+<script type="text/javascript">
+
+    $('#myForm').on('beforeFormValidation.bvalidator', function (event) {
+        
+        // bValidator instance
+        event.bValidator.instance
+
+        // validation result, true or false ('after' events only)
+        event.bValidator.validationResult
+
+        // array with error messages (afterFieldValidation only)
+        event.bValidator.errorMessages
+
+        //  <form> which is validated
+        event.target
+    })
+
+</script>

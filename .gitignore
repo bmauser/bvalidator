@@ -1,1 +1,4 @@
-/.DEV
+.DEV
+.svn
+node_modules
+dist-docs
