@@ -23,8 +23,13 @@
 <script type="text/javascript" src="lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="lib/prettify/prettify.js"></script>
 
-<script type="text/javascript" src="bvalidator-dist/jquery.bvalidator.min.js"></script>
-<script type="text/javascript" src="lib/js/bvalidator-docs.min.js"></script>
+<script type="text/javascript" src="../js/bValidator.js"></script>
+<script type="text/javascript" src="../js/bValidator.defaultOptions.js"></script>
+<script type="text/javascript" src="../js/bValidator.modifiers.js"></script>
+<script type="text/javascript" src="../js/bValidator.validators.js"></script>
+<script type="text/javascript" src="../js/jQuery.bValidator.js"></script>
+<script type="text/javascript" src="../documentation/js/init.js"></script>
+<script type="text/javascript" src="../documentation/js/bdocs.js"></script>
 
 <!-- themes js -->
 <script type="text/javascript" src="bvalidator-dist/themes/bslikerc/bslikerc.js"></script>
@@ -95,6 +100,7 @@
                 <pre class="bdocs-highlight-source">$ bower install bvalidator</pre>
                 <p>Or install with npm:</p>
                 <pre class="bdocs-highlight-source">$ npm install bvalidator</pre>
+                <p>Git repository: <a href="https://github.com/bmauser/bvalidator.git">https://github.com/bmauser/bvalidator.git</a></p>
                 <h3>Include JavaScript</h3>
                 <p>To use bValidator you need to include jQuery, <code>jquery.bvalidator.min.js</code> and .js and .css files for  the <a href="#themes">theme</a> you want to use.</p>
                 <pre class="bdocs-highlight-source">&lt;script src=&#34;jquery.min.js&#34;&gt;&lt;/script&gt;
@@ -335,7 +341,7 @@
             <h1 class="bdocs-section-header" id="actions"> <span class="glyphicon bdocs-h1-icon glyphicon-ok"></span> Validation and modifying functions</h1>
             <div class="bdocs-section">
                 <p> <strong>Validation functions</strong> (validators) are  functions that check the value and  return <code>true</code> if the value is valid. </p>
-                <p> <strong>Modifying functions</strong> (modifiers) are functions that change the value of the field before validation, for example, to trim whitespaces.  Modifiers return a modified value.</p>
+                <p> <strong>Modifying functions</strong> (modifiers) are functions that change the value of the field before validation, for example, to trim whitespace.  Modifiers return a modified value.</p>
                 <p> Validations which will be invoked   for an  input  are listed by default in <code class="attr">data-bvalidator</code> attribute. Modifiers are listed in <code class="attr">data-bvalidator-modifier</code> attribute.</p>
                 <p> Some functions can have parameters which are stated in square brackets <code>[]</code> and delimited with <code>:</code>, for example: <code>mycheck[param1:param2:param3]</code>. </p>
                 <pre class="bdocs-highlight-source">&lt;input type=&#34;text&#34; data-bvalidator=&#34;maxlength[10]&#34; data-bvalidator-modifier=&#34;trim&#34; /&gt;
@@ -501,7 +507,7 @@
                     <tr id="trim">
                         <td class="bdocs-option-name">trim</td>
                         <td>&nbsp;</td>
-                        <td>Removes  whitespaces from the beginning and the end of the input value.</td>
+                        <td>Removes  whitespace from the beginning and the end of the input value.</td>
                     </tr>
                 </table>
                 <p> Custom modifiers can be added  in the same way as custom validation functions (see <a href="#exampleModifiers">example</a>). </p>
@@ -589,7 +595,7 @@
                     <tr>
                         <td class="bdocs-option-name">getForm</td>
                         <td>&nbsp;</td>
-                        <td>Returns jQuery object containing <code class="html">&lt;form&gt;</code> (or other elemet on which bValidator is bound).</td>
+                        <td>Returns jQuery object containing <code class="html">&lt;form&gt;</code> (or other element on which bValidator is bound).</td>
                     </tr>
                     <tr>
                         <td class="bdocs-option-name">reset</td>
@@ -704,7 +710,7 @@
             <!-- Examples -->
             
             <h1 class="bdocs-section-header" id="examples"> <span class="glyphicon bdocs-h1-icon glyphicon-flash"></span> Examples</h1>
-            <p> You can edit each example and  change the source code by clicking on the 'Show editor'. This page includes default <a href="http://getbootstrap.com/">Bootstrap 3</a> CSS and JavaScript. Note that some Bootstrap styles in the examples are modified for a simple HTML markup, so if you paste a form with Bootstrap HTML it will not look like you would expect. Click on the 'No styling' bellow the editor to disable customized styling and leave only default Bootstrap styles.</p>
+            <p> You can play with each example and  change the source code by clicking on the 'Source' button. This page includes default <a href="http://getbootstrap.com/">Bootstrap 3</a> CSS and JavaScript. Note that some Bootstrap styles in the examples are modified for a simple HTML markup, so if you paste a form with Bootstrap HTML it will not look like you would expect. Click on the 'No styling' bellow the editor to disable customized styling and leave only default Bootstrap styles.</p>
             <p>You can change the look of the validation messages in the examples by choosing the theme name from the dropdown in the main menu.</p>
             <div class="bdocs-section">
                 
@@ -714,7 +720,7 @@
                 <p> This is a basic example of using bValidator. </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -740,7 +746,7 @@
                 <p> You can set a  validation message for the field with <code class="attr">data-bvalidator-msg</code> attribute: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -765,7 +771,7 @@
                 <p>
                     <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -791,7 +797,7 @@
                 <p> Messages can also be set through <a href="#options">options</a>. This example shows how to set a validation message with options passed to bValidator constructor: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -830,7 +836,7 @@
                 <p> Validation function can return a message. If the validation function returns a <code>string</code>, it will be used as validation message. See also <a href="#exampleCustomValidationFunction">custom validation functions examples</a>.</p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -871,7 +877,7 @@
                 <p> If you want to make  your own validation function, create a function that returns <code>true</code> for successful validation and put the function name in <code class="attr">data-bvalidator</code> attribute: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -906,7 +912,7 @@
                 <p> You can pass parameters to your validation function. First argument to a validation function is the value of the input field and other arguments (if any) are values stated in square brackets <code>[]</code> after the function name in <code class="attr">data-bvalidator</code> attribute. </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -946,7 +952,7 @@
                 <p> To submit the next form  fill in both fields or leave them empty: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -990,7 +996,7 @@
                 <p> Password form: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1049,7 +1055,7 @@
                 <h2 id="exampleBigForm">Big form</h2>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="true" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1143,7 +1149,7 @@
                 <h2 id="exampleCheckboxRadio">Checkboxes and radio buttons</h2>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1201,7 +1207,7 @@
                 <h2 id="exampleDynamicForm">Dynamic form</h2>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1251,11 +1257,11 @@
                 <!-- example -->
                 
                 <h2 id="exampleHtml5Form">HTML5 form</h2>
-                <p> bValidator works nicely with HTML5 input types. See <a href="#enableHtml5Attr" class="bdocs-mono">enableHtml5Attr</a> option for supported input types and attributes. You can also use <code class="attr">data-bvalidator</code> attributes with HTML5 markup, see <a href="#themeBs3form" class="bdocs-mono">bs3form</a> theme example.</p>
+                <p> bValidator works nicely with HTML5 input types. See <a href="#enableHtml5Attr" class="bdocs-mono">enableHtml5Attr</a> option for supported attributes. You can also use <code class="attr">data-bvalidator</code> attributes with HTML5 markup. See also examples for <a href="#themeBs3form" class="bdocs-mono">bs3form</a> theme.</p>
                 .
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1283,7 +1289,7 @@
     
     &lt;br&gt;
     &lt;label&gt;Numbers in format 123-456:&lt;/label&gt;
-    &lt;input type=&#34;text&#34; pattern=&#34;[0-9]{3}\-[0-9]{3}&#34; required&gt;
+    &lt;input type=&#34;text&#34; pattern=&#34;[0-9]{3}\-[0-9]{3}&#34; required data-bvalidator-msg=&#34;Enter numbers in format 123-456-&#34;&gt;
 
 	&lt;br&gt;
     &lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
@@ -1301,7 +1307,7 @@
                 <p> Container element doesn't have to be a <code class="html">&lt;form&gt;</code>. You can trigger validation with JavaScript: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1337,7 +1343,7 @@
                 <p> Enter letters and numbers in the field below: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1365,7 +1371,7 @@
                 <p> Similar example but defined with JavaScript: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1407,7 +1413,7 @@
                 <h2 id="exampleJustDisplayingMessages">Just displaying messages</h2>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1466,10 +1472,10 @@
                 <!-- example -->
                 
                 <h2 id="exampleModifiers">Modifiers</h2>
-                <p> Modifiers are functions which purpose is to change the input value before validation. For example, to strip trailing/leading whitespaces. Modifiers are called before  validation functions. Modifying function are listed in <code class="attr">data-bvalidator-modifier</code> attribute by default, the same as  validation functions are listed <code class="attr">data-bvalidator</code> attribute.	For some validation functions <code><a href="#trim">trim</a></code> modifier is  called by default (see <code><a href="#autoModifiers">autoModifiers</a></code> option). </p>
+                <p> Modifiers are functions which purpose is to change the input value before validation. For example, to strip trailing/leading whitespace. Modifiers are called before  validation functions. Modifying function are listed in <code class="attr">data-bvalidator-modifier</code> attribute by default, the same as  validation functions are listed <code class="attr">data-bvalidator</code> attribute.	For some validation functions <code><a href="#trim">trim</a></code> modifier is  called by default (see <code><a href="#autoModifiers">autoModifiers</a></code> option). </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1535,7 +1541,7 @@
                 <p> This field is validated on the server side with <code><a href="#ajax">ajax</a></code> function: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="true" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1560,7 +1566,7 @@
                 <p> In the next example both fields are  validated on the client and also on the server: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="true" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -1592,7 +1598,7 @@
                 <p id="messagesFromServer"> You can also return validation messages from the server. In the next example, all fields are validated on the server and all messages come from the server: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="true" class="bdocs-live-example well ">
     
-    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Show editor</button>
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
     <div class="clearfix">
     </div>
     <div style="display: none;" class="bdocs-example-editor-container">
@@ -2392,13 +2398,6 @@
                 <p>&nbsp;</p>
                 <p>If you like it, please share</p>
                 
-                <div class="g-plusone" data-size="medium" data-annotation="none" data-href="http://bmauser.github.io/bvalidator/">
-                </div>
-                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://bmauser.github.io/bvalidator/" data-hashtags="bvalidator" data-dnt="true">Tweet</a> <a aria-label="Star bmauser/bvalidator on GitHub" href="https://github.com/bmauser/bvalidator" class="github-button">Star</a><br>
-                <div class="fb-like" data-href="http://bmauser.github.io/bvalidator/" data-layout="button" data-action="like" data-show-faces="true" data-share="true">
-                </div>
-                <br>
-                
             </div>
             
         </div>
@@ -2478,33 +2477,10 @@
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script> 
 <script type="text/javascript">
 
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-34189043-3', 'auto');
-ga('send', 'pageview');
-
-
-
-
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=480155108852065";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
 
 
 </script>
-
-<script src="https://apis.google.com/js/platform.js" async defer></script> 
-<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 
 </body>
 </html>
