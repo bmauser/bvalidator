@@ -184,7 +184,7 @@
                             codeMirror.refresh();
                             $showSourceBtt.html('Hide editor');
                         } else {
-                            $showSourceBtt.html('Edit source');
+                            $showSourceBtt.html('Source');
                         }
 
                         $('body').scrollspy('refresh');

@@ -103,6 +103,7 @@
                 <pre class="bdocs-highlight-source"><%= include('pre/setup-bower.html'); %></pre>
                 <p>Or install with npm:</p>
                 <pre class="bdocs-highlight-source"><%= include('pre/setup-npm.html'); %></pre>
+                <p>Git repository: <a href="https://github.com/bmauser/bvalidator.git">https://github.com/bmauser/bvalidator.git</a></p>
                 <h3>Include JavaScript</h3>
                 <p>To use bValidator you need to include jQuery, <code>jquery.bvalidator.min.js</code> and .js and .css files for  the <a href="#themes">theme</a> you want to use.</p>
                 <pre class="bdocs-highlight-source"><%= include('pre/setup-include-js.html'); %></pre>
@@ -298,7 +299,7 @@
             <h1 class="bdocs-section-header" id="actions"> <span class="glyphicon bdocs-h1-icon glyphicon-ok"></span> Validation and modifying functions</h1>
             <div class="bdocs-section">
                 <p> <strong>Validation functions</strong> (validators) are  functions that check the value and  return <code>true</code> if the value is valid. </p>
-                <p> <strong>Modifying functions</strong> (modifiers) are functions that change the value of the field before validation, for example, to trim whitespaces.  Modifiers return a modified value.</p>
+                <p> <strong>Modifying functions</strong> (modifiers) are functions that change the value of the field before validation, for example, to trim whitespace.  Modifiers return a modified value.</p>
                 <p> Validations which will be invoked   for an  input  are listed by default in <code class="attr">data-bvalidator</code> attribute. Modifiers are listed in <code class="attr">data-bvalidator-modifier</code> attribute.</p>
                 <p> Some functions can have parameters which are stated in square brackets <code>[]</code> and delimited with <code>:</code>, for example: <code>mycheck[param1:param2:param3]</code>. </p>
                 <pre class="bdocs-highlight-source"><%= include('pre/actions.html'); %></pre>
@@ -463,7 +464,7 @@
                     <tr id="trim">
                         <td class="bdocs-option-name">trim</td>
                         <td>&nbsp;</td>
-                        <td>Removes  whitespaces from the beginning and the end of the input value.</td>
+                        <td>Removes  whitespace from the beginning and the end of the input value.</td>
                     </tr>
                 </table>
                 <p> Custom modifiers can be added  in the same way as custom validation functions (see <a href="#exampleModifiers">example</a>). </p>
@@ -528,7 +529,7 @@
                     <tr>
                         <td class="bdocs-option-name">getForm</td>
                         <td>&nbsp;</td>
-                        <td>Returns jQuery object containing <code class="html">&lt;form&gt;</code> (or other elemet on which bValidator is bound).</td>
+                        <td>Returns jQuery object containing <code class="html">&lt;form&gt;</code> (or other element on which bValidator is bound).</td>
                     </tr>
                     <tr>
                         <td class="bdocs-option-name">reset</td>
@@ -614,7 +615,7 @@
             <!-- Examples -->
             
             <h1 class="bdocs-section-header" id="examples"> <span class="glyphicon bdocs-h1-icon glyphicon-flash"></span> Examples</h1>
-            <p> You can edit each example and  change the source code by clicking on the 'Show editor'. This page includes default <a href="http://getbootstrap.com/">Bootstrap 3</a> CSS and JavaScript. Note that some Bootstrap styles in the examples are modified for a simple HTML markup, so if you paste a form with Bootstrap HTML it will not look like you would expect. Click on the 'No styling' bellow the editor to disable customized styling and leave only default Bootstrap styles.</p>
+            <p> You can play with each example and  change the source code by clicking on the 'Source' button. This page includes default <a href="http://getbootstrap.com/">Bootstrap 3</a> CSS and JavaScript. Note that some Bootstrap styles in the examples are modified for a simple HTML markup, so if you paste a form with Bootstrap HTML it will not look like you would expect. Click on the 'No styling' bellow the editor to disable customized styling and leave only default Bootstrap styles.</p>
             <p>You can change the look of the validation messages in the examples by choosing the theme name from the dropdown in the main menu.</p>
             <div class="bdocs-section">
                 
@@ -679,7 +680,7 @@
                 <!-- example -->
                 
                 <h2 id="exampleHtml5Form">HTML5 form</h2>
-                <p> bValidator works nicely with HTML5 input types. See <a href="#enableHtml5Attr" class="bdocs-mono">enableHtml5Attr</a> option for supported input types and attributes. You can also use <code class="attr">data-bvalidator</code> attributes with HTML5 markup, see <a href="#themeBs3form" class="bdocs-mono">bs3form</a> theme example.</p>
+                <p> bValidator works nicely with HTML5 input types. See <a href="#enableHtml5Attr" class="bdocs-mono">enableHtml5Attr</a> option for supported attributes. You can also use <code class="attr">data-bvalidator</code> attributes with HTML5 markup. See also examples for <a href="#themeBs3form" class="bdocs-mono">bs3form</a> theme.</p>
                 .
                 <%- include('examples/example.html', {file: 'html5-form.html'}); %>
                 
@@ -708,7 +709,7 @@
                 <!-- example -->
                 
                 <h2 id="exampleModifiers">Modifiers</h2>
-                <p> Modifiers are functions which purpose is to change the input value before validation. For example, to strip trailing/leading whitespaces. Modifiers are called before  validation functions. Modifying function are listed in <code class="attr">data-bvalidator-modifier</code> attribute by default, the same as  validation functions are listed <code class="attr">data-bvalidator</code> attribute.	For some validation functions <code><a href="#trim">trim</a></code> modifier is  called by default (see <code><a href="#autoModifiers">autoModifiers</a></code> option). </p>
+                <p> Modifiers are functions which purpose is to change the input value before validation. For example, to strip trailing/leading whitespace. Modifiers are called before  validation functions. Modifying function are listed in <code class="attr">data-bvalidator-modifier</code> attribute by default, the same as  validation functions are listed <code class="attr">data-bvalidator</code> attribute.	For some validation functions <code><a href="#trim">trim</a></code> modifier is  called by default (see <code><a href="#autoModifiers">autoModifiers</a></code> option). </p>
                 <%- include('examples/example.html', {file: 'modifiers.html'}); %>
                 <p> In this example, <code><a href="#trim">trim</a></code> modifier is automatically called on the first field because <code>email</code> function is mentioned by default in <code><a href="#autoModifiers">autoModifiers</a></code> option.<br />
                     On the second field, custom modifier  will delete all but digits.<br />
