@@ -23,13 +23,8 @@
 <script type="text/javascript" src="lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="lib/prettify/prettify.js"></script>
 
-<script type="text/javascript" src="../js/bValidator.js"></script>
-<script type="text/javascript" src="../js/bValidator.defaultOptions.js"></script>
-<script type="text/javascript" src="../js/bValidator.modifiers.js"></script>
-<script type="text/javascript" src="../js/bValidator.validators.js"></script>
-<script type="text/javascript" src="../js/jQuery.bValidator.js"></script>
-<script type="text/javascript" src="../documentation/js/init.js"></script>
-<script type="text/javascript" src="../documentation/js/bdocs.js"></script>
+<script type="text/javascript" src="bvalidator-dist/jquery.bvalidator.min.js"></script>
+<script type="text/javascript" src="lib/js/bvalidator-docs.min.js"></script>
 
 <!-- themes js -->
 <script type="text/javascript" src="bvalidator-dist/themes/bslikerc/bslikerc.js"></script>
@@ -2398,6 +2393,13 @@
                 <p>&nbsp;</p>
                 <p>If you like it, please share</p>
                 
+                <div class="g-plusone" data-size="medium" data-annotation="none" data-href="http://bmauser.github.io/bvalidator/">
+                </div>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://bmauser.github.io/bvalidator/" data-hashtags="bvalidator" data-dnt="true">Tweet</a> <a aria-label="Star bmauser/bvalidator on GitHub" href="https://github.com/bmauser/bvalidator" class="github-button">Star</a><br>
+                <div class="fb-like" data-href="http://bmauser.github.io/bvalidator/" data-layout="button" data-action="like" data-show-faces="true" data-share="true">
+                </div>
+                <br>
+                
             </div>
             
         </div>
@@ -2477,10 +2479,33 @@
 <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script> 
 <script type="text/javascript">
 
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-34189043-3', 'auto');
+ga('send', 'pageview');
+
+
+
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=480155108852065";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
 
 
 </script>
+
+<script src="https://apis.google.com/js/platform.js" async defer></script> 
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 
 </body>
 </html>
