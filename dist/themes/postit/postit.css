@@ -43,10 +43,10 @@
 .bvalidator-postit-tooltip .bvalidator-postit-arrow:after {
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-top: 5px solid #fffe66;
+    border-top: 10px solid #fffe66;
     content: "";
     left: -5px;
-    bottom: 10px;
+    bottom: 6px;
     position: absolute;
     width: 0;
     height: 0;
