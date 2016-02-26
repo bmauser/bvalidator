@@ -745,7 +745,8 @@
                 <p> That is the same as setting <code><a href="#useTheme">useTheme</a></code> option with <code class="attr">data-bvalidator-option-use-theme</code> attribute. </p>
                 <p> To change the theme only for the specific input field, put <code class="attr">data-bvalidator-theme</code> attribute on the <code class="html">&lt;input&gt;</code>: </p>
                 <pre class="bdocs-highlight-source"><%= include('pre/themes-attr-input.html'); %></pre>
-                <p> With JavaScript, you can set the default theme  by changing <code><a href="#useTheme">useTheme</a></code> option. </p>
+                <p> With JavaScript, you can set the default theme  by changing <code><a href="#useTheme">useTheme</a></code> option. For example, you can set the default theme depending on the screen width and for small-screen devices choose   <span id="result_box" lang="en">more adapted theme:</span></p>
+                <pre class="bdocs-highlight-source"><%= include('pre/themes-options-size-theme.html'); %></pre>
                 <h2 id="themeOptions">Theme examples and options:</h2>
                 <p> Options  for themes can be   set by <code class="attr">data-bvalidator-theme-<em>optionName</em></code> attribute or by JavaScript. </p>
                 <p> You can set <code class="attr">data-bvalidator-theme-<em>optionName</em></code> attribute on the <code class="html">&lt;form&gt;</code> element to change the option for all the fields in the form: </p>
