@@ -39,7 +39,7 @@ h2 {
 .bdocs-page-header{
 	color:#333;
 	font-size: 4em;
-	border-bottom: 3px solid @theme_color; 
+	border-bottom: 3px solid @theme_color;
 	margin: 0px 0 20px;
 	padding-top: 20px;
 	padding-bottom: 9px;
@@ -84,8 +84,8 @@ table .bdocs-highlight-source { /* can't get overflow: auto; to work inside tabl
 	white-space:nowrap;
 	margin-right: .5em;
 }
-.bdocs-example-html select, 
-.bdocs-example-html input[type="number"], 
+.bdocs-example-html select,
+.bdocs-example-html input[type="number"],
 .bdocs-example-html input[type="date"],
 .bdocs-example-html input[type="text"],
 .bdocs-example-html input[type="url"],
@@ -105,8 +105,8 @@ table .bdocs-highlight-source { /* can't get overflow: auto; to work inside tabl
 .bdocs-example-html input[type=file] {
 	display:inline-block;
 }
-.bdocs-example-html form > button, 
-#input-container > button, 
+.bdocs-example-html form > button,
+#input-container > button,
 #justMessages > button {
  .btn;
  .btn-primary;
@@ -172,29 +172,29 @@ table .bdocs-highlight-source { /* can't get overflow: auto; to work inside tabl
 .bdocs-sidebar .nav > li > a .glyphicon{ /* first level icons */
 	color: @icon_menu_color;
 }
-.bdocs-sidebar .nav > li > a:hover, 
+.bdocs-sidebar .nav > li > a:hover,
 .bdocs-sidebar .nav > li > a:focus {
 	color: #000;
 	text-decoration: none;
 	background-color: transparent;
-} 
+}
 .bdocs-sidebar .nav > .active > a .glyphicon{
 	color: @icon_color;
 }
-.bdocs-sidebar .nav > .active > a, 
-.bdocs-sidebar .nav > .active:hover > a, 
+.bdocs-sidebar .nav > .active > a,
+.bdocs-sidebar .nav > .active:hover > a,
 .bdocs-sidebar .nav > .active:focus > a {
-	
+
 	padding-right: 0px;
 	padding-left: 20px;
-	
+
 	font-weight: bold;
 	color: #000;
 	background-color: transparent;
 }
 
-.bdocs-sidebar .nav > .active > a:after, 
-.bdocs-sidebar .nav > .active:hover > a:after, 
+.bdocs-sidebar .nav > .active > a:after,
+.bdocs-sidebar .nav > .active:hover > a:after,
 .bdocs-sidebar .nav > .active:focus > a:after {
 	content: "";
 	height: 0;
@@ -213,7 +213,7 @@ table .bdocs-highlight-source { /* can't get overflow: auto; to work inside tabl
 	border-bottom-color: transparent;
 	border-top-color: transparent;
 	border-left-color: @theme_color;
-	
+
 	margin-top: -15px;
 	left: 0;
 }
@@ -225,25 +225,25 @@ table .bdocs-highlight-source { /* can't get overflow: auto; to work inside tabl
 .bdocs-sidebar .nav .nav > li > a {
 	font-size: 0.8em;
 	font-weight: normal;
-	
+
 	padding-top: 2px;
 	padding-right: 0px;
 	padding-bottom: 2px;
 	padding-left: 40px;
 }
-.bdocs-sidebar .nav .nav > li > a:hover, 
+.bdocs-sidebar .nav .nav > li > a:hover,
 .bdocs-sidebar .nav .nav > li > a:focus {
-	
+
 }
-.bdocs-sidebar .nav .nav > .active > a, 
-.bdocs-sidebar .nav .nav > .active:hover > a, 
+.bdocs-sidebar .nav .nav > .active > a,
+.bdocs-sidebar .nav .nav > .active:hover > a,
 .bdocs-sidebar .nav .nav > .active:focus > a {
 	font-weight: 500;
 	padding-left: 40px;
 
 }
-.bdocs-sidebar .nav .nav > .active > a:after, 
-.bdocs-sidebar .nav .nav > .active:hover > a:after, 
+.bdocs-sidebar .nav .nav > .active > a:after,
+.bdocs-sidebar .nav .nav > .active:hover > a:after,
 .bdocs-sidebar .nav .nav > .active:focus > a:after {
 	border-top-width: 8px;
 	border-right-width: 8px;
@@ -264,7 +264,7 @@ table .bdocs-highlight-source { /* can't get overflow: auto; to work inside tabl
 	margin: 1px 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 750px) {
 	.bdocs-sidebar {
 		display:none;
 	}
