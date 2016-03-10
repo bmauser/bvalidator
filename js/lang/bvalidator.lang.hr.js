@@ -2,7 +2,7 @@
  * bValidator Croatian error messages.
  */
 
-bValidator.defaultOptions.errorMessages.hr = {
+bValidator.defaultOptions.messages.hr = {
 
     'default' : 'Ispravite ovu vrijednost.',
     minlen    : 'Duljina mora biti najmanje {0} znakova.',
