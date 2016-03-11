@@ -36,6 +36,7 @@
 <script type="text/javascript" src="bvalidator-dist/themes/presenters/default.js"></script>
 <script type="text/javascript" src="bvalidator-dist/themes/gray2/gray2.js"></script>
 <script type="text/javascript" src="bvalidator-dist/themes/gray3/gray3.js"></script>
+<script type="text/javascript" src="bvalidator-dist/themes/gray4/gray4.js"></script>
 <script type="text/javascript" src="bvalidator-dist/themes/orange/orange.js"></script>
 <script type="text/javascript" src="bvalidator-dist/themes/postit/postit.js"></script>
 <script type="text/javascript" src="bvalidator-dist/themes/red/red.js"></script>
@@ -56,6 +57,7 @@
 <link href="bvalidator-dist/themes/bslikert/bslikert.css" rel="stylesheet"/>
 <link href="bvalidator-dist/themes/bslikerc/bslikerc.css" rel="stylesheet"/>
 <link href="bvalidator-dist/themes/gray3/gray3.css" rel="stylesheet"/>
+<link href="bvalidator-dist/themes/gray4/gray4.css" rel="stylesheet"/>
 <link href="bvalidator-dist/themes/insert/insert.css" rel="stylesheet"/>
 <link href="bvalidator-dist/themes/group/group.css" rel="stylesheet"/>
 <script type="text/javascript">
@@ -90,7 +92,7 @@
             <h1 class="bdocs-section-header" id="setup"> <span class="glyphicon bdocs-h1-icon glyphicon-wrench"></span> Setup</h1>
             <div class="bdocs-section">
                 <h3>Download</h3>
-                <p> Download bValidator from <a href="http://bmauser.github.io/bvalidator/archives/bvalidator-1.0.0-rc.0-dist.zip" target="_blank">here</a> (currently v1.0.0-rc.0) </p>
+                <p> Download bValidator from <a href="http://bmauser.github.io/bvalidator/archives/bvalidator-1.0.1-rc.0-dist.zip" target="_blank">here</a> (currently v1.0.1-rc.0) </p>
                 <p>Or install with Bower:</p>
                 <pre class="bdocs-highlight-source">$ bower install bvalidator</pre>
                 <p>Or install with npm:</p>
@@ -2260,8 +2262,31 @@
                 <p> This theme has the same options as the <a href="#themeGrayOptions"><span class="bdocs-mono">gray</span></a> theme, see the theme .js file for default values. </p>
                 <h4>Files to include for <span class="bdocs-mono">gray3</span> theme:</h4>
                 <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
-&lt;script src=&#34;themes/gray2/gray3.js&#34;&gt;&lt;/script&gt;
-&lt;link href=&#34;themes/gray2/gray3.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;script src=&#34;themes/gray3/gray3.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/gray3/gray3.css&#34; rel=&#34;stylesheet&#34; /&gt;
+</pre>
+ 
+                 <!-- theme example -->
+                
+                <h2 id="themeGray4">gray4</h2>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well bdocs-theme-example">
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;form data-bvalidator-theme=&#34;gray4&#34; data-bvalidator-return=&#34;false&#34;&gt;
+	
+	&lt;input data-bvalidator=&#34;&#34; type=&#34;text&#34;&gt;
+	
+&lt;/form&gt;
+
+
+    </div>
+</div>
+
+                <p> This theme has the same options as the <a href="#themeGrayOptions"><span class="bdocs-mono">gray</span></a> theme, see the theme .js file for default values. </p>
+                <h4>Files to include for <span class="bdocs-mono">gray4</span> theme:</h4>
+                <pre class="bdocs-highlight-source">&lt;script src=&#34;themes/presenters/default.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;themes/gray4/gray4.js&#34;&gt;&lt;/script&gt;
+&lt;link href=&#34;themes/gray4/gray4.css&#34; rel=&#34;stylesheet&#34; /&gt;
 </pre>
                 
                 <!-- theme example -->
@@ -2433,15 +2458,16 @@
                                     <li><a href="#" data-bvd-theme="gray"> <span class="bdocs-mono">gray</span> </a></li>
                                     <li><a href="#" data-bvd-theme="bs3popover"> <span class="bdocs-mono">bs3popover</span> </a></li>
                                     <li><a href="#" data-bvd-theme="bs3tooltip"> <span class="bdocs-mono">bs3tooltip</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="insert"> <span class="bdocs-mono">insert</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="group"> <span class="bdocs-mono">group</span> </a></li>
                                     <li><a href="#" data-bvd-theme="gray2"> <span class="bdocs-mono">gray2</span> </a></li>
                                     <li><a href="#" data-bvd-theme="gray3"> <span class="bdocs-mono">gray3</span> </a></li>
+                                    <li><a href="#" data-bvd-theme="gray4"> <span class="bdocs-mono">gray4</span> </a></li>
                                     <li><a href="#" data-bvd-theme="orange"> <span class="bdocs-mono">orange</span> </a></li>
                                     <li><a href="#" data-bvd-theme="postit"> <span class="bdocs-mono">postit</span> </a></li>
                                     <li><a href="#" data-bvd-theme="red"> <span class="bdocs-mono">red</span> </a></li>
                                     <li><a href="#" data-bvd-theme="bslikerc"> <span class="bdocs-mono">bslikerc</span> </a></li>
                                     <li><a href="#" data-bvd-theme="bslikert"> <span class="bdocs-mono">bslikert</span> </a></li>
-                                    <li><a href="#" data-bvd-theme="insert"> <span class="bdocs-mono">insert</span> </a></li>
-                                    <li><a href="#" data-bvd-theme="group"> <span class="bdocs-mono">group</span> </a></li>
                                     <li class="divider" role="separator"></li>
                                     <li><a href="#" data-bvd-theme-option-close="1">No close icon</a></li>
                                 </ul>
@@ -2470,6 +2496,7 @@
                             <li><a href="#themeGroup">group</a></li>
                             <li><a href="#themeGray2">gray2</a></li>
                             <li><a href="#themeGray3">gray3</a></li>
+                            <li><a href="#themeGray4">gray4</a></li>
                             <li><a href="#themePostit">postit</a></li>
                             <li><a href="#themeOrange">orange</a></li>
                             <li><a href="#themeRed">red</a></li>
