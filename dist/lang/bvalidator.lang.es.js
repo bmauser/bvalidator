@@ -2,7 +2,7 @@
  * bValidator Spanish error messages by phobeous@gmail.com
  */
 
-bValidator.defaultOptions.errorMessages.es = {
+bValidator.defaultOptions.messages.es = {
 
     'default' : 'Por favor, corrija este valor.',
     minlen    : 'La longitud debe ser de al menos {0} caracteres.',

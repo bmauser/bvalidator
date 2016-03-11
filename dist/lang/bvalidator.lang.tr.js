@@ -2,7 +2,7 @@
  * bValidator Turkish error messages. Thanks to Onur Aydemir.
  */
 
-bValidator.defaultOptions.errorMessages.tr = {
+bValidator.defaultOptions.messages.tr = {
 
     'default' : 'Lütfen bu değeri düzeltin.',
     minlen    : 'Uzunluğu en az {0} karakter olmalıdır.',
