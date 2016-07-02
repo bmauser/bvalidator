@@ -4,7 +4,7 @@
 
 bValidator.defaultOptions.messages.fr = {
 
-'default' : 'Por favor, corrija o valor deste campo.',
+    'default' : 'Por favor, corrija o valor deste campo.',
     minlen    : 'Ce champ doit contenir au moins {0} caractères.',
     maxlen    : 'Ce champ doit contenir au maximum {0} caractères.',
     rangelen  : 'Ce champ doit contenir entre {0} et {1} caractères.',
