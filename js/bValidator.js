@@ -120,7 +120,7 @@ var bValidator = (function ($) {
             }
         },
 
-        // makes request for 'ajax' action
+        // returns namespace for $.data()
         getDataNamespace : function (instanceName) {
             return '.' + instanceName;
         },
@@ -214,7 +214,7 @@ var bValidator = (function ($) {
             return true; // request is sent
         },
 
-        // helper function for serverValidate() function
+        // callback function for serverValidate()
         afterAjaxRequest : function (ajaxResponse, postInputs, inputsAndMessages, fromEvent, onlyValidCheck, allFieldsOK) {
 
             var fn = this;
@@ -453,12 +453,12 @@ var bValidator = (function ($) {
                 if ($input.attr('name'))
                     return this.chkboxGroup($input).filter(':checked').length;
                 return $input.prop('checked');
-                // radio
+            // radio
             } else if ($input[0].type == 'radio') {
                 var name = $input.attr('name');
                 if (name)
                     return $('input:radio[name="' + name + '"]:checked').length
-                    // multi select
+            // multi select
             } else if ($input[0].type == 'select-multiple') {
                 return $('option:selected', $input).length; // number of selected items
             }
@@ -623,6 +623,15 @@ var bValidator = (function ($) {
             return ret;
         },
 
+        // destroys presenter
+        destroyPresenter : function (presenter) {
+            // destroy presenter
+            if (typeof presenter.destroy === 'function') {
+                presenter.destroy();
+            } else
+                presenter.removeAll(); // hide messages
+        },
+
         // returns presenter instance
         getPresenter : function ($input) {
 
@@ -631,16 +640,10 @@ var bValidator = (function ($) {
 
             // does presenter need to be replaced
             if (presenter && presenter.forTheme != themeName) {
-
-                // destroy presenter
-                if (typeof presenter.destroy === 'function') {
-                    presenter.destroy();
-                } else
-                    presenter.removeAll(); // hide messages
-
+                this.destroyPresenter(presenter);
                 presenter = null;
             }
-
+            console.log(presenter);
             if (!presenter) {
                 if (themeName && this.options.themes[themeName].presenter) {
                     if (typeof this.options.themes[themeName].presenter == 'string')
@@ -856,7 +859,7 @@ var bValidator = (function ($) {
             return allFieldsOK;
         },
 
-        // shows messages and binds events
+        // returns error message
         getErrMsg : function ($input, actionName, actionParams) {
 
             var fn = this;
@@ -1011,18 +1014,20 @@ var bValidator = (function ($) {
 
             // hide messages
             $inputs.each(function () {
-
                 var $input = $(this);
-                var presenter = fn.getPresenter($input);
-
-                presenter.removeAll();
+                var presenter = $input.data('presenter' + fn.dataNamespace);
+                if (presenter){
+                    fn.destroyPresenter(presenter);
+                    $input.removeData('presenter' + fn.dataNamespace);
+                }
+                $input.removeData('lastMessages' + fn.dataNamespace);
             });
         },
 
         // destroys validator
         destroy : function () {
             this.reset();
-            this.$mainElement.removeData('bValidator').removeData('bValidators');
+            this.$mainElement.removeData('bValidator');
         },
 
         // sets scrollTo value
@@ -1166,8 +1171,8 @@ var bValidator = (function ($) {
         },
 
         // checks validity
-        isValid : function ($inputs) {
-            return this.fn.validate($inputs, 'only_valid_check');
+        isValid : function ($inputsToValidate) {
+            return this.fn.validate($inputsToValidate, 'only_valid_check');
         },
 
         // deletes message
