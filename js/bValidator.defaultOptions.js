@@ -19,6 +19,7 @@ bValidator.defaultOptions = (function () {
         html5ValidationOff    : true,
         enableHtml5Attr       : true,
         useTheme              : '',
+        forceValidationResult : null,
         noMsgIfExistsForInstance : [],
 
         errorMessageAttr     : '-msg',      // attribute which holds error message text (data-bvalidator-msg)
