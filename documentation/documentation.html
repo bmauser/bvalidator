@@ -100,7 +100,7 @@
             <h1 class="bdocs-section-header" id="setup"> <span class="glyphicon bdocs-h1-icon glyphicon-wrench"></span> Setup</h1>
             <div class="bdocs-section">
                 <h3>Download</h3>
-                <p> Download bValidator from <a href="http://bmauser.github.io/bvalidator/archives/bvalidator-<%= version; %>-dist.zip" target="_blank">here</a> (currently v<%= version; %>) </p>
+                <p> Download bValidator from <a href="http://bmauser.github.io/bvalidator/archives/bvalidator-<%= version; %>-dist.zip" target="_blank"><strong>here</strong></a> (currently v<%= version; %>) </p>
                 <p>Or install with Bower:</p>
                 <pre class="bdocs-highlight-source"><%= include('pre/setup-bower.html'); %></pre>
                 <p>Or install with npm:</p>
@@ -268,6 +268,11 @@
                         <td>If <code>true</code>, bValidator will validate HTML5 
                             input types: <code>email</code>, <code>url</code>, <code>number</code> <br>
                             and inputs with attributes: <code>min</code>, <code>max</code>, <code>minlength</code>, <code>maxlength</code>, <code>pattern</code>, <code>required</code>.</td>
+                    </tr>
+                    <tr id="forceValidationResult">
+                        <td class="bdocs-option-name">forceValidationResult</td>
+                        <td><code>null</code></td>
+                        <td>Set to <code>true</code> or <code>false</code> to force validation result for all  inputs inside the form.</td>
                     </tr>
                 </table>
                 <p> Also see <a href="#themeOptions">theme options</a>.</p>
@@ -707,6 +712,14 @@
                 <%- include('examples/example.html', {file: 'just-messages.html'}); %>
                 <p> In this example no validation is done, only  messages are displayed.
                     Messages can be displayed on any element on the page, it doesn't have to be an input and it doesn't have to be inside the container element on which bValidator is bound. </p>
+                
+                <!-- example -->
+                
+                <h2 id="exampleForceValidation">Forcing validation result</h2>
+                <p> Sometimes after bValidator is initialized, you want to disable validation for a <code class="html">&lt;form&gt;</code> or an <code class="html">&lt;input&gt;</code> or you want to force them invalid. You can do it by adding <code class="attr">data-bvalidator-result</code> attribute with value <code>"true"</code> or <code>"false"</code>. Put  the  attribute on the <code class="html">&lt;form&gt;</code>  if you want to force validation result for all inputs inside the form.</p>
+                <%- include('examples/example.html', {file: 'disable-validation.html'}); %>
+                <p>You can also force validation result for  all fields inside the <code class="html">&lt;form&gt;</code> with  <code><a href="#forceValidationResult">forceValidationResult</a></code> option:</p>
+                <pre class="bdocs-highlight-source"><%= include('pre/examples-disable-validation1.html'); %></pre>
                 
                 <!-- example -->
                 
@@ -1188,6 +1201,7 @@
                             <li><a href="#exampleValidateDiv">Validate <span class="bdocs-mono">&lt;div&gt;</span> element</a></li>
                             <li><a href="#exampleMoreInstances">More instances</a></li>
                             <li><a href="#exampleJustDisplayingMessages">Just displaying messages</a></li>
+                            <li><a href="#exampleForceValidation">Forcing validation result</a></li>
                             <li><a href="#exampleModifiers">Modifiers</a></li>
                             <li><a href="#exampleServerSideValidation">Server side validation</a></li>
                         </ul>
