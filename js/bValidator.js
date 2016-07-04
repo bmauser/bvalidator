@@ -643,7 +643,7 @@ var bValidator = (function ($) {
                 this.destroyPresenter(presenter);
                 presenter = null;
             }
-            console.log(presenter);
+
             if (!presenter) {
                 if (themeName && this.options.themes[themeName].presenter) {
                     if (typeof this.options.themes[themeName].presenter == 'string')
@@ -664,6 +664,27 @@ var bValidator = (function ($) {
             return presenter;
         },
 
+        // check to force validation result
+        getForceValidationResult : function ($element, checkForceValidationResultOption) {
+
+            var result;
+
+            // if forceValidationResult option is set true or false
+            if (checkForceValidationResultOption && typeof this.options.forceValidationResult === 'boolean'){
+                result = this.options.forceValidationResult;
+            }
+
+            // from data-bvalidator-return attribute
+            var resultFromAttr = $element.attr(this.dataAttrPrefix + this.options.validationResultAttr);
+
+            if (resultFromAttr === 'true')
+                result = true;
+            else if (resultFromAttr === 'false')
+                result = false;
+
+            return result; // true, false, undefined
+        },
+
         // validation function
         validate : function ($inputsToValidate, onlyValidCheck, fromEvent, scrollToMsg) {
 
@@ -677,7 +698,7 @@ var bValidator = (function ($) {
                 $inputsToValidate = fn.getElementsForValidation(fn.$mainElement);
 
             // check data-bvalidator-return attribute on the form
-            var forceValidationResultForm = fn.$mainElement.attr(fn.dataAttrPrefix + fn.options.validationResultAttr);
+            var forceValidationResultForm = fn.getForceValidationResult(fn.$mainElement, true);
 
             // validate each input
             $inputsToValidate.each(function () {
@@ -708,14 +729,14 @@ var bValidator = (function ($) {
 
                 // check data-bvalidator-return attribute on the field
                 if (forceValidationResultForm === undefined)
-                    forceValidationResultInput = $input.attr(fn.dataAttrPrefix + fn.options.validationResultAttr);
+                    forceValidationResultInput = fn.getForceValidationResult($input);
                 else
                     forceValidationResultInput = forceValidationResultForm;
 
                 // if data-bvalidator-return attribute value is set
-                if (forceValidationResultInput === 'true')
+                if (forceValidationResultInput === true)
                     return fieldIsValid();
-                if (forceValidationResultInput === 'false')
+                if (forceValidationResultInput === false)
                     return fieldForceInvalid();
 
                 // do not validate field if there is error message from another instance
@@ -727,8 +748,7 @@ var bValidator = (function ($) {
 
                 // array of validations to do from data-bvalidator attribute
                 var validationsToDo = fn.getActions($input, fn.dataAttrPrefix + fn.options.validateActionsAttr, true);
-                // console.log(fn.$mainElement.attr('id'));
-                // console.log(validationsToDo);
+
                 // if empty data-bvalidator attribute
                 if (validationsToDo.length === 0)
                     return fieldIsValid();
