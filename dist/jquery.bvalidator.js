@@ -120,7 +120,7 @@ var bValidator = (function ($) {
             }
         },
 
-        // makes request for 'ajax' action
+        // returns namespace for $.data()
         getDataNamespace : function (instanceName) {
             return '.' + instanceName;
         },
@@ -214,7 +214,7 @@ var bValidator = (function ($) {
             return true; // request is sent
         },
 
-        // helper function for serverValidate() function
+        // callback function for serverValidate()
         afterAjaxRequest : function (ajaxResponse, postInputs, inputsAndMessages, fromEvent, onlyValidCheck, allFieldsOK) {
 
             var fn = this;
@@ -453,12 +453,12 @@ var bValidator = (function ($) {
                 if ($input.attr('name'))
                     return this.chkboxGroup($input).filter(':checked').length;
                 return $input.prop('checked');
-                // radio
+            // radio
             } else if ($input[0].type == 'radio') {
                 var name = $input.attr('name');
                 if (name)
                     return $('input:radio[name="' + name + '"]:checked').length
-                    // multi select
+            // multi select
             } else if ($input[0].type == 'select-multiple') {
                 return $('option:selected', $input).length; // number of selected items
             }
@@ -623,6 +623,15 @@ var bValidator = (function ($) {
             return ret;
         },
 
+        // destroys presenter
+        destroyPresenter : function (presenter) {
+            // destroy presenter
+            if (typeof presenter.destroy === 'function') {
+                presenter.destroy();
+            } else
+                presenter.removeAll(); // hide messages
+        },
+
         // returns presenter instance
         getPresenter : function ($input) {
 
@@ -631,13 +640,7 @@ var bValidator = (function ($) {
 
             // does presenter need to be replaced
             if (presenter && presenter.forTheme != themeName) {
-
-                // destroy presenter
-                if (typeof presenter.destroy === 'function') {
-                    presenter.destroy();
-                } else
-                    presenter.removeAll(); // hide messages
-
+                this.destroyPresenter(presenter);
                 presenter = null;
             }
 
@@ -661,6 +664,27 @@ var bValidator = (function ($) {
             return presenter;
         },
 
+        // check to force validation result
+        getForceValidationResult : function ($element, checkForceValidationResultOption) {
+
+            var result;
+
+            // if forceValidationResult option is set true or false
+            if (checkForceValidationResultOption && typeof this.options.forceValidationResult === 'boolean'){
+                result = this.options.forceValidationResult;
+            }
+
+            // from data-bvalidator-return attribute
+            var resultFromAttr = $element.attr(this.dataAttrPrefix + this.options.validationResultAttr);
+
+            if (resultFromAttr === 'true')
+                result = true;
+            else if (resultFromAttr === 'false')
+                result = false;
+
+            return result; // true, false, undefined
+        },
+
         // validation function
         validate : function ($inputsToValidate, onlyValidCheck, fromEvent, scrollToMsg) {
 
@@ -674,7 +698,7 @@ var bValidator = (function ($) {
                 $inputsToValidate = fn.getElementsForValidation(fn.$mainElement);
 
             // check data-bvalidator-return attribute on the form
-            var forceValidationResultForm = fn.$mainElement.attr(fn.dataAttrPrefix + fn.options.validationResultAttr);
+            var forceValidationResultForm = fn.getForceValidationResult(fn.$mainElement, true);
 
             // validate each input
             $inputsToValidate.each(function () {
@@ -705,14 +729,14 @@ var bValidator = (function ($) {
 
                 // check data-bvalidator-return attribute on the field
                 if (forceValidationResultForm === undefined)
-                    forceValidationResultInput = $input.attr(fn.dataAttrPrefix + fn.options.validationResultAttr);
+                    forceValidationResultInput = fn.getForceValidationResult($input);
                 else
                     forceValidationResultInput = forceValidationResultForm;
 
                 // if data-bvalidator-return attribute value is set
-                if (forceValidationResultInput === 'true')
+                if (forceValidationResultInput === true)
                     return fieldIsValid();
-                if (forceValidationResultInput === 'false')
+                if (forceValidationResultInput === false)
                     return fieldForceInvalid();
 
                 // do not validate field if there is error message from another instance
@@ -724,8 +748,7 @@ var bValidator = (function ($) {
 
                 // array of validations to do from data-bvalidator attribute
                 var validationsToDo = fn.getActions($input, fn.dataAttrPrefix + fn.options.validateActionsAttr, true);
-                // console.log(fn.$mainElement.attr('id'));
-                // console.log(validationsToDo);
+
                 // if empty data-bvalidator attribute
                 if (validationsToDo.length === 0)
                     return fieldIsValid();
@@ -856,7 +879,7 @@ var bValidator = (function ($) {
             return allFieldsOK;
         },
 
-        // shows messages and binds events
+        // returns error message
         getErrMsg : function ($input, actionName, actionParams) {
 
             var fn = this;
@@ -1011,18 +1034,20 @@ var bValidator = (function ($) {
 
             // hide messages
             $inputs.each(function () {
-
                 var $input = $(this);
-                var presenter = fn.getPresenter($input);
-
-                presenter.removeAll();
+                var presenter = $input.data('presenter' + fn.dataNamespace);
+                if (presenter){
+                    fn.destroyPresenter(presenter);
+                    $input.removeData('presenter' + fn.dataNamespace);
+                }
+                $input.removeData('lastMessages' + fn.dataNamespace);
             });
         },
 
         // destroys validator
         destroy : function () {
             this.reset();
-            this.$mainElement.removeData('bValidator').removeData('bValidators');
+            this.$mainElement.removeData('bValidator');
         },
 
         // sets scrollTo value
@@ -1166,8 +1191,8 @@ var bValidator = (function ($) {
         },
 
         // checks validity
-        isValid : function ($inputs) {
-            return this.fn.validate($inputs, 'only_valid_check');
+        isValid : function ($inputsToValidate) {
+            return this.fn.validate($inputsToValidate, 'only_valid_check');
         },
 
         // deletes message
@@ -1279,6 +1304,7 @@ bValidator.defaultOptions = (function () {
         html5ValidationOff    : true,
         enableHtml5Attr       : true,
         useTheme              : '',
+        forceValidationResult : null,
         noMsgIfExistsForInstance : [],
 
         errorMessageAttr     : '-msg',      // attribute which holds error message text (data-bvalidator-msg)

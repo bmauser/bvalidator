@@ -339,6 +339,7 @@ module.exports = function (grunt) {
     grunt.registerTask('docs_css',     ['less:compile_docs', 'cssmin:docs', 'autoprefixer:docs', 'clean:docs_css']);
     grunt.registerTask('docs_css_dev', ['less:compile_docs', 'cssmin:docs', 'autoprefixer:docs']);
 
+    // build tasks:
     grunt.registerTask('docs-dist', ['clean:dist_docs', 'codemirror', 'bootstrap', 'jshint:docs', 'jscs:docs', 'ejs:documentation', 'uglify:docs', 'copy:prettify', 'copy:jquery', 'docs_css',     'copy:ajax_response', 'compress:distzip', 'copy:dist_2_doc']);
     grunt.registerTask('docs-dev',  ['clean:dist_docs', 'codemirror', 'bootstrap', 'jshint:docs', 'jscs:docs', 'ejs:dev_documentation',            'copy:prettify', 'copy:jquery', 'docs_css_dev', 'copy:ajax_response',                     'copy:dist_2_doc']);
 
