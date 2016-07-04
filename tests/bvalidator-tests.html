@@ -704,7 +704,35 @@
 		$('#emailField').attr('data-bvalidator-return', 'true');
 		$('#testForm').bValidator('validate');
 		assert.ok( $('.bvalidator-message-container').length == 0);
+
+        $('#emailField').attr('data-bvalidator-return', 'false');
+        $('#testForm').bValidator('validate');
+        assert.ok( $('.bvalidator-message-container').length == 1);
+
+        $('#testForm').attr('data-bvalidator-return', 'false');
+        $('#testForm').bValidator('validate');
+        assert.ok( $('.bvalidator-message-container').length == 1);
+
+        $('#testForm').attr('data-bvalidator-return', 'true');
+        $('#testForm').bValidator('validate');
+        assert.ok( $('.bvalidator-message-container').length == 0);
 	});
+
+    QUnit.test( "option forceValidationResult", function( assert ) {
+
+        makeForm();
+        addEmailFieldToForm();
+        $('#testForm').bValidator('validate');
+        assert.ok( $('.bvalidator-message-container').length == 1);
+
+        $('#testForm').data('bValidator').getOptions().forceValidationResult = true;
+        $('#testForm').bValidator('validate');
+        assert.ok( $('.bvalidator-message-container').length == 0);
+
+        $('#testForm').data('bValidator').getOptions().forceValidationResult = false;
+        $('#testForm').bValidator('validate');
+        assert.ok( $('.bvalidator-message-container').length == 1);
+    });
 
 	QUnit.test( "option modifyActionsAttr", function( assert ) {
 
