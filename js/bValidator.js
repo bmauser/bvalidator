@@ -44,8 +44,9 @@ var bValidator = (function ($) {
         // values used by functions in fn object
         this.fn.options = $.extend(true, {}, bValidator.defaultOptions, this.fn.getAttrOptions($mainElement, instanceName + bValidator.defaultOptions.dataOptionNamespace), overrideOptions); // get options from default options, from data-bvalidator-option attributes, from overrideOptions parameter
         this.fn.instance = this;
-        this.fn.dataNamespace = this.fn.getDataNamespace(instanceName); // .data() namespace
-        this.fn.eventNamespace = this.fn.dataNamespace; // event namespace
+        this.fn.dataNamespace = this.fn.getDataNamespace(instanceName); // .instancename
+        this.fn.eventNamespace = this.fn.dataNamespace; // .instancename
+        this.fn.eventFormNamespace = this.fn.eventNamespace + 'form'; // events on the <form>
         this.fn.$mainElement = $mainElement;
         this.fn.instanceName = instanceName;
         this.fn.dataAttrPrefix = 'data-' + instanceName;
@@ -70,7 +71,7 @@ var bValidator = (function ($) {
 
             if (fn.options.validateOnSubmit) {
 
-                $form.on('submit', function (submitEvent) {
+                $form.on('submit' + fn.eventFormNamespace, function (submitEvent) {
 
                     var validationResult = true;
 
@@ -110,7 +111,7 @@ var bValidator = (function ($) {
             }
 
             // bind reset on form reset
-            $form.on('reset', function () {
+            $form.on('reset' + fn.eventFormNamespace, function () {
                 fn.instance.reset();
             });
 
@@ -1031,6 +1032,7 @@ var bValidator = (function ($) {
                 fn.bindValidateOn($inputs);
 
             $inputs.removeData('ajaxCache' + fn.dataNamespace);
+            $inputs.removeData('lastMessages' + fn.dataNamespace);
 
             // hide messages
             $inputs.each(function () {
@@ -1040,14 +1042,16 @@ var bValidator = (function ($) {
                     fn.destroyPresenter(presenter);
                     $input.removeData('presenter' + fn.dataNamespace);
                 }
-                $input.removeData('lastMessages' + fn.dataNamespace);
             });
         },
 
         // destroys validator
         destroy : function () {
+            this.options.validateOn = false; // for reset() not to call bindValidateOn()
             this.reset();
+            this.$mainElement.off(this.eventFormNamespace); // unbind submit and reset
             this.$mainElement.removeData('bValidator');
+            delete(this.$mainElement.data('bValidators')[this.instanceName]);
         },
 
         // sets scrollTo value
