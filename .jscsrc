@@ -36,7 +36,6 @@
   "requireSpacesInsideObjectBrackets": "allButNested",
   "validateAlignedFunctionParameters": true,
   "validateIndentation": 4,
-  "validateLineBreaks": "LF",
   "validateNewlineAfterArrayElements": true,
   "validateQuoteMarks": "'",
   "maxErrors": 3
