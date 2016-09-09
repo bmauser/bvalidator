@@ -23,6 +23,7 @@
     opacity: 0.9;
     line-height: 20px;
     position:absolute;
+    z-index: 1;
 }
 .bvalidator-gray4-tooltip-noclose {
     padding-right: 6px;
