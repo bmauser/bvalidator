@@ -92,7 +92,7 @@
             <h1 class="bdocs-section-header" id="setup"> <span class="glyphicon bdocs-h1-icon glyphicon-wrench"></span> Setup</h1>
             <div class="bdocs-section">
                 <h3>Download</h3>
-                <p> Download bValidator from <a href="http://bmauser.github.io/bvalidator/archives/bvalidator-1.0.3-dist.zip" target="_blank"><strong>here</strong></a> (currently v1.0.3) </p>
+                <p> Download bValidator from <a href="http://bmauser.github.io/bvalidator/archives/bvalidator-1.0.4-dist.zip" target="_blank"><strong>here</strong></a> (currently v1.0.4) </p>
                 <p>Or install with Bower:</p>
                 <pre class="bdocs-highlight-source">$ bower install bvalidator</pre>
                 <p>Or install with npm:</p>
@@ -1305,7 +1305,7 @@
                 
                 <!-- example -->
                 
-                <h2 id="exampleValidateDiv">Validate <span class="bdocs-mono">&lt;div&gt;</span> element</h2>
+                <h2 id="exampleValidateDiv">Validate any element</h2>
                 <p> Container element doesn't have to be a <code class="html">&lt;form&gt;</code>. You can trigger validation with JavaScript: </p>
                 <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
     
@@ -1320,10 +1320,10 @@
     <div class="bdocs-example-html-container bdocs-example-html">
         &lt;script type=&#34;text/javascript&#34;&gt;
     
-    function checkIfValid(){
+    $(&#39;#button006&#39;).on(&#39;click&#39;, function(){
         if($(&#39;#input-container&#39;).data(&#39;bValidator&#39;).validate())
             alert (&#39;Is valid!&#39;);
-    }
+    })
     
 &lt;/script&gt;
 
@@ -1332,8 +1332,44 @@
 	&lt;label&gt;Only digits:&lt;/label&gt;
 	&lt;input data-bvalidator=&#34;digit,required&#34; type=&#34;text&#34; &gt;
 
-	&lt;button onclick=&#34;checkIfValid();&#34; type=&#34;submit&#34;&gt;Validate&lt;/button&gt;
+	&lt;button id=&#34;button006&#34;&gt;Validate&lt;/button&gt;
 &lt;/div&gt;
+
+    </div>
+</div>
+
+                <p> Any element can be validated like an <code class="html">&lt;input&gt;</code>:</p>
+                <div data-bdocs-br-input="true" data-bdocs-resize-labels="false" class="bdocs-live-example well ">
+    
+    <button class="btn btn-info btn-xs pull-right bdocs-example-show-editor-btt" type="button">Source</button>
+    <div class="clearfix">
+    </div>
+    <div style="display: none;" class="bdocs-example-editor-container">
+        <div class="bdocs-editor"></div>
+        <button class="btn btn-link btn-xs pull-right bdocs-remove-styles-btt" type="button">No styling</button>
+    </div>
+    
+    <div class="bdocs-example-html-container bdocs-example-html">
+        &lt;script type=&#34;text/javascript&#34;&gt;
+    
+    function validateDiv(){
+        // do something here and return true or false
+        return false
+    }
+    
+&lt;/script&gt;
+
+&lt;form data-bvalidator-validate&gt;
+	
+	&lt;div data-bvalidator=&#34;validateDiv,required&#34; data-bvalidator-msg=&#34;Please check your calculation.&#34; class=&#34;bdocs-example-box&#34;&gt;
+        Result: 1234
+    &lt;/div&gt;
+	
+    &lt;br /&gt;
+    
+	&lt;button type=&#34;submit&#34;&gt;Submit&lt;/button&gt;
+    
+&lt;/form&gt;
 
     </div>
 </div>
@@ -2519,7 +2555,7 @@
                             <li><a href="#exampleCheckboxRadio">Checkboxes and radio buttons</a></li>
                             <li><a href="#exampleDynamicForm">Dynamic form</a></li>
                             <li><a href="#exampleHtml5Form">HTML5 form</a></li>
-                            <li><a href="#exampleValidateDiv">Validate <span class="bdocs-mono">&lt;div&gt;</span> element</a></li>
+                            <li><a href="#exampleValidateDiv">Validate any element</a></li>
                             <li><a href="#exampleMoreInstances">More instances</a></li>
                             <li><a href="#exampleJustDisplayingMessages">Just displaying messages</a></li>
                             <li><a href="#exampleForceValidation">Forcing validation result</a></li>

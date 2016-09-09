@@ -387,9 +387,12 @@ var bValidator = (function ($) {
                     eventNames = ['change'];
                 } else {
                     $bindEventOnInput = $input;
-                    if ($input[0].type.substring(0, 6) == 'select' || $input[0].type == 'file')
-                        eventNames = ['change'];
+                    if (typeof $input[0].type != 'undefined'){
+                        if ($input[0].type.substring(0, 6) == 'select' || $input[0].type == 'file')
+                            eventNames = ['change'];
+                    }
                 }
+
                 // remove all events
                 $bindEventOnInput.off(fn.eventNamespace);
 
@@ -449,19 +452,21 @@ var bValidator = (function ($) {
         // gets element value
         getValue : function ($input) {
 
-            // checkbox
-            if ($input[0].type == 'checkbox') {
-                if ($input.attr('name'))
-                    return this.chkboxGroup($input).filter(':checked').length;
-                return $input.prop('checked');
-            // radio
-            } else if ($input[0].type == 'radio') {
-                var name = $input.attr('name');
-                if (name)
-                    return $('input:radio[name="' + name + '"]:checked').length
-            // multi select
-            } else if ($input[0].type == 'select-multiple') {
-                return $('option:selected', $input).length; // number of selected items
+            if (typeof $input[0].type != 'undefined'){
+                // checkbox
+                if ($input[0].type == 'checkbox') {
+                    if ($input.attr('name'))
+                        return this.chkboxGroup($input).filter(':checked').length;
+                    return $input.prop('checked');
+                // radio
+                } else if ($input[0].type == 'radio') {
+                    var name = $input.attr('name');
+                    if (name)
+                        return $('input:radio[name="' + name + '"]:checked').length
+                // multi select
+                } else if ($input[0].type == 'select-multiple') {
+                    return $('option:selected', $input).length; // number of selected items
+                }
             }
 
             return $input.val();
@@ -501,8 +506,10 @@ var bValidator = (function ($) {
             var ret = [];
 
             // type = email, url, number
-            if ($input[0].type == 'email' || $input[0].type == 'url' || $input[0].type == 'number')
-                ret[ret.length] = { name: $input[0].type };
+            if (typeof $input[0].type != 'undefined'){
+                if ($input[0].type == 'email' || $input[0].type == 'url' || $input[0].type == 'number')
+                    ret[ret.length] = { name: $input[0].type };
+            }
 
             // min
             var min = $input.attr('min');
