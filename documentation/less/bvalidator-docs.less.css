@@ -285,3 +285,9 @@ table .bdocs-highlight-source { /* can't get overflow: auto; to work inside tabl
 .bdocs-example-back-orange {
 	background-color: #F17A2A !important;
 }
+.bdocs-example-box {
+	background-color: #B6B6B6;
+    padding: 5px;
+    margin-bottom: 1em;
+    display: inline-block;
+}
