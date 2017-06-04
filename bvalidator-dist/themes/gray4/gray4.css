@@ -1,0 +1,57 @@
+/* invalid input */
+.bvalidator-gray4-invalid {
+    background-color: rgba(208,26,15,0.80) !important;
+    color: #FFF;
+}
+/* tooltip */
+.bvalidator-gray4-tooltip {
+    background-color: #333;
+    font-size: 13px;
+    border: 1px solid #999;
+    color: #FFF;
+    border-radius: 4px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    -webkit-box-shadow: 0 0 6px #ddd;
+            box-shadow: 0 0 6px #ddd;
+    white-space: nowrap;
+    padding-top: 2px;
+    padding-right: 15px;
+    padding-bottom: 2px;
+    padding-left: 6px;
+    opacity: 0.9;
+    line-height: 20px;
+    position:absolute;
+    z-index: 1;
+}
+.bvalidator-gray4-tooltip-noclose {
+    padding-right: 6px;
+}
+/* message */
+.bvalidator-gray4-tooltip .bvalidator-gray4-msg {
+    position: relative;
+}
+/* close icon */
+.bvalidator-gray4-tooltip .bvalidator-gray4-close {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #F96;
+    cursor: pointer;
+    position:absolute;
+    right: 5px;
+    top: 2px;
+}
+.bvalidator-gray4-tooltip .bvalidator-gray4-close:hover, .bvalidator-gray4-tooltip .bvalidator-gray4-close:focus{
+    color: #FC6;
+}
+/* arrow */
+.bvalidator-gray4-tooltip .bvalidator-gray4-arrow {
+    border-color: #333 transparent transparent;
+    border-style: solid;
+    border-width: 10px 10px 0;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -9px;
+    left: 5px
+}

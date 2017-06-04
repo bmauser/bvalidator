@@ -44,8 +44,9 @@ var bValidator = (function ($) {
         // values used by functions in fn object
         this.fn.options = $.extend(true, {}, bValidator.defaultOptions, this.fn.getAttrOptions($mainElement, instanceName + bValidator.defaultOptions.dataOptionNamespace), overrideOptions); // get options from default options, from data-bvalidator-option attributes, from overrideOptions parameter
         this.fn.instance = this;
-        this.fn.dataNamespace = this.fn.getDataNamespace(instanceName); // .data() namespace
-        this.fn.eventNamespace = this.fn.dataNamespace; // event namespace
+        this.fn.dataNamespace = this.fn.getDataNamespace(instanceName); // .instancename
+        this.fn.eventNamespace = this.fn.dataNamespace; // .instancename
+        this.fn.eventFormNamespace = this.fn.eventNamespace + 'form'; // events on the <form>
         this.fn.$mainElement = $mainElement;
         this.fn.instanceName = instanceName;
         this.fn.dataAttrPrefix = 'data-' + instanceName;
@@ -70,7 +71,7 @@ var bValidator = (function ($) {
 
             if (fn.options.validateOnSubmit) {
 
-                $form.on('submit', function (submitEvent) {
+                $form.on('submit' + fn.eventFormNamespace, function (submitEvent) {
 
                     var validationResult = true;
 
@@ -110,7 +111,7 @@ var bValidator = (function ($) {
             }
 
             // bind reset on form reset
-            $form.on('reset', function () {
+            $form.on('reset' + fn.eventFormNamespace, function () {
                 fn.instance.reset();
             });
 
@@ -120,7 +121,7 @@ var bValidator = (function ($) {
             }
         },
 
-        // makes request for 'ajax' action
+        // returns namespace for $.data()
         getDataNamespace : function (instanceName) {
             return '.' + instanceName;
         },
@@ -214,7 +215,7 @@ var bValidator = (function ($) {
             return true; // request is sent
         },
 
-        // helper function for serverValidate() function
+        // callback function for serverValidate()
         afterAjaxRequest : function (ajaxResponse, postInputs, inputsAndMessages, fromEvent, onlyValidCheck, allFieldsOK) {
 
             var fn = this;
@@ -386,9 +387,12 @@ var bValidator = (function ($) {
                     eventNames = ['change'];
                 } else {
                     $bindEventOnInput = $input;
-                    if ($input[0].type.substring(0, 6) == 'select' || $input[0].type == 'file')
-                        eventNames = ['change'];
+                    if (typeof $input[0].type != 'undefined'){
+                        if ($input[0].type.substring(0, 6) == 'select' || $input[0].type == 'file')
+                            eventNames = ['change'];
+                    }
                 }
+
                 // remove all events
                 $bindEventOnInput.off(fn.eventNamespace);
 
@@ -448,19 +452,21 @@ var bValidator = (function ($) {
         // gets element value
         getValue : function ($input) {
 
-            // checkbox
-            if ($input[0].type == 'checkbox') {
-                if ($input.attr('name'))
-                    return this.chkboxGroup($input).filter(':checked').length;
-                return $input.prop('checked');
+            if (typeof $input[0].type != 'undefined'){
+                // checkbox
+                if ($input[0].type == 'checkbox') {
+                    if ($input.attr('name'))
+                        return this.chkboxGroup($input).filter(':checked').length;
+                    return $input.prop('checked');
                 // radio
-            } else if ($input[0].type == 'radio') {
-                var name = $input.attr('name');
-                if (name)
-                    return $('input:radio[name="' + name + '"]:checked').length
-                    // multi select
-            } else if ($input[0].type == 'select-multiple') {
-                return $('option:selected', $input).length; // number of selected items
+                } else if ($input[0].type == 'radio') {
+                    var name = $input.attr('name');
+                    if (name)
+                        return $('input:radio[name="' + name + '"]:checked').length
+                // multi select
+                } else if ($input[0].type == 'select-multiple') {
+                    return $('option:selected', $input).length; // number of selected items
+                }
             }
 
             return $input.val();
@@ -500,8 +506,10 @@ var bValidator = (function ($) {
             var ret = [];
 
             // type = email, url, number
-            if ($input[0].type == 'email' || $input[0].type == 'url' || $input[0].type == 'number')
-                ret[ret.length] = { name: $input[0].type };
+            if (typeof $input[0].type != 'undefined'){
+                if ($input[0].type == 'email' || $input[0].type == 'url' || $input[0].type == 'number')
+                    ret[ret.length] = { name: $input[0].type };
+            }
 
             // min
             var min = $input.attr('min');
@@ -623,6 +631,15 @@ var bValidator = (function ($) {
             return ret;
         },
 
+        // destroys presenter
+        destroyPresenter : function (presenter) {
+            // destroy presenter
+            if (typeof presenter.destroy === 'function') {
+                presenter.destroy();
+            } else
+                presenter.removeAll(); // hide messages
+        },
+
         // returns presenter instance
         getPresenter : function ($input) {
 
@@ -631,13 +648,7 @@ var bValidator = (function ($) {
 
             // does presenter need to be replaced
             if (presenter && presenter.forTheme != themeName) {
-
-                // destroy presenter
-                if (typeof presenter.destroy === 'function') {
-                    presenter.destroy();
-                } else
-                    presenter.removeAll(); // hide messages
-
+                this.destroyPresenter(presenter);
                 presenter = null;
             }
 
@@ -661,6 +672,27 @@ var bValidator = (function ($) {
             return presenter;
         },
 
+        // check to force validation result
+        getForceValidationResult : function ($element, checkForceValidationResultOption) {
+
+            var result;
+
+            // if forceValidationResult option is set true or false
+            if (checkForceValidationResultOption && typeof this.options.forceValidationResult === 'boolean'){
+                result = this.options.forceValidationResult;
+            }
+
+            // from data-bvalidator-return attribute
+            var resultFromAttr = $element.attr(this.dataAttrPrefix + this.options.validationResultAttr);
+
+            if (resultFromAttr === 'true')
+                result = true;
+            else if (resultFromAttr === 'false')
+                result = false;
+
+            return result; // true, false, undefined
+        },
+
         // validation function
         validate : function ($inputsToValidate, onlyValidCheck, fromEvent, scrollToMsg) {
 
@@ -674,7 +706,7 @@ var bValidator = (function ($) {
                 $inputsToValidate = fn.getElementsForValidation(fn.$mainElement);
 
             // check data-bvalidator-return attribute on the form
-            var forceValidationResultForm = fn.$mainElement.attr(fn.dataAttrPrefix + fn.options.validationResultAttr);
+            var forceValidationResultForm = fn.getForceValidationResult(fn.$mainElement, true);
 
             // validate each input
             $inputsToValidate.each(function () {
@@ -705,14 +737,14 @@ var bValidator = (function ($) {
 
                 // check data-bvalidator-return attribute on the field
                 if (forceValidationResultForm === undefined)
-                    forceValidationResultInput = $input.attr(fn.dataAttrPrefix + fn.options.validationResultAttr);
+                    forceValidationResultInput = fn.getForceValidationResult($input);
                 else
                     forceValidationResultInput = forceValidationResultForm;
 
                 // if data-bvalidator-return attribute value is set
-                if (forceValidationResultInput === 'true')
+                if (forceValidationResultInput === true)
                     return fieldIsValid();
-                if (forceValidationResultInput === 'false')
+                if (forceValidationResultInput === false)
                     return fieldForceInvalid();
 
                 // do not validate field if there is error message from another instance
@@ -724,8 +756,7 @@ var bValidator = (function ($) {
 
                 // array of validations to do from data-bvalidator attribute
                 var validationsToDo = fn.getActions($input, fn.dataAttrPrefix + fn.options.validateActionsAttr, true);
-                // console.log(fn.$mainElement.attr('id'));
-                // console.log(validationsToDo);
+
                 // if empty data-bvalidator attribute
                 if (validationsToDo.length === 0)
                     return fieldIsValid();
@@ -856,7 +887,7 @@ var bValidator = (function ($) {
             return allFieldsOK;
         },
 
-        // shows messages and binds events
+        // returns error message
         getErrMsg : function ($input, actionName, actionParams) {
 
             var fn = this;
@@ -1008,21 +1039,26 @@ var bValidator = (function ($) {
                 fn.bindValidateOn($inputs);
 
             $inputs.removeData('ajaxCache' + fn.dataNamespace);
+            $inputs.removeData('lastMessages' + fn.dataNamespace);
 
             // hide messages
             $inputs.each(function () {
-
                 var $input = $(this);
-                var presenter = fn.getPresenter($input);
-
-                presenter.removeAll();
+                var presenter = $input.data('presenter' + fn.dataNamespace);
+                if (presenter){
+                    fn.destroyPresenter(presenter);
+                    $input.removeData('presenter' + fn.dataNamespace);
+                }
             });
         },
 
         // destroys validator
         destroy : function () {
+            this.options.validateOn = false; // for reset() not to call bindValidateOn()
             this.reset();
-            this.$mainElement.removeData('bValidator').removeData('bValidators');
+            this.$mainElement.off(this.eventFormNamespace); // unbind submit and reset
+            this.$mainElement.removeData('bValidator');
+            delete(this.$mainElement.data('bValidators')[this.instanceName]);
         },
 
         // sets scrollTo value
@@ -1166,8 +1202,8 @@ var bValidator = (function ($) {
         },
 
         // checks validity
-        isValid : function ($inputs) {
-            return this.fn.validate($inputs, 'only_valid_check');
+        isValid : function ($inputsToValidate) {
+            return this.fn.validate($inputsToValidate, 'only_valid_check');
         },
 
         // deletes message
@@ -1279,6 +1315,7 @@ bValidator.defaultOptions = (function () {
         html5ValidationOff    : true,
         enableHtml5Attr       : true,
         useTheme              : '',
+        forceValidationResult : null,
         noMsgIfExistsForInstance : [],
 
         errorMessageAttr     : '-msg',      // attribute which holds error message text (data-bvalidator-msg)

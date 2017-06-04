@@ -2,7 +2,7 @@
  * bValidator Estonian error messages. Thanks to Mare Kotsulim.
  */
 
-bValidator.defaultOptions.errorMessages.ee = {
+bValidator.defaultOptions.messages.ee = {
 
     'default' : 'Palun paranda see sisestus.',
     minlen    : 'Pikkus peab olema vähemalt {0} märki.',

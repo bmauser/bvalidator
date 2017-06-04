@@ -2,7 +2,7 @@
  * bValidator Brazilian Portuguese error messages by newtoncalegari@gmail.com
  */
 
-bValidator.defaultOptions.errorMessages.ptbr = {
+bValidator.defaultOptions.messages.ptbr = {
 
     'default' : 'Por favor, corrija o valor deste campo.',
     minlen    : 'O tamanho mínimo é de {0} caracteres.',
