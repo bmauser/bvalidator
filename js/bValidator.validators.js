@@ -140,15 +140,21 @@ bValidator.validators = (function ($) {
 
             var validationResult;
 
-            // check if response from server is JSON
-            try {
-                var results = $.parseJSON(ajaxResponse);
-                if (results[postName])
-                    validationResult = results[postName];
+            if(typeof ajaxResponse === 'object'){
+                if (postName in ajaxResponse)
+                    validationResult = ajaxResponse[postName];
             }
-            // ajaxResponse is not json
-            catch (err) {
-                validationResult = ajaxResponse;
+            else {
+                // check if response from server is JSON
+                try {
+                    var results = $.parseJSON(ajaxResponse);
+                    if (postName in results)
+                        validationResult = results[postName];
+                }
+                    // ajaxResponse is not json
+                catch (err) {
+                    validationResult = ajaxResponse;
+                }
             }
 
             return validationResult
