@@ -229,6 +229,7 @@ var bValidator = (function ($) {
                     var actionData = postInputs[postName].actionData;
                     var ajaxValidationResult;
                     var errorMsg = [];
+                    var ajaxCache;
 
                     // input value after ajax request
                     var inputValue = $input.val();
@@ -236,6 +237,11 @@ var bValidator = (function ($) {
                     // skip field if value is changed since ajax request started
                     if (inputValue != postInputs[postName].inputValue)
                         continue;
+                    
+                    if (fn.options.ajaxCache) {
+                        ajaxCache = $input.data('ajaxCache' + fn.dataNamespace);
+                        ajaxCache.lastMessage = null;
+                    }
 
                     // default ajax validation function has some additional arguments
                     actionData.params = [ajaxResponse, postName].concat(actionData.params)
@@ -260,7 +266,6 @@ var bValidator = (function ($) {
 
                         // save last message to cache
                         if (fn.options.ajaxCache) {
-                            var ajaxCache = $input.data('ajaxCache' + fn.dataNamespace);
                             ajaxCache.lastMessage = errorMsg;
                         }
                     }
