@@ -4,8 +4,8 @@
 
 bValidator.defaultOptions.themes.bs3popover = {
 
-    popoverOptions : { // see: http://getbootstrap.com/javascript/#popovers-options
-        html     : 'true',
+    popoverOptions : {
+        html     : true,
         template : '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-content"></div></div>',
         viewport : null,
         trigger  : 'manual'
