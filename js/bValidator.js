@@ -237,7 +237,7 @@ var bValidator = (function ($) {
                     // skip field if value is changed since ajax request started
                     if (inputValue != postInputs[postName].inputValue)
                         continue;
-                    
+
                     if (fn.options.ajaxCache) {
                         ajaxCache = $input.data('ajaxCache' + fn.dataNamespace);
                         ajaxCache.lastMessage = null;

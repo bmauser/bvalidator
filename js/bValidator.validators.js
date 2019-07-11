@@ -140,7 +140,7 @@ bValidator.validators = (function ($) {
 
             var validationResult;
 
-            if(typeof ajaxResponse === 'object'){
+            if (typeof ajaxResponse === 'object'){
                 if (postName in ajaxResponse)
                     validationResult = ajaxResponse[postName];
             }
