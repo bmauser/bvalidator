@@ -15,8 +15,7 @@
     border: 2px solid #100b07;
     border-radius: 10px;
     font-family: "Comic Sans MS", "Trebuchet MS", Trebuchet, Arial, Verdana, Sans-serif;
-    -webkit-box-shadow: 0 0 6px #ddd;
-            box-shadow: 0 0 6px #ddd;
+    box-shadow: 0 0 6px #ddd;
     line-height: normal;
     position: absolute;
 }

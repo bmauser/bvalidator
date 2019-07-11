@@ -12,8 +12,7 @@
     border-radius: 4px;
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
-    -webkit-box-shadow: 0 0 6px #ddd;
-            box-shadow: 0 0 6px #ddd;
+    box-shadow: 0 0 6px #ddd;
     white-space: nowrap;
     padding-top: 2px;
     padding-right: 15px;

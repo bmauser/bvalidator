@@ -95,11 +95,11 @@ bValidator.Bs3PopoverTooltipPresenter = (function ($) {
         // displays message
         showInvalid : function (messages) {
 
-            var tooltipContent = this.getTooltipContent(messages);
+            var $tooltipContent = this.getTooltipContent(messages);
 
             // if popover is already initialized just replace the content
             if (this.$tooltipContainer) {
-                this.$input.data('bs.' + this.type).options.content = tooltipContent;
+                this.$input.data('bs.' + this.type).options.content = $tooltipContent;
             }
             // make a new tooltip
             else {
@@ -115,10 +115,10 @@ bValidator.Bs3PopoverTooltipPresenter = (function ($) {
                 }
 
                 if (this.type == 'tooltip') {
-                    options.title = tooltipContent;
+                    options.title = $tooltipContent;
                     options = $.extend({}, options, this.themeOptions.tooltipOptions);
                 } else { // popover
-                    options.content = tooltipContent;
+                    options.content = $tooltipContent;
                     options = $.extend({}, options, this.themeOptions.popoverOptions);
                 }
 

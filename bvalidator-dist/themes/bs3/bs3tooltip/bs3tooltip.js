@@ -4,10 +4,11 @@
 
 bValidator.defaultOptions.themes.bs3tooltip = {
 
-    tooltipOptions : { // see: http://getbootstrap.com/javascript/#tooltips-options
-        html     : 'true',
+    tooltipOptions : {
+        html     : true,
         viewport : null,
-        trigger  : 'manual'
+        trigger  : 'manual',
+        sanitize : false
     },
     placement : 'right', // top | bottom | left | right
     content   : '<div class="bvalidator-bs3tooltip-msg bvalidator-bs3tooltip-msg-noclose">{message}</div>',
