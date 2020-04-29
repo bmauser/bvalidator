@@ -37,7 +37,7 @@
     "grunt-contrib-watch": "latest",
     "grunt-ejs": "latest",
     "grunt-jscs": "latest",
-    "jquery": "^2"
+    "jquery": "^3"
   },
   "files": [
     "*",
